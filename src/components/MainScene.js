@@ -92,4 +92,12 @@ export default class MainScene extends Phaser.Scene {
     this.levelText = this.make.text(FONT_PROPS(this.level, 32));
     Phaser.Display.Align.In.QuickSet(this.levelText, header, 4, -120, -10);
   }
+
+  createCube(data) {
+    const block = this.add.sprite(data.sx, data.sy, 'sprites', this.frames[data.color]);
+    block.gridData = data;
+    data.sprite = block;
+    block.setInteractive();
+    block.on('clicked', this.clickHandler, this);
+  }
 }
