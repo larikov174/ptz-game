@@ -37,7 +37,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   preload() {
-
+    this.cameras.main.fadeIn(250);
   }
 
   create() {
