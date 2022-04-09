@@ -179,4 +179,20 @@ export default class MainScene extends Phaser.Scene {
       }
     }
   }
+
+  reassignCoords() {  //redraw cubes with new coordinates
+    this.grid.forEach(item => {
+      for (let i = 0; i < 9; i++) {
+        item[i].y = item.indexOf(item[i])
+        item[i].sy = this.startY + (67 * item[i].y)
+        this.tweens.add({
+          targets: item[i].sprite,
+          y: item[i].sy,
+          duration: 200,
+          callbackScope: this,
+        })
+      }
+    })
+  }
+
 }
