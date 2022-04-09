@@ -109,4 +109,18 @@ export default class MainScene extends Phaser.Scene {
       }
     }
   }
+
+  createGrid() {
+    for (let x = 0; x < 9; x++) {
+      this.grid[x] = [];
+      for (let y = 0; y < 9; y++) {
+        const sx = this.startX + x * 60;
+        const sy = this.startY + y * 67;
+        const color = Phaser.Math.Between(0, 4);
+        const id = Phaser.Utils.String.UUID();
+        this.grid[x][y] = { x, y, sx, sy, color, id, isEmpty: false };
+      }
+    }
+    this.renderGrid();
+  }
 }
