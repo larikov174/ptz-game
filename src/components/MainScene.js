@@ -282,7 +282,32 @@ export default class MainScene extends Phaser.Scene {
   }
 
   onGameWin() {
-    this.sfx.emitt()
+    this.sfx.emitt();
     this.levelChange();
+  }
+
+  updateData(parent, key, data) {
+    if (key === 'moves') {
+      this.movesText.setText(data < 10 ? `0${data}` : data);
+      if ((data === 0 && this.score < this.goal) || this.possibleMoves.length === 0) this.onGameLoose();
+      if (this.score >= this.goal) this.onGameWin();
+    }
+
+    if (key === 'score') {
+      let dynemicWidth = 420 * (data / this.goal);
+      this.scoreText.setText(`${data} / ${this.goal}`);
+      this.rectBar.setSize(dynemicWidth < 420 ? dynemicWidth : 420, 30);
+      this.progressBar.fillRectShape(this.rectBar);
+    }
+
+    if (key === 'highscore') {
+      this.highscoreText.setText(data);
+      localStorage.setItem('highscore', data);
+    }
+
+    if (key === 'level') {
+      this.levelText.setText(data);
+      if (this.score === 0) this.progressBar.clear();
+    }
   }
 }
