@@ -41,7 +41,20 @@ export default class MainScene extends Phaser.Scene {
   }
 
   create() {
+    this.sfx = new SFX({
+      sprites: this.add.particles('sprites')
+    })
 
+    this.createUI();
+    this.createGrid();
+    this.registry.set('score', this.score);
+    this.registry.set('moves', this.moves);
+    this.registry.set('highscore', this.highscore);
+    this.registry.set('level', this.level);
+    this.registry.events.on('changedata', this.updateData, this);
+
+    // emmit click event on each cube
+    this.input.on('gameobjectdown', (pointer, gameObject) => gameObject.emit('clicked', gameObject), this);
   }
 
 
