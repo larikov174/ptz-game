@@ -94,7 +94,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   createCube(data) {
-    const block = this.add.sprite(data.sx, data.sy, 'sprites', this.frames[data.color]);  //render cubes and conect them to the grid
+    const block = this.add.sprite(data.sx, data.sy, 'sprites', this.frames[data.color]); //render cubes and conect them to the grid
     block.gridData = data;
     data.sprite = block;
     block.setInteractive();
@@ -143,8 +143,9 @@ export default class MainScene extends Phaser.Scene {
   getConnected(x, y) {
     if (!this.isInGrid(x, y) || this.grid[x][y].isEmpty) return null;
     let currentCube = this.grid[x][y];
-    if (currentCube.color === this.chosenColor && !this.isCubeChecked(x, y)) {  //check if neighbour cube is the same color
-      this.connected.push({ x, y, id: currentCube.id, sprite: currentCube.sprite });  //making an array of connected cubes
+    if (currentCube.color === this.chosenColor && !this.isCubeChecked(x, y)) {
+      //check if neighbour cube is the same color
+      this.connected.push({ x, y, id: currentCube.id, sprite: currentCube.sprite }); //making an array of connected cubes
       this.getConnected(x + 1, y);
       this.getConnected(x - 1, y);
       this.getConnected(x, y + 1);
@@ -152,11 +153,15 @@ export default class MainScene extends Phaser.Scene {
     }
   }
 
-  getPossibleMoves() {  //check if player can go on
+  getPossibleMoves() {
+    //check if player can go on
     this.possibleMoves.length = 0;
     for (let x = 0; x < 8; x++) {
       for (let y = 0; y < 8; y++) {
-        if (this.grid[x][y].color === this.grid[x][y + 1].color || this.grid[x][y].color === this.grid[x + 1][y].color) {
+        if (
+          this.grid[x][y].color === this.grid[x][y + 1].color ||
+          this.grid[x][y].color === this.grid[x + 1][y].color
+        ) {
           this.possibleMoves.push({ id: this.grid[x][y].id });
         }
       }
@@ -169,7 +174,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   ascentEmptys(x, y) {
-    Phaser.Utils.Array.SendToBack(this.grid[x], this.grid[x][y])
+    Phaser.Utils.Array.SendToBack(this.grid[x], this.grid[x][y]);
   }
 
   pullUpEmptys() {
@@ -180,19 +185,20 @@ export default class MainScene extends Phaser.Scene {
     }
   }
 
-  reassignCoords() {  //redraw cubes with new coordinates
-    this.grid.forEach(item => {
+  reassignCoords() {
+    //redraw cubes with new coordinates
+    this.grid.forEach((item) => {
       for (let i = 0; i < 9; i++) {
-        item[i].y = item.indexOf(item[i])
-        item[i].sy = this.startY + (67 * item[i].y)
+        item[i].y = item.indexOf(item[i]);
+        item[i].sy = this.startY + 67 * item[i].y;
         this.tweens.add({
           targets: item[i].sprite,
           y: item[i].sy,
           duration: 200,
           callbackScope: this,
-        })
+        });
       }
-    })
+    });
   }
 
   handleEmptys() {
@@ -201,12 +207,12 @@ export default class MainScene extends Phaser.Scene {
   }
 
   refill() {
-    this.grid.forEach(item => {
+    this.grid.forEach((item) => {
       for (let i = 0; i < 9; i++) {
         if (item[i].isEmpty) {
           const color = Phaser.Math.Between(0, 4);
           item[i].isEmpty = false;
-          item[i].sprite.setFrame(this.frames[color])
+          item[i].sprite.setFrame(this.frames[color]);
           item[i].color = color;
           this.tweens.add({
             targets: item[i].sprite,
@@ -216,7 +222,36 @@ export default class MainScene extends Phaser.Scene {
           });
         }
       }
-    })
+    });
   }
 
+  clickHandler(block) {
+    this.getPossibleMoves();
+    this.chosenColor = block.gridData.color;
+    this.connectedItems(block.gridData.x, block.gridData.y);
+    if (this.connected.length > 1) {
+      let deleted = 0;
+      this.score += this.connected.length;
+      this.registry.set('score', this.score);
+      this.moves--;
+      this.registry.set('moves', this.moves);
+      this.connected.forEach((cube) => {
+        deleted++;
+        this.tweens.add({
+          targets: cube.sprite,
+          alpha: 0,
+          duration: 200,
+          callbackScope: this,
+          onComplete: () => {
+            deleted--;
+            this.setEmpty(cube.x, cube.y);
+            if (deleted === 0) {
+              this.handleEmptys();
+              this.refill();
+            }
+          },
+        });
+      });
+    }
+  }
 }
