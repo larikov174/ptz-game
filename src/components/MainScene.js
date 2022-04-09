@@ -100,4 +100,13 @@ export default class MainScene extends Phaser.Scene {
     block.setInteractive();
     block.on('clicked', this.clickHandler, this);
   }
+
+  renderGrid() {
+    for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 9; j++) {
+        let currentCube = this.grid[i][j];
+        this.createCube(currentCube);
+      }
+    }
+  }
 }
