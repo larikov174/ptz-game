@@ -162,4 +162,21 @@ export default class MainScene extends Phaser.Scene {
       }
     }
   }
+
+  connectedItems(x, y) {
+    this.connected.length = 0;
+    this.getConnected(x, y);
+  }
+
+  ascentEmptys(x, y) {
+    Phaser.Utils.Array.SendToBack(this.grid[x], this.grid[x][y])
+  }
+
+  pullUpEmptys() {
+    for (let i = 0; i < 9; i++) {
+      for (let j = 1; j < 9; j++) {
+        if (this.isEmpty(i, j)) this.ascentEmptys(i, j);
+      }
+    }
+  }
 }
