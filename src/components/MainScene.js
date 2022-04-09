@@ -151,4 +151,15 @@ export default class MainScene extends Phaser.Scene {
       this.getConnected(x, y - 1);
     }
   }
+
+  getPossibleMoves() {
+    this.possibleMoves.length = 0;
+    for (let x = 0; x < 8; x++) {
+      for (let y = 0; y < 8; y++) {
+        if (this.grid[x][y].color === this.grid[x][y + 1].color || this.grid[x][y].color === this.grid[x + 1][y].color) {
+          this.possibleMoves.push({ id: this.grid[x][y].id });
+        }
+      }
+    }
+  }
 }
