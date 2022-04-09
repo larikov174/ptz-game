@@ -139,4 +139,16 @@ export default class MainScene extends Phaser.Scene {
   isEmpty(x, y) {
     return this.grid[x][y].isEmpty;
   }
+
+  getConnected(x, y) {
+    if (!this.isInGrid(x, y) || this.grid[x][y].isEmpty) return null;
+    let currentCube = this.grid[x][y];
+    if (currentCube.color === this.chosenColor && !this.isCubeChecked(x, y)) {
+      this.connected.push({ x, y, id: currentCube.id, sprite: currentCube.sprite });
+      this.getConnected(x + 1, y);
+      this.getConnected(x - 1, y);
+      this.getConnected(x, y + 1);
+      this.getConnected(x, y - 1);
+    }
+  }
 }
