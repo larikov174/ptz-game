@@ -42,8 +42,8 @@ export default class MainScene extends Phaser.Scene {
 
   create() {
     this.sfx = new SFX({
-      sprites: this.add.particles('sprites')
-    })
+      sprites: this.add.particles('sprites'),
+    });
 
     this.createUI();
     this.createGrid();
@@ -57,5 +57,39 @@ export default class MainScene extends Phaser.Scene {
     this.input.on('gameobjectdown', (pointer, gameObject) => gameObject.emit('clicked', gameObject), this);
   }
 
+  createUI() {
+    let field = this.add.image(0, 0, 'sprites', 'field');
+    Phaser.Display.Align.In.BottomLeft(field, this.sceneZone);
 
+    let header = this.add.image(0, 0, 'sprites', 'bar1');
+    Phaser.Display.Align.In.TopCenter(header, this.sceneZone);
+    header.depth = -2;
+
+    this.progressOverlay.fillRectShape(this.rectOverlay);
+    this.progressOverlay.depth = 0;
+    this.progressBar.depth = 1;
+
+    let scoreboard = this.add.image(0, 0, 'sprites', 'scoreboard');
+    Phaser.Display.Align.In.RightCenter(scoreboard, this.sceneZone);
+
+    this.add.group({
+      key: 'sprites',
+      frame: ['bonus'],
+      frameQuantity: 3,
+      gridAlign: { width: 3, height: 1, cellWidth: 120, cellHeight: 67, x: 660, y: 700 },
+      setScale: { x: 0.8, y: 0.8 },
+    });
+
+    this.scoreText = this.make.text(FONT_PROPS(`${this.score} / ${this.goal}`, 32));
+    Phaser.Display.Align.In.QuickSet(this.scoreText, scoreboard, 11, 0, -60);
+
+    this.highscoreText = this.make.text(FONT_PROPS(this.highscore, 32));
+    Phaser.Display.Align.In.QuickSet(this.highscoreText, header, 2, -180, -32);
+
+    this.movesText = this.make.text(FONT_PROPS(this.moves, 100));
+    Phaser.Display.Align.In.QuickSet(this.movesText, scoreboard, 6, 0, -70);
+
+    this.levelText = this.make.text(FONT_PROPS(this.level, 32));
+    Phaser.Display.Align.In.QuickSet(this.levelText, header, 4, -120, -10);
+  }
 }
