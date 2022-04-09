@@ -123,4 +123,20 @@ export default class MainScene extends Phaser.Scene {
     }
     this.renderGrid();
   }
+
+  isCubeChecked(x, y) {
+    return this.connected.some((item) => item.x === x && item.y === y);
+  }
+
+  isInGrid(x, y) {
+    return x >= 0 && x < 9 && y >= 0 && y < 9 && this.grid[x][y] !== undefined;
+  }
+
+  setEmpty(x, y) {
+    this.grid[x][y].isEmpty = true;
+  }
+
+  isEmpty(x, y) {
+    return this.grid[x][y].isEmpty;
+  }
 }
