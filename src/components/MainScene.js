@@ -254,4 +254,35 @@ export default class MainScene extends Phaser.Scene {
       });
     }
   }
+
+  gameOver(cam = null, progress = 0) {
+    if (progress === 1) this.scene.start('GameOver');
+  }
+
+  cameraFadeOut(cam = null, progress = 0) {
+    if (progress === 1) this.camera.fade(1000, 0, 0, 0, false, this.gameOver);
+  }
+
+  onGameLoose() {
+    if (this.score > this.highscore) {
+      this.highscore = this.score;
+      this.registry.set('highscore', this.highscore);
+    }
+    this.camera.shake(1000, 0.04, false, this.cameraFadeOut);
+  }
+
+  levelChange() {
+    this.goal = Math.floor(this.goal * 1.5);
+    this.level++;
+    this.score = 0;
+    this.moves = 10;
+    this.registry.set('level', this.level);
+    this.registry.set('score', this.score);
+    this.registry.set('moves', this.moves);
+  }
+
+  onGameWin() {
+    this.sfx.emitt()
+    this.levelChange();
+  }
 }
