@@ -94,7 +94,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   createCube(data) {
-    const block = this.add.sprite(data.sx, data.sy, 'sprites', this.frames[data.color]);
+    const block = this.add.sprite(data.sx, data.sy, 'sprites', this.frames[data.color]);  //render cubes and conect them to the grid
     block.gridData = data;
     data.sprite = block;
     block.setInteractive();
@@ -143,8 +143,8 @@ export default class MainScene extends Phaser.Scene {
   getConnected(x, y) {
     if (!this.isInGrid(x, y) || this.grid[x][y].isEmpty) return null;
     let currentCube = this.grid[x][y];
-    if (currentCube.color === this.chosenColor && !this.isCubeChecked(x, y)) {
-      this.connected.push({ x, y, id: currentCube.id, sprite: currentCube.sprite });
+    if (currentCube.color === this.chosenColor && !this.isCubeChecked(x, y)) {  //check if neighbour cube is the same color
+      this.connected.push({ x, y, id: currentCube.id, sprite: currentCube.sprite });  //making an array of connected cubes
       this.getConnected(x + 1, y);
       this.getConnected(x - 1, y);
       this.getConnected(x, y + 1);
@@ -152,7 +152,7 @@ export default class MainScene extends Phaser.Scene {
     }
   }
 
-  getPossibleMoves() {
+  getPossibleMoves() {  //check if player can go on
     this.possibleMoves.length = 0;
     for (let x = 0; x < 8; x++) {
       for (let y = 0; y < 8; y++) {
