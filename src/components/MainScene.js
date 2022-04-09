@@ -195,4 +195,28 @@ export default class MainScene extends Phaser.Scene {
     })
   }
 
+  handleEmptys() {
+    this.pullUpEmptys();
+    this.reassignCoords();
+  }
+
+  refill() {
+    this.grid.forEach(item => {
+      for (let i = 0; i < 9; i++) {
+        if (item[i].isEmpty) {
+          const color = Phaser.Math.Between(0, 4);
+          item[i].isEmpty = false;
+          item[i].sprite.setFrame(this.frames[color])
+          item[i].color = color;
+          this.tweens.add({
+            targets: item[i].sprite,
+            alpha: 1,
+            duration: 200,
+            callbackScope: this,
+          });
+        }
+      }
+    })
+  }
+
 }
