@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import SFX from './SFX';
 import FONT_PROPS from '../utils/utils';
 
 export default class MainScene extends Phaser.Scene {
