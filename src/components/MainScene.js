@@ -192,10 +192,9 @@ export default class MainScene extends Phaser.Scene {
       for (let i = 0; i < 9; i++) {
         item[i].y = item.indexOf(item[i]);
         item[i].sy = this.startY + 67 * item[i].y;
-        this.tweens.add({
+        this.tweens.timeline({
           targets: item[i].sprite,
-          alpha: 1,
-          y: item[i].sy,
+          tweens: [{ y: item[i].sy }, { alpha: 1 }],
           duration: 250,
           callbackScope: this,
         });
@@ -233,10 +232,9 @@ export default class MainScene extends Phaser.Scene {
       this.registry.set('moves', this.moves);
       this.connected.forEach((cube) => {
         deleted++;
-        this.tweens.add({
+        this.tweens.timeline({
           targets: cube.sprite,
-          alpha: 0,
-          y: 200,
+          tweens: [{ alpha: 0 }, { y: 230 }],
           duration: 0,
           callbackScope: this,
           onComplete: () => {
