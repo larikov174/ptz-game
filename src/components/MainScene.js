@@ -194,8 +194,9 @@ export default class MainScene extends Phaser.Scene {
         item[i].sy = this.startY + 67 * item[i].y;
         this.tweens.add({
           targets: item[i].sprite,
+          alpha: 1,
           y: item[i].sy,
-          duration: 200,
+          duration: 250,
           callbackScope: this,
         });
       }
@@ -215,12 +216,6 @@ export default class MainScene extends Phaser.Scene {
           item[i].isEmpty = false;
           item[i].sprite.setFrame(this.frames[color]);
           item[i].color = color;
-          this.tweens.add({
-            targets: item[i].sprite,
-            alpha: 1,
-            duration: 200,
-            callbackScope: this,
-          });
         }
       }
     });
@@ -241,7 +236,8 @@ export default class MainScene extends Phaser.Scene {
         this.tweens.add({
           targets: cube.sprite,
           alpha: 0,
-          duration: 200,
+          y: 200,
+          duration: 0,
           callbackScope: this,
           onComplete: () => {
             deleted--;
