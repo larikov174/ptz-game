@@ -122,6 +122,7 @@ export default class MainScene extends Phaser.Scene {
       }
     }
     this.renderGrid();
+    this.getPossibleMoves();
   }
 
   isCubeChecked(x, y) {
