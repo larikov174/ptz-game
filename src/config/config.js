@@ -10,6 +10,12 @@ const config = {
   height: 820,
   backgroundColor: '#a1a1a1',
   scene: [Preloader, MainScene, GameOver],
+  scale: {
+    parent: 'body',
+    mode: Phaser.Scale.ScaleModes.FIT,
+    width: 990,
+    height: 820
+}
 };
 
 export default config;
