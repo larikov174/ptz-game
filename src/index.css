@@ -9,3 +9,16 @@ body {
   justify-content: center;
   align-items: flex-start;
 }
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom: 20px;
+  width: 990px;
+}
+
+.footer__text {
+  font: normal 400 20px/24px Calibri, serif;
+}
