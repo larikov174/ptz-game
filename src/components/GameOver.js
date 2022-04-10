@@ -22,9 +22,9 @@ export default class GameOver extends Phaser.Scene {
     }
     const width = this.sys.game.config.width;
     const height = this.sys.game.config.height;
-    const title = this.make.text(FONT_PROPS('ВЫ ПРОИГРАЛИ!', 48));
-    const textScore = this.make.text(FONT_PROPS(`Ваш лучший результат(очков): ${this.registry.get('highscore')}`));
-    const textAgain = this.make.text(FONT_PROPS('Нажмите, чтобы начать игру заново'));
+    const title = this.make.text(FONT_PROPS(this.registry.get('new') == true ? 'Круто, ты установил свой рекорд!' : 'Ты можешь лучше, поднажми!', 48));
+    const textScore = this.make.text(FONT_PROPS(this.registry.get('new') == true ? `Твой новый результат(очков): ${this.registry.get('highscore')}` : `Твой лучший результат(очков): ${this.registry.get('highscore')}`));
+    const textAgain = this.make.text(FONT_PROPS('Попробуем еще раз?!'));
 
 
     Phaser.Display.Align.In.Center(title,

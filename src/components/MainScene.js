@@ -51,6 +51,7 @@ export default class MainScene extends Phaser.Scene {
     this.registry.set('moves', this.moves);
     this.registry.set('highscore', this.highscore);
     this.registry.set('level', this.level);
+    this.registry.set('new', false);
     this.registry.events.on('changedata', this.updateData, this);
 
     // emmit click event on each cube
@@ -298,6 +299,7 @@ export default class MainScene extends Phaser.Scene {
     if (key === 'highscore') {
       this.highscoreText.setText(data);
       localStorage.setItem('highscore', data);
+      this.registry.set('new', true)
     }
 
     if (key === 'level') {
