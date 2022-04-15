@@ -221,14 +221,37 @@ export default class MainScene extends Phaser.Scene {
     });
   }
 
+  addScore(){
+    console.log(this.connected.length);
+    if (this.connected.length === 2) {
+      this.score += 2;
+      this.registry.set('score', this.score);
+      return;
+    }
+    if (this.connected.length === 3) {
+      this.score += Math.ceil(this.connected.length * 1.5);
+      this.registry.set('score', this.score);
+      return;
+    }
+    if (this.connected.length === 4) {
+      this.score += Math.ceil(this.connected.length * 2);
+      this.registry.set('score', this.score);
+      return;
+    }
+    if (this.connected.length >= 5) {
+      this.score += Math.ceil(this.connected.length * 3);
+      this.registry.set('score', this.score);
+      return;
+    }
+  }
+
   clickHandler(block) {
     this.getPossibleMoves();
     this.chosenColor = block.gridData.color;
     this.connectedItems(block.gridData.x, block.gridData.y);
     if (this.connected.length > 1) {
       let deleted = 0;
-      this.score += this.connected.length;
-      this.registry.set('score', this.score);
+      this.addScore();
       this.moves--;
       this.registry.set('moves', this.moves);
       this.connected.forEach((cube) => {
