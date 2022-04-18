@@ -41,4 +41,8 @@ export default class GameLogic extends Phaser.Scene {
       return (score += Math.ceil(connected.length * 3));
     }
   }
+
+  isCubeChecked(x, y, array) {
+    return array.some((item) => item.x === x && item.y === y);
+  }
 }

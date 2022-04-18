@@ -129,14 +129,12 @@ export default class MainScene extends Phaser.Scene {
     this.getPossibleMoves();
   }
 
-  isCubeChecked(x, y) {
-    return this.connected.some((item) => item.x === x && item.y === y);
-  }
+
 
   getConnected(x, y) {
     if (!this.logic.isInGrid(x, y, this.grid) || this.grid[x][y].isEmpty) return null;
     let currentCube = this.grid[x][y];
-    if (currentCube.color === this.chosenColor && !this.isCubeChecked(x, y)) {
+    if (currentCube.color === this.chosenColor && !this.logic.isCubeChecked(x, y, this.connected)) {
       //check if neighbour cube is the same color
       this.connected.push({ x, y, id: currentCube.id, sprite: currentCube.sprite }); //making an array of connected cubes
       this.getConnected(x + 1, y);
