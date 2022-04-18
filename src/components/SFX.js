@@ -2,7 +2,7 @@ export default class SFX {
   constructor(data) {
     this._emitters = {};
     this._particles = data.sprites;
-    this._frames = ['blue', 'purple', 'red', 'yellow', 'green'];
+    this._frames = data.frames;
   }
 
   _createEmitter(color) {
@@ -28,17 +28,5 @@ export default class SFX {
     const color = Phaser.Math.Between(0, 4);
     this._callEmitter();
     this._emitters[this._frames[color]].explode(26, 90, 70);
-  }
-
-  cameraFadeIn() {
-    return this.cameras.fadeIn(250);
-  }
-
-  cameraFadeOut(next) {
-    this.cameras.add().fade(1000, 0, 0, 0, false, next);
-  }
-
-  cameraShake(next) {
-    this.cameras.add().shake(1000, 0.04, false, next);
   }
 }

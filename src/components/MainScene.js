@@ -43,7 +43,10 @@ export default class MainScene extends Phaser.Scene {
 
   create() {
     this.logic = new GameLogic();
-    this.sfx = new SFX({sprites: this.add.particles('sprites')});
+    this.sfx = new SFX({
+      sprites: this.add.particles('sprites'),
+      frames: this.frames,
+    });
 
     this.createUI();
     this.createGrid();
@@ -302,7 +305,7 @@ export default class MainScene extends Phaser.Scene {
     if (key === 'highscore') {
       this.highscoreText.setText(data);
       localStorage.setItem('highscore', data);
-      this.registry.set('new', true)
+      this.registry.set('new', true);
     }
 
     if (key === 'level') {
