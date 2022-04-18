@@ -221,12 +221,14 @@ export default class MainScene extends Phaser.Scene {
   // }
 
   clickHandler(block) {
+    const score = this.registry.get('score');
+
     this.getPossibleMoves();
     this.chosenColor = block.gridData.color;
     this.connectedItems(block.gridData.x, block.gridData.y);
     if (this.connected.length > 1) {
       let deleted = 0;
-      this.registry.set('score', this.logic.addScore(this.connected, this.score));
+      this.registry.set('score', this.logic.addScore(this.connected, score));
       this.moves--;
       this.registry.set('moves', this.moves);
       this.connected.forEach((cube) => {
@@ -258,9 +260,10 @@ export default class MainScene extends Phaser.Scene {
   }
 
   onGameLoose() {
-    if (this.score > this.highscore) {
-      this.highscore = this.score;
-      this.registry.set('highscore', this.highscore);
+    const score = this.registry.get('score');
+
+    if (score > this.highscore) {
+      this.registry.set('highscore', score);
     }
     this.camera.shake(1000, 0.04, false, this.cameraFadeOut);
   }
@@ -281,10 +284,12 @@ export default class MainScene extends Phaser.Scene {
   }
 
   updateData(parent, key, data) {
+    const score = this.registry.get('score');
+
     if (key === 'moves') {
       this.movesText.setText(data < 10 ? `0${data}` : data);
-      if ((data === 0 && this.score < this.goal) || this.possibleMoves.length === 0) this.onGameLoose();
-      if (this.score >= this.goal) this.onGameWin();
+      if ((data === 0 && score < this.goal) || this.possibleMoves.length === 0) this.onGameLoose();
+      if (score >= this.goal) this.onGameWin();
     }
 
     if (key === 'score') {
