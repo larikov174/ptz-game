@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import SFX from './SFX';
+import GameLogic from './GameLogic';
 import FONT_PROPS from '../utils/utils';
 
 export default class MainScene extends Phaser.Scene {
@@ -41,9 +42,8 @@ export default class MainScene extends Phaser.Scene {
   }
 
   create() {
-    this.sfx = new SFX({
-      sprites: this.add.particles('sprites'),
-    });
+    this.logic = new GameLogic();
+    this.sfx = new SFX({sprites: this.add.particles('sprites')});
 
     this.createUI();
     this.createGrid();
@@ -130,20 +130,8 @@ export default class MainScene extends Phaser.Scene {
     return this.connected.some((item) => item.x === x && item.y === y);
   }
 
-  isInGrid(x, y) {
-    return x >= 0 && x < 9 && y >= 0 && y < 9 && this.grid[x][y] !== undefined;
-  }
-
-  setEmpty(x, y) {
-    this.grid[x][y].isEmpty = true;
-  }
-
-  isEmpty(x, y) {
-    return this.grid[x][y].isEmpty;
-  }
-
   getConnected(x, y) {
-    if (!this.isInGrid(x, y) || this.grid[x][y].isEmpty) return null;
+    if (!this.logic.isInGrid(x, y, this.grid) || this.grid[x][y].isEmpty) return null;
     let currentCube = this.grid[x][y];
     if (currentCube.color === this.chosenColor && !this.isCubeChecked(x, y)) {
       //check if neighbour cube is the same color
@@ -175,18 +163,6 @@ export default class MainScene extends Phaser.Scene {
     this.getConnected(x, y);
   }
 
-  ascentEmptys(x, y) {
-    Phaser.Utils.Array.SendToBack(this.grid[x], this.grid[x][y]);
-  }
-
-  pullUpEmptys() {
-    for (let i = 0; i < 9; i++) {
-      for (let j = 1; j < 9; j++) {
-        if (this.isEmpty(i, j)) this.ascentEmptys(i, j);
-      }
-    }
-  }
-
   reassignCoords() {
     //redraw cubes with new coordinates
     this.grid.forEach((item) => {
@@ -204,7 +180,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   handleEmptys() {
-    this.pullUpEmptys();
+    this.logic.pullUpEmptys(this.grid);
     this.reassignCoords();
   }
 
@@ -221,29 +197,28 @@ export default class MainScene extends Phaser.Scene {
     });
   }
 
-  addScore(){
-    console.log(this.connected.length);
-    if (this.connected.length === 2) {
-      this.score += 2;
-      this.registry.set('score', this.score);
-      return;
-    }
-    if (this.connected.length === 3) {
-      this.score += Math.ceil(this.connected.length * 1.5);
-      this.registry.set('score', this.score);
-      return;
-    }
-    if (this.connected.length === 4) {
-      this.score += Math.ceil(this.connected.length * 2);
-      this.registry.set('score', this.score);
-      return;
-    }
-    if (this.connected.length >= 5) {
-      this.score += Math.ceil(this.connected.length * 3);
-      this.registry.set('score', this.score);
-      return;
-    }
-  }
+  // addScore(){
+  //   if (this.connected.length === 2) {
+  //     this.score += 2;
+  //     this.registry.set('score', this.score);
+  //     return;
+  //   }
+  //   if (this.connected.length === 3) {
+  //     this.score += Math.ceil(this.connected.length * 1.5);
+  //     this.registry.set('score', this.score);
+  //     return;
+  //   }
+  //   if (this.connected.length === 4) {
+  //     this.score += Math.ceil(this.connected.length * 2);
+  //     this.registry.set('score', this.score);
+  //     return;
+  //   }
+  //   if (this.connected.length >= 5) {
+  //     this.score += Math.ceil(this.connected.length * 3);
+  //     this.registry.set('score', this.score);
+  //     return;
+  //   }
+  // }
 
   clickHandler(block) {
     this.getPossibleMoves();
@@ -251,7 +226,7 @@ export default class MainScene extends Phaser.Scene {
     this.connectedItems(block.gridData.x, block.gridData.y);
     if (this.connected.length > 1) {
       let deleted = 0;
-      this.addScore();
+      this.registry.set('score', this.logic.addScore(this.connected, this.score));
       this.moves--;
       this.registry.set('moves', this.moves);
       this.connected.forEach((cube) => {
@@ -263,7 +238,7 @@ export default class MainScene extends Phaser.Scene {
           callbackScope: this,
           onComplete: () => {
             deleted--;
-            this.setEmpty(cube.x, cube.y);
+            this.logic.setEmpty(cube.x, cube.y, this.grid);
             if (deleted === 0) {
               this.handleEmptys();
               this.refill();
