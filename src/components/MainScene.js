@@ -88,7 +88,7 @@ export default class MainScene extends Phaser.Scene {
     Phaser.Display.Align.In.QuickSet(this.scoreText, scoreboard, 11, 0, -60);
 
     this.highscoreText = this.make.text(FONT_PROPS(this.highscore, 32));
-    Phaser.Display.Align.In.QuickSet(this.highscoreText, header, 2, -180, -32);
+    Phaser.Display.Align.In.QuickSet(this.highscoreText, header, 2, -170, -32);
 
     this.movesText = this.make.text(FONT_PROPS(SETUP.MOVES, 100));
     Phaser.Display.Align.In.QuickSet(this.movesText, scoreboard, 6, 0, -70);
