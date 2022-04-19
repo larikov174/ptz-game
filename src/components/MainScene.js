@@ -18,9 +18,7 @@ export default class MainScene extends Phaser.Scene {
     this.possibleMoves = [];
     this.chosenColor = null;
     this.highscore = localStorage.highscore ? JSON.parse(localStorage.highscore) : SETUP.HIGHSCORE;
-    this.goal = 5;
-    this.moves = 10;
-    this.level = 1;
+    this.goal = SETUP.GOAL;
     this.levelText = '';
     this.movesText = '';
     this.scoreText = '';
@@ -46,9 +44,9 @@ export default class MainScene extends Phaser.Scene {
     this.createUI();
     this.createGrid();
     this.registry.set('score', SETUP.SCORE);
-    this.registry.set('moves', this.moves);
+    this.registry.set('moves', SETUP.MOVES);
     this.registry.set('highscore', this.highscore);
-    this.registry.set('level', this.level);
+    this.registry.set('level', SETUP.LEVEL);
     this.registry.set('new', false);
     this.registry.events.on('changedata', this.updateData, this);
 
@@ -75,7 +73,14 @@ export default class MainScene extends Phaser.Scene {
       key: 'sprites',
       frame: ['bonus'],
       frameQuantity: 3,
-      gridAlign: { width: 3, height: 1, cellWidth: SETUP.CUBE_WIDTH * 2, cellHeight: SETUP.CUBE_HEIGHT, x: 660, y: 700 },
+      gridAlign: {
+        width: 3,
+        height: 1,
+        cellWidth: SETUP.CUBE_WIDTH * 2,
+        cellHeight: SETUP.CUBE_HEIGHT,
+        x: 660,
+        y: 700,
+      },
       setScale: { x: 0.8, y: 0.8 },
     });
 
@@ -85,10 +90,10 @@ export default class MainScene extends Phaser.Scene {
     this.highscoreText = this.make.text(FONT_PROPS(this.highscore, 32));
     Phaser.Display.Align.In.QuickSet(this.highscoreText, header, 2, -180, -32);
 
-    this.movesText = this.make.text(FONT_PROPS(this.moves, 100));
+    this.movesText = this.make.text(FONT_PROPS(SETUP.MOVES, 100));
     Phaser.Display.Align.In.QuickSet(this.movesText, scoreboard, 6, 0, -70);
 
-    this.levelText = this.make.text(FONT_PROPS(this.level, 32));
+    this.levelText = this.make.text(FONT_PROPS(SETUP.LEVEL, 32));
     Phaser.Display.Align.In.QuickSet(this.levelText, header, 4, -120, -10);
   }
 
@@ -101,8 +106,8 @@ export default class MainScene extends Phaser.Scene {
   }
 
   renderGrid() {
-    for (let i = 0; i < 9; i++) {
-      for (let j = 0; j < 9; j++) {
+    for (let i = 0; i < SETUP.INLINE_LIMIT; i++) {
+      for (let j = 0; j < SETUP.INLINE_LIMIT; j++) {
         let currentCube = this.grid[i][j];
         this.createCube(currentCube);
       }
@@ -110,9 +115,9 @@ export default class MainScene extends Phaser.Scene {
   }
 
   createGrid() {
-    for (let x = 0; x < 9; x++) {
+    for (let x = 0; x < SETUP.INLINE_LIMIT; x++) {
       this.grid[x] = [];
-      for (let y = 0; y < 9; y++) {
+      for (let y = 0; y < SETUP.INLINE_LIMIT; y++) {
         const sx = SETUP.START_X + x * SETUP.CUBE_WIDTH;
         const sy = SETUP.START_Y + y * SETUP.CUBE_HEIGHT;
         const color = Phaser.Math.Between(0, 4);
@@ -123,8 +128,6 @@ export default class MainScene extends Phaser.Scene {
     this.renderGrid();
     this.getPossibleMoves();
   }
-
-
 
   getConnected(x, y) {
     if (!this.logic.isInGrid(x, y, this.grid) || this.grid[x][y].isEmpty) return null;
@@ -142,8 +145,8 @@ export default class MainScene extends Phaser.Scene {
   getPossibleMoves() {
     //check if player can go on
     this.possibleMoves.length = 0;
-    for (let x = 0; x < 8; x++) {
-      for (let y = 0; y < 8; y++) {
+    for (let x = 0; x < SETUP.INLINE_LIMIT-1; x++) {
+      for (let y = 0; y < SETUP.INLINE_LIMIT-1; y++) {
         if (
           this.grid[x][y].color === this.grid[x][y + 1].color ||
           this.grid[x][y].color === this.grid[x + 1][y].color
@@ -162,7 +165,7 @@ export default class MainScene extends Phaser.Scene {
   reassignCoords() {
     //redraw cubes with new coordinates
     this.grid.forEach((item) => {
-      for (let i = 0; i < 9; i++) {
+      for (let i = 0; i < SETUP.INLINE_LIMIT; i++) {
         item[i].y = item.indexOf(item[i]);
         item[i].sy = SETUP.START_Y + SETUP.CUBE_HEIGHT * item[i].y;
         this.tweens.timeline({
@@ -182,7 +185,7 @@ export default class MainScene extends Phaser.Scene {
 
   refill() {
     this.grid.forEach((item) => {
-      for (let i = 0; i < 9; i++) {
+      for (let i = 0; i < SETUP.INLINE_LIMIT; i++) {
         if (item[i].isEmpty) {
           const color = Phaser.Math.Between(0, 4);
           item[i].isEmpty = false;
@@ -195,6 +198,7 @@ export default class MainScene extends Phaser.Scene {
 
   clickHandler(block) {
     const score = this.registry.get('score');
+    const moves = this.registry.get('moves');
 
     this.getPossibleMoves();
     this.chosenColor = block.gridData.color;
@@ -202,8 +206,7 @@ export default class MainScene extends Phaser.Scene {
     if (this.connected.length > 1) {
       let deleted = 0;
       this.registry.set('score', this.logic.addScore(this.connected, score));
-      this.moves--;
-      this.registry.set('moves', this.moves);
+      this.registry.set('moves', moves - 1);
       this.connected.forEach((cube) => {
         deleted++;
         this.tweens.timeline({
@@ -242,12 +245,11 @@ export default class MainScene extends Phaser.Scene {
   }
 
   levelChange() {
+    const level = this.registry.get('level');
     this.goal = Math.floor(this.goal * 1.5);
-    this.level++;
-    this.moves = 10;
-    this.registry.set('level', this.level);
+    this.registry.set('level', level + 1);
     this.registry.set('score', SETUP.SCORE);
-    this.registry.set('moves', this.moves);
+    this.registry.set('moves', SETUP.MOVES);
   }
 
   onGameWin() {

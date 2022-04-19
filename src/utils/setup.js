@@ -11,6 +11,7 @@ const SETUP = {
   MOVES: 10,
   LEVEL: 1,
   HIGHSCORE: 0,
+  INLINE_LIMIT: 9,
 };
 
 export default SETUP;
