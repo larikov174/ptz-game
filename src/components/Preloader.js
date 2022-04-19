@@ -1,4 +1,5 @@
 import FONT_PROPS from '../utils/utils';
+import SETUP from '../utils/setup';
 import sprites from '../assets/sprites.png';
 import json from '../assets/sprites.json';
 
@@ -18,8 +19,8 @@ export default class Preloader extends Phaser.Scene {
     const cubeR = this.add.image(0, 0, 'sprites', 'red').setScale(1.5);
     const cubeB = this.add.image(0, 0, 'sprites', 'blue').setScale(1.5);
     const cubeG = this.add.image(0, 0, 'sprites', 'green').setScale(2.5);
-    const title = this.make.text(FONT_PROPS('КуБиКи', 48));
-    const text = this.make.text(FONT_PROPS('Нажмите, чтобы начать игру'));
+    const title = this.make.text(FONT_PROPS(SETUP.TEXT.MAIN_TITLE, 48));
+    const text = this.make.text(FONT_PROPS(SETUP.TEXT.BEGIN));
 
     Phaser.Display.Align.In.TopCenter(title,
       this.add.zone(
