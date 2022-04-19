@@ -198,29 +198,6 @@ export default class MainScene extends Phaser.Scene {
     });
   }
 
-  // addScore(){
-  //   if (this.connected.length === 2) {
-  //     this.score += 2;
-  //     this.registry.set('score', this.score);
-  //     return;
-  //   }
-  //   if (this.connected.length === 3) {
-  //     this.score += Math.ceil(this.connected.length * 1.5);
-  //     this.registry.set('score', this.score);
-  //     return;
-  //   }
-  //   if (this.connected.length === 4) {
-  //     this.score += Math.ceil(this.connected.length * 2);
-  //     this.registry.set('score', this.score);
-  //     return;
-  //   }
-  //   if (this.connected.length >= 5) {
-  //     this.score += Math.ceil(this.connected.length * 3);
-  //     this.registry.set('score', this.score);
-  //     return;
-  //   }
-  // }
-
   clickHandler(block) {
     const score = this.registry.get('score');
 
@@ -236,7 +213,7 @@ export default class MainScene extends Phaser.Scene {
         deleted++;
         this.tweens.timeline({
           targets: cube.sprite,
-          tweens: [{ alpha: 0 }, { y: 230 }],
+          tweens: [{ alpha: 1 }, { y: 190 }],
           duration: 0,
           callbackScope: this,
           onComplete: () => {
