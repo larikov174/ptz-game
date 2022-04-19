@@ -18,7 +18,6 @@ export default class MainScene extends Phaser.Scene {
     this.possibleMoves = [];
     this.chosenColor = null;
     this.highscore = localStorage.highscore ? JSON.parse(localStorage.highscore) : SETUP.HIGHSCORE;
-    this.goal = SETUP.GOAL;
     this.levelText = '';
     this.movesText = '';
     this.scoreText = '';
@@ -45,8 +44,9 @@ export default class MainScene extends Phaser.Scene {
     this.createGrid();
     this.registry.set('score', SETUP.SCORE);
     this.registry.set('moves', SETUP.MOVES);
-    this.registry.set('highscore', this.highscore);
     this.registry.set('level', SETUP.LEVEL);
+    this.registry.set('goal', SETUP.GOAL);
+    this.registry.set('highscore', this.highscore);
     this.registry.set('new', false);
     this.registry.events.on('changedata', this.updateData, this);
 
@@ -84,7 +84,7 @@ export default class MainScene extends Phaser.Scene {
       setScale: { x: 0.8, y: 0.8 },
     });
 
-    this.scoreText = this.make.text(FONT_PROPS(`${SETUP.SCORE} / ${this.goal}`, 32));
+    this.scoreText = this.make.text(FONT_PROPS(`${SETUP.SCORE} / ${SETUP.GOAL}`, 32));
     Phaser.Display.Align.In.QuickSet(this.scoreText, scoreboard, 11, 0, -60);
 
     this.highscoreText = this.make.text(FONT_PROPS(this.highscore, 32));
@@ -97,8 +97,9 @@ export default class MainScene extends Phaser.Scene {
     Phaser.Display.Align.In.QuickSet(this.levelText, header, 4, -120, -10);
   }
 
+  //render cubes and connect them to the grid
   createCube(data) {
-    const block = this.add.sprite(data.sx, data.sy, 'sprites', SETUP.FRAMES[data.color]); //render cubes and conect them to the grid
+    const block = this.add.sprite(data.sx, data.sy, 'sprites', SETUP.FRAMES[data.color]);
     block.gridData = data;
     data.sprite = block;
     block.setInteractive();
@@ -132,9 +133,10 @@ export default class MainScene extends Phaser.Scene {
   getConnected(x, y) {
     if (!this.logic.isInGrid(x, y, this.grid) || this.grid[x][y].isEmpty) return null;
     let currentCube = this.grid[x][y];
+    //check if neighbour cube is the same color
     if (currentCube.color === this.chosenColor && !this.logic.isCubeChecked(x, y, this.connected)) {
-      //check if neighbour cube is the same color
-      this.connected.push({ x, y, id: currentCube.id, sprite: currentCube.sprite }); //making an array of connected cubes
+      //making an array of connected cubes
+      this.connected.push({ x, y, id: currentCube.id, sprite: currentCube.sprite });
       this.getConnected(x + 1, y);
       this.getConnected(x - 1, y);
       this.getConnected(x, y + 1);
@@ -142,11 +144,11 @@ export default class MainScene extends Phaser.Scene {
     }
   }
 
+  //check if player can go on
   getPossibleMoves() {
-    //check if player can go on
     this.possibleMoves.length = 0;
-    for (let x = 0; x < SETUP.INLINE_LIMIT-1; x++) {
-      for (let y = 0; y < SETUP.INLINE_LIMIT-1; y++) {
+    for (let x = 0; x < SETUP.INLINE_LIMIT - 1; x++) {
+      for (let y = 0; y < SETUP.INLINE_LIMIT - 1; y++) {
         if (
           this.grid[x][y].color === this.grid[x][y + 1].color ||
           this.grid[x][y].color === this.grid[x + 1][y].color
@@ -162,8 +164,8 @@ export default class MainScene extends Phaser.Scene {
     this.getConnected(x, y);
   }
 
+  //redraw cubes with new coordinates
   reassignCoords() {
-    //redraw cubes with new coordinates
     this.grid.forEach((item) => {
       for (let i = 0; i < SETUP.INLINE_LIMIT; i++) {
         item[i].y = item.indexOf(item[i]);
@@ -246,7 +248,8 @@ export default class MainScene extends Phaser.Scene {
 
   levelChange() {
     const level = this.registry.get('level');
-    this.goal = Math.floor(this.goal * 1.5);
+    const goal = this.registry.get('goal');
+    this.registry.set('goal', Math.ceil(goal * 1.5));
     this.registry.set('level', level + 1);
     this.registry.set('score', SETUP.SCORE);
     this.registry.set('moves', SETUP.MOVES);
@@ -259,16 +262,17 @@ export default class MainScene extends Phaser.Scene {
 
   updateData(parent, key, data) {
     const score = this.registry.get('score');
+    const goal = this.registry.get('goal');
 
     if (key === 'moves') {
       this.movesText.setText(data < 10 ? `0${data}` : data);
-      if ((data === 0 && score < this.goal) || this.possibleMoves.length === 0) this.onGameLoose();
-      if (score >= this.goal) this.onGameWin();
+      if ((data === 0 && score < goal) || this.possibleMoves.length === 0) this.onGameLoose();
+      if (score >= goal) this.onGameWin();
     }
 
     if (key === 'score') {
-      let dynemicWidth = 420 * (data / this.goal);
-      this.scoreText.setText(`${data} / ${this.goal}`);
+      let dynemicWidth = 420 * (data / goal);
+      this.scoreText.setText(`${data} / ${goal}`);
       this.rectBar.setSize(dynemicWidth < 420 ? dynemicWidth : 420, 30);
       this.progressBar.fillRectShape(this.rectBar);
     }

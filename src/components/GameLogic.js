@@ -1,10 +1,12 @@
+import SETUP from '../utils/setup';
+
 export default class GameLogic extends Phaser.Scene {
   constructor() {
     super('GameLogic');
   }
 
   isInGrid(x, y, grid) {
-    return x >= 0 && x < 9 && y >= 0 && y < 9 && grid[x][y] !== undefined;
+    return x >= 0 && x < SETUP.INLINE_LIMIT && y >= 0 && y < SETUP.INLINE_LIMIT && grid[x][y] !== undefined;
   }
 
   setEmpty(x, y, grid) {
@@ -20,8 +22,8 @@ export default class GameLogic extends Phaser.Scene {
   }
 
   pullUpEmptys(grid) {
-    for (let i = 0; i < 9; i++) {
-      for (let j = 1; j < 9; j++) {
+    for (let i = 0; i < SETUP.INLINE_LIMIT; i++) {
+      for (let j = 1; j < SETUP.INLINE_LIMIT; j++) {
         if (this._isEmpty(i, j, grid)) this._ascentEmptys(i, j, grid);
       }
     }
