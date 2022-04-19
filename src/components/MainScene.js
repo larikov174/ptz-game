@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import SFX from './SFX';
 import GameLogic from './GameLogic';
 import FONT_PROPS from '../utils/utils';
+import SETUP from '../utils/setup';
 
 export default class MainScene extends Phaser.Scene {
   constructor() {
@@ -9,22 +10,16 @@ export default class MainScene extends Phaser.Scene {
   }
 
   init() {
-    this.startX = 45;
-    this.startY = 230;
-    this.endX = 590;
-    this.endY = 690;
     this.gameWidth = this.sys.game.config.width;
     this.gameHeigth = this.sys.game.config.height;
     this.sceneZone = this.add.zone(this.gameWidth / 2, this.gameHeigth / 2, this.gameWidth, this.gameHeigth);
-    this.frames = ['blue', 'purple', 'red', 'yellow', 'green'];
     this.grid = [];
     this.connected = [];
+    this.possibleMoves = [];
     this.chosenColor = null;
-    this.highscore = localStorage.highscore ? JSON.parse(localStorage.highscore) : 0;
-    this.score = 0;
+    this.highscore = localStorage.highscore ? JSON.parse(localStorage.highscore) : SETUP.HIGHSCORE;
     this.goal = 5;
     this.moves = 10;
-    this.possibleMoves = [];
     this.level = 1;
     this.levelText = '';
     this.movesText = '';
@@ -45,12 +40,12 @@ export default class MainScene extends Phaser.Scene {
     this.logic = new GameLogic();
     this.sfx = new SFX({
       sprites: this.add.particles('sprites'),
-      frames: this.frames,
+      frames: SETUP.FRAMES,
     });
 
     this.createUI();
     this.createGrid();
-    this.registry.set('score', this.score);
+    this.registry.set('score', SETUP.SCORE);
     this.registry.set('moves', this.moves);
     this.registry.set('highscore', this.highscore);
     this.registry.set('level', this.level);
@@ -80,11 +75,11 @@ export default class MainScene extends Phaser.Scene {
       key: 'sprites',
       frame: ['bonus'],
       frameQuantity: 3,
-      gridAlign: { width: 3, height: 1, cellWidth: 120, cellHeight: 67, x: 660, y: 700 },
+      gridAlign: { width: 3, height: 1, cellWidth: SETUP.CUBE_WIDTH * 2, cellHeight: SETUP.CUBE_HEIGHT, x: 660, y: 700 },
       setScale: { x: 0.8, y: 0.8 },
     });
 
-    this.scoreText = this.make.text(FONT_PROPS(`${this.score} / ${this.goal}`, 32));
+    this.scoreText = this.make.text(FONT_PROPS(`${SETUP.SCORE} / ${this.goal}`, 32));
     Phaser.Display.Align.In.QuickSet(this.scoreText, scoreboard, 11, 0, -60);
 
     this.highscoreText = this.make.text(FONT_PROPS(this.highscore, 32));
@@ -98,7 +93,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   createCube(data) {
-    const block = this.add.sprite(data.sx, data.sy, 'sprites', this.frames[data.color]); //render cubes and conect them to the grid
+    const block = this.add.sprite(data.sx, data.sy, 'sprites', SETUP.FRAMES[data.color]); //render cubes and conect them to the grid
     block.gridData = data;
     data.sprite = block;
     block.setInteractive();
@@ -118,8 +113,8 @@ export default class MainScene extends Phaser.Scene {
     for (let x = 0; x < 9; x++) {
       this.grid[x] = [];
       for (let y = 0; y < 9; y++) {
-        const sx = this.startX + x * 60;
-        const sy = this.startY + y * 67;
+        const sx = SETUP.START_X + x * SETUP.CUBE_WIDTH;
+        const sy = SETUP.START_Y + y * SETUP.CUBE_HEIGHT;
         const color = Phaser.Math.Between(0, 4);
         const id = Phaser.Utils.String.UUID();
         this.grid[x][y] = { x, y, sx, sy, color, id, isEmpty: false };
@@ -169,7 +164,7 @@ export default class MainScene extends Phaser.Scene {
     this.grid.forEach((item) => {
       for (let i = 0; i < 9; i++) {
         item[i].y = item.indexOf(item[i]);
-        item[i].sy = this.startY + 67 * item[i].y;
+        item[i].sy = SETUP.START_Y + SETUP.CUBE_HEIGHT * item[i].y;
         this.tweens.timeline({
           targets: item[i].sprite,
           tweens: [{ y: item[i].sy }, { alpha: 1 }],
@@ -191,7 +186,7 @@ export default class MainScene extends Phaser.Scene {
         if (item[i].isEmpty) {
           const color = Phaser.Math.Between(0, 4);
           item[i].isEmpty = false;
-          item[i].sprite.setFrame(this.frames[color]);
+          item[i].sprite.setFrame(SETUP.FRAMES[color]);
           item[i].color = color;
         }
       }
@@ -249,10 +244,9 @@ export default class MainScene extends Phaser.Scene {
   levelChange() {
     this.goal = Math.floor(this.goal * 1.5);
     this.level++;
-    this.score = 0;
     this.moves = 10;
     this.registry.set('level', this.level);
-    this.registry.set('score', this.score);
+    this.registry.set('score', SETUP.SCORE);
     this.registry.set('moves', this.moves);
   }
 
@@ -285,7 +279,7 @@ export default class MainScene extends Phaser.Scene {
 
     if (key === 'level') {
       this.levelText.setText(data);
-      if (this.score === 0) this.progressBar.clear();
+      this.progressBar.clear();
     }
   }
 }
