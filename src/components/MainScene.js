@@ -1,12 +1,14 @@
 import Phaser from 'phaser';
 import SFX from './SFX';
 import GameLogic from './GameLogic';
+import ScoreLabel from '../ui/ScoreLabel'
 import FONT_PROPS from '../utils/utils';
 import SETUP from '../utils/setup';
 
 export default class MainScene extends Phaser.Scene {
   constructor() {
     super('MainScene');
+    this.ScoreLabel = undefined;
   }
 
   init() {
