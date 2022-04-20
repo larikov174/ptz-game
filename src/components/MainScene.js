@@ -45,9 +45,8 @@ export default class MainScene extends Phaser.Scene {
 
     this.createUI();
     this.createGrid();
-    this.registry.set('score', 0);
-    this.registry.set('moves', 10);
-    this.registry.set('level', 1);
+    this.registry.set('moves', this.movesLabel.get());
+    this.registry.set('level', this.levelLabel.get());
     this.registry.set('new', false);
     this.registry.events.on('changedata', this.updateData, this);
 
