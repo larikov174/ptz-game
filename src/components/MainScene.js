@@ -7,7 +7,6 @@ import SETUP from '../utils/setup';
 export default class MainScene extends Phaser.Scene {
   constructor() {
     super('MainScene');
-    this.scoreLabel = undefined;
   }
 
   init() {
@@ -37,12 +36,12 @@ export default class MainScene extends Phaser.Scene {
       frames: SETUP.FRAMES,
     });
 
-    this.scoreLabel = this.createScoreLabel(0, 0, 0, 32);
-    this.goalLabel = this.createScoreLabel(0, 0, 5, 32);
-    this.movesLabel = this.createScoreLabel(0, 0, 10, 100);
-    this.highscoreLabel = this.createScoreLabel(0, 0, this.highscore, 32);
-    this.levelLabel = this.createScoreLabel(0, 0, 1, 32);
-    this.slash = this.createScoreLabel(0, 0, '/', 32);
+    this.scoreLabel = this.createLabel(0, 0, 0, 32);
+    this.goalLabel = this.createLabel(0, 0, 5, 32);
+    this.movesLabel = this.createLabel(0, 0, 10, 100);
+    this.highscoreLabel = this.createLabel(0, 0, this.highscore, 32);
+    this.levelLabel = this.createLabel(0, 0, 1, 32);
+    this.slash = this.createLabel(0, 0, '/', 32);
 
     this.createUI();
     this.createGrid();
@@ -56,7 +55,7 @@ export default class MainScene extends Phaser.Scene {
     this.input.on('gameobjectdown', (pointer, gameObject) => gameObject.emit('clicked', gameObject), this);
   }
 
-  createScoreLabel(x, y, score, size) {
+  createLabel(x, y, score, size) {
     const style = { fontSize: `${size}px`, fill: '#fff', fontFamily: 'Calibri' };
     const label = new LabelCreator(this, x, y, score, style);
     this.add.existing(label);
@@ -210,7 +209,6 @@ export default class MainScene extends Phaser.Scene {
     if (this.connected.length > 1) {
       let deleted = 0;
       this.scoreLabel.add(this.connected.length);
-      this.registry.set('score', this.scoreLabel.get());
       this.movesLabel.reduce(1);
       this.registry.set('moves', this.movesLabel.get());
       this.connected.forEach((cube) => {
