@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import SFX from './SFX';
 import GameLogic from './GameLogic';
-import ScoreLabel from '../ui/ScoreLabel';
+import LabelCreator from '../ui/LabelCreator';
 import SETUP from '../utils/setup';
 
 export default class MainScene extends Phaser.Scene {
@@ -58,7 +58,7 @@ export default class MainScene extends Phaser.Scene {
 
   createScoreLabel(x, y, score, size) {
     const style = { fontSize: `${size}px`, fill: '#fff', fontFamily: 'Calibri' };
-    const label = new ScoreLabel(this, x, y, score, style);
+    const label = new LabelCreator(this, x, y, score, style);
     this.add.existing(label);
     label.depth = 3;
     return label;
@@ -210,9 +210,9 @@ export default class MainScene extends Phaser.Scene {
     if (this.connected.length > 1) {
       let deleted = 0;
       this.scoreLabel.add(this.connected.length);
-      this.registry.set('score', this.scoreLabel.value());
+      this.registry.set('score', this.scoreLabel.get());
       this.movesLabel.reduce(1);
-      this.registry.set('moves', this.movesLabel.value());
+      this.registry.set('moves', this.movesLabel.get());
       this.connected.forEach((cube) => {
         deleted++;
         this.tweens.timeline({
@@ -242,7 +242,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   onGameLoose() {
-    const score = this.scoreLabel.value();
+    const score = this.scoreLabel.get();
     if (score > this.highscore) {
       this.registry.set('new', true);
       localStorage.setItem('highscore', score);
@@ -252,10 +252,10 @@ export default class MainScene extends Phaser.Scene {
 
   levelChange() {
     this.scoreLabel.reset();
-    this.movesLabel.setScore(10);
+    this.movesLabel.set(10);
     this.levelLabel.add(1);
-    this.goalLabel.add(Math.ceil(this.goalLabel.value() * 1.5));
-    this.registry.set('level', this.levelLabel.value());
+    this.goalLabel.add(Math.ceil(this.goalLabel.get() * 1.5));
+    this.registry.set('level', this.levelLabel.get());
   }
 
   onGameWin() {
@@ -264,9 +264,9 @@ export default class MainScene extends Phaser.Scene {
   }
 
   updateData(parent, key, data) {
-    const moves = this.movesLabel.value();
-    const score = this.scoreLabel.value();
-    const goal = this.goalLabel.value();
+    const moves = this.movesLabel.get();
+    const score = this.scoreLabel.get();
+    const goal = this.goalLabel.get();
 
     if (key === 'moves') {
       let dynemicWidth = 420 * (score / goal);
