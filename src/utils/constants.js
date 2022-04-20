@@ -1,6 +1,6 @@
-const SETUP = {
+const CONST = {
   START_X: 45,
-  START_Y:230,
+  START_Y: 230,
   END_X: 590,
   END_Y: 690,
   CUBE_WIDTH: 60,
@@ -14,13 +14,13 @@ const SETUP = {
   INLINE_LIMIT: 9,
   TEXT: {
     MAIN_TITLE: 'КуБиКи',
-    BEGIN: 'Нажмите, чтобы начать игру',
+    BEGIN_TEXT: 'Нажмите, чтобы начать игру',
     NEW_RECORD: 'Круто, ты установил свой рекорд!',
     CHEERUP: 'Ты можешь лучше, поднажми!',
     NEW_SCORE: 'Твой новый результат(очков):',
     BEST_SCORE: 'Твой лучший результат(очков):',
-    AGAIN: 'Попробуем еще раз?!'
-  }
+    AGAIN: 'Попробуем еще раз?!',
+  },
 };
 
-export default SETUP;
+export default CONST;
