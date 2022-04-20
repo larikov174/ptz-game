@@ -1,14 +1,13 @@
 import Phaser from 'phaser';
 import SFX from './SFX';
 import GameLogic from './GameLogic';
-import ScoreLabel from '../ui/ScoreLabel'
-import FONT_PROPS from '../utils/utils';
+import ScoreLabel from '../ui/ScoreLabel';
 import SETUP from '../utils/setup';
 
 export default class MainScene extends Phaser.Scene {
   constructor() {
     super('MainScene');
-    this.ScoreLabel = undefined;
+    this.scoreLabel = undefined;
   }
 
   init() {
@@ -20,10 +19,6 @@ export default class MainScene extends Phaser.Scene {
     this.possibleMoves = [];
     this.chosenColor = null;
     this.highscore = localStorage.highscore ? JSON.parse(localStorage.highscore) : SETUP.HIGHSCORE;
-    this.levelText = '';
-    this.movesText = '';
-    this.scoreText = '';
-    this.highscoreText = '';
     this.progressBar = this.add.graphics({ fillStyle: { color: 0x199d21 } });
     this.progressOverlay = this.add.graphics({ fillStyle: { color: 0x001a3e } });
     this.rectBar = new Phaser.Geom.Rectangle(250, 45, 0, 30);
@@ -42,18 +37,31 @@ export default class MainScene extends Phaser.Scene {
       frames: SETUP.FRAMES,
     });
 
+    this.scoreLabel = this.createScoreLabel(0, 0, 0, 32);
+    this.goalLabel = this.createScoreLabel(0, 0, 5, 32);
+    this.movesLabel = this.createScoreLabel(0, 0, 10, 100);
+    this.highscoreLabel = this.createScoreLabel(0, 0, this.highscore, 32);
+    this.levelLabel = this.createScoreLabel(0, 0, 1, 32);
+    this.slash = this.createScoreLabel(0, 0, '/', 32);
+
     this.createUI();
     this.createGrid();
-    this.registry.set('score', SETUP.SCORE);
-    this.registry.set('moves', SETUP.MOVES);
-    this.registry.set('level', SETUP.LEVEL);
-    this.registry.set('goal', SETUP.GOAL);
-    this.registry.set('highscore', this.highscore);
+    this.registry.set('score', 0);
+    this.registry.set('moves', 10);
+    this.registry.set('level', 1);
     this.registry.set('new', false);
     this.registry.events.on('changedata', this.updateData, this);
 
     // emmit click event on each cube
     this.input.on('gameobjectdown', (pointer, gameObject) => gameObject.emit('clicked', gameObject), this);
+  }
+
+  createScoreLabel(x, y, score, size) {
+    const style = { fontSize: `${size}px`, fill: '#fff', fontFamily: 'Calibri' };
+    const label = new ScoreLabel(this, x, y, score, style);
+    this.add.existing(label);
+    label.depth = 3;
+    return label;
   }
 
   createUI() {
@@ -71,6 +79,13 @@ export default class MainScene extends Phaser.Scene {
     let scoreboard = this.add.image(0, 0, 'sprites', 'scoreboard');
     Phaser.Display.Align.In.RightCenter(scoreboard, this.sceneZone);
 
+    Phaser.Display.Align.In.QuickSet(this.scoreLabel, scoreboard, 11, -50, -60);
+    Phaser.Display.Align.In.QuickSet(this.slash, scoreboard, 11, 0, -60);
+    Phaser.Display.Align.In.QuickSet(this.goalLabel, scoreboard, 11, 50, -60);
+    Phaser.Display.Align.In.QuickSet(this.highscoreLabel, header, 2, -170, -32);
+    Phaser.Display.Align.In.QuickSet(this.movesLabel, scoreboard, 6, 0, -70);
+    Phaser.Display.Align.In.QuickSet(this.levelLabel, header, 4, -120, -10);
+
     this.add.group({
       key: 'sprites',
       frame: ['bonus'],
@@ -85,18 +100,6 @@ export default class MainScene extends Phaser.Scene {
       },
       setScale: { x: 0.8, y: 0.8 },
     });
-
-    this.scoreText = this.make.text(FONT_PROPS(`${SETUP.SCORE} / ${SETUP.GOAL}`, 32));
-    Phaser.Display.Align.In.QuickSet(this.scoreText, scoreboard, 11, 0, -60);
-
-    this.highscoreText = this.make.text(FONT_PROPS(this.highscore, 32));
-    Phaser.Display.Align.In.QuickSet(this.highscoreText, header, 2, -170, -32);
-
-    this.movesText = this.make.text(FONT_PROPS(SETUP.MOVES, 100));
-    Phaser.Display.Align.In.QuickSet(this.movesText, scoreboard, 6, 0, -70);
-
-    this.levelText = this.make.text(FONT_PROPS(SETUP.LEVEL, 32));
-    Phaser.Display.Align.In.QuickSet(this.levelText, header, 4, -120, -10);
   }
 
   //render cubes and connect them to the grid
@@ -201,16 +204,15 @@ export default class MainScene extends Phaser.Scene {
   }
 
   clickHandler(block) {
-    const score = this.registry.get('score');
-    const moves = this.registry.get('moves');
-
     this.getPossibleMoves();
     this.chosenColor = block.gridData.color;
     this.connectedItems(block.gridData.x, block.gridData.y);
     if (this.connected.length > 1) {
       let deleted = 0;
-      this.registry.set('score', this.logic.addScore(this.connected, score));
-      this.registry.set('moves', moves - 1);
+      this.scoreLabel.add(this.connected.length);
+      this.registry.set('score', this.scoreLabel.value());
+      this.movesLabel.reduce(1);
+      this.registry.set('moves', this.movesLabel.value());
       this.connected.forEach((cube) => {
         deleted++;
         this.tweens.timeline({
@@ -240,21 +242,21 @@ export default class MainScene extends Phaser.Scene {
   }
 
   onGameLoose() {
-    const score = this.registry.get('score');
-
+    const score = this.scoreLabel.value();
     if (score > this.highscore) {
+      this.registry.set('new', true);
       this.registry.set('highscore', score);
+      localStorage.setItem('highscore', score);
     }
     this.camera.shake(1000, 0.04, false, this.cameraFadeOut);
   }
 
   levelChange() {
-    const level = this.registry.get('level');
-    const goal = this.registry.get('goal');
-    this.registry.set('goal', Math.ceil(goal * 1.5));
-    this.registry.set('level', level + 1);
-    this.registry.set('score', SETUP.SCORE);
-    this.registry.set('moves', SETUP.MOVES);
+    this.scoreLabel.reset();
+    this.movesLabel.setScore(10);
+    this.levelLabel.add(1);
+    this.goalLabel.add(Math.ceil(this.goalLabel.value() * 1.5));
+    this.registry.set('level', this.levelLabel.value());
   }
 
   onGameWin() {
@@ -263,31 +265,18 @@ export default class MainScene extends Phaser.Scene {
   }
 
   updateData(parent, key, data) {
-    const score = this.registry.get('score');
-    const goal = this.registry.get('goal');
+    const moves = this.movesLabel.value();
+    const score = this.scoreLabel.value();
+    const goal = this.goalLabel.value();
 
     if (key === 'moves') {
-      this.movesText.setText(data < 10 ? `0${data}` : data);
-      if ((data === 0 && score < goal) || this.possibleMoves.length === 0) this.onGameLoose();
+      let dynemicWidth = 420 * (score / goal);
+      this.rectBar.setSize(dynemicWidth < 420 ? dynemicWidth : 420, 30);
+      this.progressBar.fillRectShape(this.rectBar);
+      if (moves === 0 || this.possibleMoves.length === 0) this.onGameLoose();
       if (score >= goal) this.onGameWin();
     }
 
-    if (key === 'score') {
-      let dynemicWidth = 420 * (data / goal);
-      this.scoreText.setText(`${data} / ${goal}`);
-      this.rectBar.setSize(dynemicWidth < 420 ? dynemicWidth : 420, 30);
-      this.progressBar.fillRectShape(this.rectBar);
-    }
-
-    if (key === 'highscore') {
-      this.highscoreText.setText(data);
-      localStorage.setItem('highscore', data);
-      this.registry.set('new', true);
-    }
-
-    if (key === 'level') {
-      this.levelText.setText(data);
-      this.progressBar.clear();
-    }
+    if (key === 'level') this.progressBar.clear();
   }
 }
