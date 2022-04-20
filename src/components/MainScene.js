@@ -245,7 +245,6 @@ export default class MainScene extends Phaser.Scene {
     const score = this.scoreLabel.value();
     if (score > this.highscore) {
       this.registry.set('new', true);
-      this.registry.set('highscore', score);
       localStorage.setItem('highscore', score);
     }
     this.camera.shake(1000, 0.04, false, this.cameraFadeOut);

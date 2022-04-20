@@ -29,9 +29,7 @@ export default class GameOver extends Phaser.Scene {
     );
     const textScore = this.make.text(
       FONT_PROPS(
-        `${this.registry.get('new') == true ? SETUP.TEXT.NEW_SCORE : SETUP.TEXT.BEST_SCORE} ${this.registry.get(
-          'highscore',
-        )}`,
+        `${this.registry.get('new') == true ? SETUP.TEXT.NEW_SCORE : SETUP.TEXT.BEST_SCORE} ${localStorage.highscore}`,
       ),
     );
 
