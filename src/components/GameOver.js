@@ -35,7 +35,7 @@ export default class GameOver extends Phaser.Scene {
   create() {
     this.createCubefall();
     const { AGAIN, CHEERUP, NEW_RECORD, NEW_SCORE, BEST_SCORE } = CONST.TEXT;
-    const { SIZE_L, SIZE_S } = FONT_PROPS.SIZE;
+    const { SIZE_L, SIZE_S } = FONT_PROPS;
     const width = this.sys.game.config.width;
     const height = this.sys.game.config.height;
     const screenCenter = this.add.zone(width / 2, height / 2, width, height);

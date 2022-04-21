@@ -8,8 +8,7 @@ import CONST from '../utils/constants';
 
 const { FRAMES, HIGHSCORE, SCORE, GOAL, MOVES, LEVEL, CUBE_HEIGHT, CUBE_WIDTH, INLINE_LIMIT, START_Y, START_X } = CONST;
 const { BAR_WIDTH, BAR_HEIGHT, COLOR_NAVY, COLOR_GREEN } = CONST.P_BAR;
-const { FAMILY, FILL } = FONT_PROPS;
-const { SIZE_XL, SIZE_M } = FONT_PROPS.SIZE;
+const { FAMILY, FILL, SIZE_XL, SIZE_M } = FONT_PROPS;
 
 export default class MainScene extends Phaser.Scene {
   constructor() {

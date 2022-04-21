@@ -24,7 +24,7 @@ export default class Preloader extends Phaser.Scene {
 
   create() {
     const { MAIN_TITLE, BEGIN_TEXT } = CONST.TEXT;
-    const { SIZE_L, SIZE_S } = FONT_PROPS.SIZE;
+    const { SIZE_L, SIZE_S } = FONT_PROPS;
     const width = this.sys.game.config.width;
     const height = this.sys.game.config.height;
     const screenCenter = this.add.zone(width / 2, height / 2, width, height);
