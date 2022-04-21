@@ -6,7 +6,7 @@ import LabelCreator from '../ui/LabelCreator';
 import FONT_PROPS from '../ui/FontProps';
 import CONST from '../utils/constants';
 
-const { FRAMES, HIGHSCORE, SCORE, GOAL, MOVES, LEVEL, CUBE_HEIGHT, CUBE_WIDTH } = CONST;
+const { FRAMES, HIGHSCORE, SCORE, GOAL, MOVES, LEVEL, CUBE_HEIGHT, CUBE_WIDTH, START_Y } = CONST;
 const { BAR_WIDTH, BAR_HEIGHT, COLOR_NAVY, COLOR_GREEN } = CONST.P_BAR;
 const { FAMILY, FILL, SIZE_XL, SIZE_M } = FONT_PROPS;
 
@@ -118,7 +118,7 @@ export default class MainScene extends Phaser.Scene {
         deleted++;
         this.tweens.timeline({
           targets: cube.sprite,
-          tweens: [{ alpha: 1 }, { y: 190 }],
+          tweens: [{ alpha: 1 }, { y: START_Y - CUBE_HEIGHT }],
           duration: 0,
           callbackScope: this,
           onComplete: () => {
@@ -151,8 +151,8 @@ export default class MainScene extends Phaser.Scene {
   }
 
   levelChange() {
-    this.movesLabel.set(10);
-    this.levelLabel.add(1);
+    this.movesLabel.set(MOVES);
+    this.levelLabel.add(LEVEL);
     this.goalLabel.add(Math.ceil(this.goalLabel.get() * 1.5));
     this.registry.set('level', this.levelLabel.get());
   }
