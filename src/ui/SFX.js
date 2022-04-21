@@ -1,8 +1,8 @@
 export default class SFX {
-  constructor(data) {
+  constructor(sprites, frames) {
     this._emitters = {};
-    this._particles = data.sprites;
-    this._frames = data.frames;
+    this._particles = sprites;
+    this._frames = frames;
   }
 
   _createEmitter(color) {
