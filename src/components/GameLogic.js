@@ -11,8 +11,64 @@ export default class GameLogic extends Phaser.Scene {
     this.possibleMoves = possibleMoves;
   }
 
-  isInGrid(x, y) {
+  _isInGrid(x, y) {
     return x >= 0 && x < INLINE_LIMIT && y >= 0 && y < INLINE_LIMIT && this.grid[x][y] !== undefined;
+  }
+
+  _ascentEmptys(x, y) {
+    Phaser.Utils.Array.SendToBack(this.grid[x], this.grid[x][y]);
+  }
+
+  _pullUpEmptys() {
+    for (let i = 0; i < INLINE_LIMIT; i++) {
+      for (let j = 1; j < INLINE_LIMIT; j++) {
+        if (this.isEmpty(i, j)) this._ascentEmptys(i, j, this.grid);
+      }
+    }
+  }
+
+  _isCubeChecked(x, y) {
+    return this.connected.some((item) => item.x === x && item.y === y);
+  }
+
+  _getConnections(x, y, color) {
+    if (!this._isInGrid(x, y) || this.isEmpty(x, y)) return null;
+    const currentCube = this.grid[x][y];
+    if (currentCube.color === color && !this._isCubeChecked(x, y)) {
+      this.connected.push({ x, y, id: currentCube.id, sprite: currentCube.sprite });
+      this._getConnections(x + 1, y, color);
+      this._getConnections(x - 1, y, color);
+      this._getConnections(x, y + 1, color);
+      this._getConnections(x, y - 1, color);
+    }
+  }
+
+  _refill() {
+    this.grid.forEach((item) => {
+      for (let i = 0; i < INLINE_LIMIT; i++) {
+        if (item[i].isEmpty) {
+          const color = Phaser.Math.Between(0, FRAMES.length - 1);
+          item[i].isEmpty = false;
+          item[i].sprite.setFrame(FRAMES[color]);
+          item[i].color = color;
+        }
+      }
+    });
+  }
+
+  _reassignCoords(tweens) {
+    this.grid.forEach((item) => {
+      for (let i = 0; i < INLINE_LIMIT; i++) {
+        item[i].y = item.indexOf(item[i]);
+        item[i].sy = START_Y + CUBE_HEIGHT * item[i].y;
+        tweens.timeline({
+          targets: item[i].sprite,
+          tweens: [{ y: item[i].sy }, { alpha: 1 }],
+          duration: 250,
+          callbackScope: this,
+        });
+      }
+    });
   }
 
   setEmpty(x, y) {
@@ -21,22 +77,6 @@ export default class GameLogic extends Phaser.Scene {
 
   isEmpty(x, y) {
     return this.grid[x][y].isEmpty;
-  }
-
-  _ascentEmptys(x, y) {
-    Phaser.Utils.Array.SendToBack(this.grid[x], this.grid[x][y]);
-  }
-
-  pullUpEmptys() {
-    for (let i = 0; i < INLINE_LIMIT; i++) {
-      for (let j = 1; j < INLINE_LIMIT; j++) {
-        if (this.isEmpty(i, j)) this._ascentEmptys(i, j, this.grid);
-      }
-    }
-  }
-
-  isCubeChecked(x, y) {
-    return this.connected.some((item) => item.x === x && item.y === y);
   }
 
   getPossibleMoves() {
@@ -55,52 +95,12 @@ export default class GameLogic extends Phaser.Scene {
 
   findConnected(x, y, color) {
     this.connected.length = 0;
-    this.getConnections(x, y, color);
-  }
-
-  getConnections(x, y, color) {
-    if (!this.isInGrid(x, y) || this.isEmpty(x, y)) return null;
-    const currentCube = this.grid[x][y];
-    if (currentCube.color === color && !this.isCubeChecked(x, y)) {
-      this.connected.push({ x, y, id: currentCube.id, sprite: currentCube.sprite });
-      this.getConnections(x + 1, y, color);
-      this.getConnections(x - 1, y, color);
-      this.getConnections(x, y + 1, color);
-      this.getConnections(x, y - 1, color);
-    }
-  }
-
-  refill() {
-    this.grid.forEach((item) => {
-      for (let i = 0; i < INLINE_LIMIT; i++) {
-        if (item[i].isEmpty) {
-          const color = Phaser.Math.Between(0, FRAMES.length - 1);
-          item[i].isEmpty = false;
-          item[i].sprite.setFrame(FRAMES[color]);
-          item[i].color = color;
-        }
-      }
-    });
-  }
-
-  reassignCoords(tweens) {
-    this.grid.forEach((item) => {
-      for (let i = 0; i < INLINE_LIMIT; i++) {
-        item[i].y = item.indexOf(item[i]);
-        item[i].sy = START_Y + CUBE_HEIGHT * item[i].y;
-        tweens.timeline({
-          targets: item[i].sprite,
-          tweens: [{ y: item[i].sy }, { alpha: 1 }],
-          duration: 250,
-          callbackScope: this,
-        });
-      }
-    });
+    this._getConnections(x, y, color);
   }
 
   handleEmptys(tweens) {
-    this.pullUpEmptys();
-    this.reassignCoords(tweens);
-    this.refill();
+    this._pullUpEmptys();
+    this._reassignCoords(tweens);
+    this._refill();
   }
 }
