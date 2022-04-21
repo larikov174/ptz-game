@@ -142,11 +142,6 @@ export default class MainScene extends Phaser.Scene {
     this.logic.getPossibleMoves();
   }
 
-  connectedItems(x, y, color) {
-    this.connected.length = 0;
-    this.logic.getConnected(x, y, color);
-  }
-
   //redraw cubes with new coordinates
   reassignCoords() {
     this.grid.forEach((item) => {
@@ -184,7 +179,7 @@ export default class MainScene extends Phaser.Scene {
   clickHandler(block) {
     const chosenColor = block.gridData.color;
     this.logic.getPossibleMoves();
-    this.connectedItems(block.gridData.x, block.gridData.y, chosenColor);
+    this.logic.findConnected(block.gridData.x, block.gridData.y, chosenColor);
     if (this.connected.length > 1) {
       let deleted = 0;
       this.scoreLabel.addScore(this.connected.length);
