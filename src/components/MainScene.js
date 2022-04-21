@@ -4,6 +4,8 @@ import GameLogic from './GameLogic';
 import LabelCreator from '../ui/LabelCreator';
 import CONST from '../utils/constants';
 
+const { FRAMES, HIGHSCORE, SCORE, GOAL, MOVES, LEVEL, CUBE_HEIGHT, CUBE_WIDTH, INLINE_LIMIT, START_Y, START_X } = CONST;
+
 export default class MainScene extends Phaser.Scene {
   constructor() {
     super('MainScene');
@@ -17,7 +19,7 @@ export default class MainScene extends Phaser.Scene {
     this.connected = [];
     this.possibleMoves = [];
     this.chosenColor = null;
-    this.highscore = localStorage.highscore ? JSON.parse(localStorage.highscore) : CONST.HIGHSCORE;
+    this.highscore = localStorage.highscore ? JSON.parse(localStorage.highscore) : HIGHSCORE;
     this.progressBar = this.add.graphics({ fillStyle: { color: 0x199d21 } });
     this.progressOverlay = this.add.graphics({ fillStyle: { color: 0x001a3e } });
     this.rectBar = new Phaser.Geom.Rectangle(250, 45, 0, 30);
@@ -33,14 +35,14 @@ export default class MainScene extends Phaser.Scene {
     this.logic = new GameLogic();
     this.sfx = new SFX({
       sprites: this.add.particles('sprites'),
-      frames: CONST.FRAMES,
+      frames: FRAMES,
     });
 
-    this.scoreLabel = this.createLabel(0, 0, 0, 32);
-    this.goalLabel = this.createLabel(0, 0, 5, 32);
-    this.movesLabel = this.createLabel(0, 0, 10, 100);
+    this.scoreLabel = this.createLabel(0, 0, SCORE, 32);
+    this.goalLabel = this.createLabel(0, 0, GOAL, 32);
+    this.movesLabel = this.createLabel(0, 0, MOVES, 100);
     this.highscoreLabel = this.createLabel(0, 0, this.highscore, 32);
-    this.levelLabel = this.createLabel(0, 0, 1, 32);
+    this.levelLabel = this.createLabel(0, 0, LEVEL, 32);
     this.slash = this.createLabel(0, 0, '/', 32);
 
     this.createUI();
@@ -91,8 +93,8 @@ export default class MainScene extends Phaser.Scene {
       gridAlign: {
         width: 3,
         height: 1,
-        cellWidth: CONST.CUBE_WIDTH * 2,
-        cellHeight: CONST.CUBE_HEIGHT,
+        cellWidth: CUBE_WIDTH * 2,
+        cellHeight: CUBE_HEIGHT,
         x: 660,
         y: 700,
       },
@@ -102,7 +104,7 @@ export default class MainScene extends Phaser.Scene {
 
   //render cubes and connect them to the grid
   createCube(data) {
-    const block = this.add.sprite(data.sx, data.sy, 'sprites', CONST.FRAMES[data.color]);
+    const block = this.add.sprite(data.sx, data.sy, 'sprites', FRAMES[data.color]);
     block.gridData = data;
     data.sprite = block;
     block.setInteractive();
@@ -110,8 +112,8 @@ export default class MainScene extends Phaser.Scene {
   }
 
   renderGrid() {
-    for (let i = 0; i < CONST.INLINE_LIMIT; i++) {
-      for (let j = 0; j < CONST.INLINE_LIMIT; j++) {
+    for (let i = 0; i < INLINE_LIMIT; i++) {
+      for (let j = 0; j < INLINE_LIMIT; j++) {
         let currentCube = this.grid[i][j];
         this.createCube(currentCube);
       }
@@ -119,11 +121,11 @@ export default class MainScene extends Phaser.Scene {
   }
 
   createGrid() {
-    for (let x = 0; x < CONST.INLINE_LIMIT; x++) {
+    for (let x = 0; x < INLINE_LIMIT; x++) {
       this.grid[x] = [];
-      for (let y = 0; y < CONST.INLINE_LIMIT; y++) {
-        const sx = CONST.START_X + x * CONST.CUBE_WIDTH;
-        const sy = CONST.START_Y + y * CONST.CUBE_HEIGHT;
+      for (let y = 0; y < INLINE_LIMIT; y++) {
+        const sx = START_X + x * CUBE_WIDTH;
+        const sy = START_Y + y * CUBE_HEIGHT;
         const color = Phaser.Math.Between(0, 4);
         const id = Phaser.Utils.String.UUID();
         this.grid[x][y] = { x, y, sx, sy, color, id, isEmpty: false };
@@ -150,8 +152,8 @@ export default class MainScene extends Phaser.Scene {
   //check if player can go on
   getPossibleMoves() {
     this.possibleMoves.length = 0;
-    for (let x = 0; x < CONST.INLINE_LIMIT - 1; x++) {
-      for (let y = 0; y < CONST.INLINE_LIMIT - 1; y++) {
+    for (let x = 0; x < INLINE_LIMIT - 1; x++) {
+      for (let y = 0; y < INLINE_LIMIT - 1; y++) {
         if (
           this.grid[x][y].color === this.grid[x][y + 1].color ||
           this.grid[x][y].color === this.grid[x + 1][y].color
@@ -170,9 +172,9 @@ export default class MainScene extends Phaser.Scene {
   //redraw cubes with new coordinates
   reassignCoords() {
     this.grid.forEach((item) => {
-      for (let i = 0; i < CONST.INLINE_LIMIT; i++) {
+      for (let i = 0; i < INLINE_LIMIT; i++) {
         item[i].y = item.indexOf(item[i]);
-        item[i].sy = CONST.START_Y + CONST.CUBE_HEIGHT * item[i].y;
+        item[i].sy = START_Y + CUBE_HEIGHT * item[i].y;
         this.tweens.timeline({
           targets: item[i].sprite,
           tweens: [{ y: item[i].sy }, { alpha: 1 }],
@@ -190,11 +192,11 @@ export default class MainScene extends Phaser.Scene {
 
   refill() {
     this.grid.forEach((item) => {
-      for (let i = 0; i < CONST.INLINE_LIMIT; i++) {
+      for (let i = 0; i < INLINE_LIMIT; i++) {
         if (item[i].isEmpty) {
           const color = Phaser.Math.Between(0, 4);
           item[i].isEmpty = false;
-          item[i].sprite.setFrame(CONST.FRAMES[color]);
+          item[i].sprite.setFrame(FRAMES[color]);
           item[i].color = color;
         }
       }
