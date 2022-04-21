@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import SFX from './SFX';
 import GameLogic from './GameLogic';
+import ProgressBar from '../ui/ProgressBar';
 import LabelCreator from '../ui/LabelCreator';
 import FONT_PROPS from '../ui/FontProps';
 import CONST from '../utils/constants';
@@ -34,6 +35,9 @@ export default class MainScene extends Phaser.Scene {
       frames: FRAMES,
     });
 
+    this.progressOverlay = this.createBar(420, 0x001a3e);
+    this.progressBar = this.createBar(0, 0x199d21);
+
     this.scoreLabel = this.createLabel(0, 0, SCORE, SIZE_M);
     this.goalLabel = this.createLabel(0, 0, GOAL, SIZE_M);
     this.movesLabel = this.createLabel(0, 0, MOVES, SIZE_XL);
@@ -43,6 +47,7 @@ export default class MainScene extends Phaser.Scene {
 
     this.createUI();
     this.createGrid();
+
     this.registry.set('moves', this.movesLabel.get());
     this.registry.set('level', this.levelLabel.get());
     this.registry.set('new', false);
@@ -56,8 +61,14 @@ export default class MainScene extends Phaser.Scene {
     const style = { fontSize: `${size}px`, fill: FILL, fontFamily: FAMILY };
     const label = new LabelCreator(this, x, y, value, style);
     this.add.existing(label);
-    label.depth = 3;
+    label.depth = 1;
     return label;
+  }
+
+  createBar(width, color) {
+    const bar = new ProgressBar(this, 0, 0, width, 30, color);
+    this.add.existing(bar);
+    return bar;
   }
 
   createUI() {
@@ -68,21 +79,13 @@ export default class MainScene extends Phaser.Scene {
     const header = this.add.image(0, 0, 'sprites', 'bar1');
     const scoreboard = this.add.image(0, 0, 'sprites', 'scoreboard');
 
-    this.progressBar = this.add.graphics();
-    this.progressBar.fillStyle(0x199d21);
-    this.progressBar.fillRect(250, 45, 0, 30);
-    this.progressBar.depth = 1;
-
-    this.progressOverlay = this.add.graphics();
-    this.progressOverlay.fillStyle(0x001a3e);
-    this.progressOverlay.fillRect(250, 45, 420, 30);
-    this.progressOverlay.depth = 0;
-
     header.depth = -1;
 
     Phaser.Display.Align.In.BottomLeft(field, screenCenter);
     Phaser.Display.Align.In.TopCenter(header, screenCenter);
     Phaser.Display.Align.In.RightCenter(scoreboard, screenCenter);
+    Phaser.Display.Align.In.QuickSet(this.progressOverlay, header, 6, -35, 0);
+    Phaser.Display.Align.In.QuickSet(this.progressBar, this.progressOverlay, 3, 0, 0);
     Phaser.Display.Align.In.QuickSet(this.scoreLabel, scoreboard, 11, -50, -60);
     Phaser.Display.Align.In.QuickSet(this.slash, scoreboard, 11, 0, -60);
     Phaser.Display.Align.In.QuickSet(this.goalLabel, scoreboard, 11, 50, -60);
@@ -272,14 +275,13 @@ export default class MainScene extends Phaser.Scene {
     const dynemicWidth = 420 * (score / goal);
 
     if (key === 'moves') {
-      this.progressBar.fillRect(250, 45, dynemicWidth < 420 ? dynemicWidth : 420, 30);
+      this.progressBar.redraw(dynemicWidth)
       if (moves === 0 || this.possibleMoves.length === 0) this.onGameLoose();
       if (score >= goal) this.onGameWin();
     }
 
     if (key === 'level') {
-      this.progressBar.clear();
-      this.progressBar.fillRect(250, 45, dynemicWidth < 420 ? dynemicWidth : 420, 30);
+      this.progressBar.redraw(dynemicWidth);
     }
   }
 }
