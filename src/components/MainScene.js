@@ -142,23 +142,9 @@ export default class MainScene extends Phaser.Scene {
     this.logic.getPossibleMoves();
   }
 
-  //check if neighbour cube is the same color
-  getConnected(x, y) {
-    if (!this.logic.isInGrid(x, y) || this.logic.isEmpty(x, y)) return null;
-    let currentCube = this.grid[x][y];
-    if (currentCube.color === this.chosenColor && !this.logic.isCubeChecked(x, y)) {
-      //making an array of connected cubes
-      this.connected.push({ x, y, id: currentCube.id, sprite: currentCube.sprite });
-      this.getConnected(x + 1, y);
-      this.getConnected(x - 1, y);
-      this.getConnected(x, y + 1);
-      this.getConnected(x, y - 1);
-    }
-  }
-
-  connectedItems(x, y) {
+  connectedItems(x, y, color) {
     this.connected.length = 0;
-    this.getConnected(x, y);
+    this.logic.getConnected(x, y, color);
   }
 
   //redraw cubes with new coordinates
@@ -196,9 +182,9 @@ export default class MainScene extends Phaser.Scene {
   }
 
   clickHandler(block) {
+    const chosenColor = block.gridData.color;
     this.logic.getPossibleMoves();
-    this.chosenColor = block.gridData.color;
-    this.connectedItems(block.gridData.x, block.gridData.y);
+    this.connectedItems(block.gridData.x, block.gridData.y, chosenColor);
     if (this.connected.length > 1) {
       let deleted = 0;
       this.scoreLabel.addScore(this.connected.length);

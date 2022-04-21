@@ -51,4 +51,16 @@ export default class GameLogic extends Phaser.Scene {
       }
     }
   }
+
+  getConnected(x, y, color) {
+    if (!this.isInGrid(x, y) || this.isEmpty(x, y)) return null;
+    const currentCube = this.grid[x][y];
+    if (currentCube.color === color && !this.isCubeChecked(x, y)) {
+      this.connected.push({ x, y, id: currentCube.id, sprite: currentCube.sprite });
+      this.getConnected(x + 1, y, color);
+      this.getConnected(x - 1, y, color);
+      this.getConnected(x, y + 1, color);
+      this.getConnected(x, y - 1, color);
+    }
+  }
 }
