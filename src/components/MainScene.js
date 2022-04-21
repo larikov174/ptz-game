@@ -139,7 +139,7 @@ export default class MainScene extends Phaser.Scene {
       }
     }
     this.renderGrid();
-    this.getPossibleMoves();
+    this.logic.getPossibleMoves();
   }
 
   //check if neighbour cube is the same color
@@ -153,21 +153,6 @@ export default class MainScene extends Phaser.Scene {
       this.getConnected(x - 1, y);
       this.getConnected(x, y + 1);
       this.getConnected(x, y - 1);
-    }
-  }
-
-  //check if player can go on
-  getPossibleMoves() {
-    this.possibleMoves.length = 0;
-    for (let x = 0; x < INLINE_LIMIT - 1; x++) {
-      for (let y = 0; y < INLINE_LIMIT - 1; y++) {
-        if (
-          this.grid[x][y].color === this.grid[x][y + 1].color ||
-          this.grid[x][y].color === this.grid[x + 1][y].color
-        ) {
-          this.possibleMoves.push({ id: this.grid[x][y].id });
-        }
-      }
     }
   }
 
@@ -211,7 +196,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   clickHandler(block) {
-    this.getPossibleMoves();
+    this.logic.getPossibleMoves();
     this.chosenColor = block.gridData.color;
     this.connectedItems(block.gridData.x, block.gridData.y);
     if (this.connected.length > 1) {
