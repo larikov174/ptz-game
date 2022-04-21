@@ -13,16 +13,29 @@ export default class LabelCreator extends Phaser.GameObjects.Text {
     this._updateScoreText();
   }
 
-  add(points) {
-    this.set(this.value + points);
+  add(value) {
+    this.set(this.value + value);
+  }
+
+  addScore(points) {
+    switch (points) {
+      case 2:
+        this.set(this.value + points);
+        break;
+      case 3:
+        this.set(this.value + Math.ceil(points * 1.5));
+        break;
+      case 4:
+        this.set(this.value + Math.ceil(points * 2));
+        break;
+      default:
+        this.set(this.value + Math.ceil(points * 3));
+        break;
+    }
   }
 
   reduce(move) {
     this.set(this.value - move);
-  }
-
-  reset() {
-    this.set(0);
   }
 
   get() {

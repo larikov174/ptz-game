@@ -207,7 +207,7 @@ export default class MainScene extends Phaser.Scene {
     this.connectedItems(block.gridData.x, block.gridData.y);
     if (this.connected.length > 1) {
       let deleted = 0;
-      this.scoreLabel.add(this.connected.length);
+      this.scoreLabel.addScore(this.connected.length);
       this.movesLabel.reduce(1);
       this.registry.set('moves', this.movesLabel.get());
       this.connected.forEach((cube) => {
@@ -248,7 +248,6 @@ export default class MainScene extends Phaser.Scene {
   }
 
   levelChange() {
-    this.scoreLabel.reset();
     this.movesLabel.set(10);
     this.levelLabel.add(1);
     this.goalLabel.add(Math.ceil(this.goalLabel.get() * 1.5));
