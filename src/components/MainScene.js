@@ -142,27 +142,6 @@ export default class MainScene extends Phaser.Scene {
     this.logic.getPossibleMoves();
   }
 
-  //redraw cubes with new coordinates
-  reassignCoords() {
-    this.grid.forEach((item) => {
-      for (let i = 0; i < INLINE_LIMIT; i++) {
-        item[i].y = item.indexOf(item[i]);
-        item[i].sy = START_Y + CUBE_HEIGHT * item[i].y;
-        this.tweens.timeline({
-          targets: item[i].sprite,
-          tweens: [{ y: item[i].sy }, { alpha: 1 }],
-          duration: 250,
-          callbackScope: this,
-        });
-      }
-    });
-  }
-
-  handleEmptys() {
-    this.logic.pullUpEmptys();
-    this.reassignCoords();
-  }
-
   clickHandler(block) {
     const chosenColor = block.gridData.color;
     this.logic.getPossibleMoves();
@@ -183,8 +162,7 @@ export default class MainScene extends Phaser.Scene {
             deleted--;
             this.logic.setEmpty(cube.x, cube.y);
             if (deleted === 0) {
-              this.handleEmptys();
-              this.logic.refill();
+              this.logic.handleEmptys(this.tweens);
             }
           },
         });

@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import CONST from '../utils/constants';
 
-const { INLINE_LIMIT, FRAMES } = CONST;
+const { INLINE_LIMIT, FRAMES, START_Y, CUBE_HEIGHT } = CONST;
 
 export default class GameLogic extends Phaser.Scene {
   constructor(grid, connected, possibleMoves) {
@@ -71,15 +71,36 @@ export default class GameLogic extends Phaser.Scene {
   }
 
   refill() {
-    for (let i = 0; i < INLINE_LIMIT; i++) {
-      for (let j = 1; j < INLINE_LIMIT; j++) {
-        if (this.isEmpty(i, j)) {
+    this.grid.forEach((item) => {
+      for (let i = 0; i < INLINE_LIMIT; i++) {
+        if (item[i].isEmpty) {
           const color = Phaser.Math.Between(0, FRAMES.length - 1);
-          this.grid[i][j].sprite.setFrame(FRAMES[color]);
-          this.grid[i][j].isEmpty = false;
-          this.grid[i][j].color = color;
+          item[i].isEmpty = false;
+          item[i].sprite.setFrame(FRAMES[color]);
+          item[i].color = color;
         }
       }
-    }
+    });
+  }
+
+  reassignCoords(tweens) {
+    this.grid.forEach((item) => {
+      for (let i = 0; i < INLINE_LIMIT; i++) {
+        item[i].y = item.indexOf(item[i]);
+        item[i].sy = START_Y + CUBE_HEIGHT * item[i].y;
+        tweens.timeline({
+          targets: item[i].sprite,
+          tweens: [{ y: item[i].sy }, { alpha: 1 }],
+          duration: 250,
+          callbackScope: this,
+        });
+      }
+    });
+  }
+
+  handleEmptys(tweens) {
+    this.pullUpEmptys();
+    this.reassignCoords(tweens);
+    this.refill();
   }
 }
