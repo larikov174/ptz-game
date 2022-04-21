@@ -20,10 +20,6 @@ export default class MainScene extends Phaser.Scene {
     this.possibleMoves = [];
     this.chosenColor = null;
     this.highscore = localStorage.highscore ? JSON.parse(localStorage.highscore) : HIGHSCORE;
-    this.progressBar = this.add.graphics({ fillStyle: { color: 0x199d21 } });
-    this.progressOverlay = this.add.graphics({ fillStyle: { color: 0x001a3e } });
-    this.rectBar = new Phaser.Geom.Rectangle(250, 45, 0, 30);
-    this.rectOverlay = new Phaser.Geom.Rectangle(250, 45, 420, 30);
     this.camera = this.cameras.add();
   }
 
@@ -72,9 +68,16 @@ export default class MainScene extends Phaser.Scene {
     const header = this.add.image(0, 0, 'sprites', 'bar1');
     const scoreboard = this.add.image(0, 0, 'sprites', 'scoreboard');
 
-    this.progressOverlay.fillRectShape(this.rectOverlay);
-    this.progressOverlay.depth = 0;
+    this.progressBar = this.add.graphics();
+    this.progressBar.fillStyle(0x199d21);
+    this.progressBar.fillRect(250, 45, 0, 30);
     this.progressBar.depth = 1;
+
+    this.progressOverlay = this.add.graphics();
+    this.progressOverlay.fillStyle(0x001a3e);
+    this.progressOverlay.fillRect(250, 45, 420, 30);
+    this.progressOverlay.depth = 0;
+
     header.depth = -1;
 
     Phaser.Display.Align.In.BottomLeft(field, screenCenter);
@@ -266,15 +269,17 @@ export default class MainScene extends Phaser.Scene {
     const moves = this.movesLabel.get();
     const score = this.scoreLabel.get();
     const goal = this.goalLabel.get();
+    const dynemicWidth = 420 * (score / goal);
 
     if (key === 'moves') {
-      let dynemicWidth = 420 * (score / goal);
-      this.rectBar.setSize(dynemicWidth < 420 ? dynemicWidth : 420, 30);
-      this.progressBar.fillRectShape(this.rectBar);
+      this.progressBar.fillRect(250, 45, dynemicWidth < 420 ? dynemicWidth : 420, 30);
       if (moves === 0 || this.possibleMoves.length === 0) this.onGameLoose();
       if (score >= goal) this.onGameWin();
     }
 
-    if (key === 'level') this.progressBar.clear();
+    if (key === 'level') {
+      this.progressBar.clear();
+      this.progressBar.fillRect(250, 45, dynemicWidth < 420 ? dynemicWidth : 420, 30);
+    }
   }
 }
