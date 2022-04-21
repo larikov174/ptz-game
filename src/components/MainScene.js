@@ -163,19 +163,6 @@ export default class MainScene extends Phaser.Scene {
     this.reassignCoords();
   }
 
-  refill() {
-    this.grid.forEach((item) => {
-      for (let i = 0; i < INLINE_LIMIT; i++) {
-        if (item[i].isEmpty) {
-          const color = Phaser.Math.Between(0, FRAMES.length - 1);
-          item[i].isEmpty = false;
-          item[i].sprite.setFrame(FRAMES[color]);
-          item[i].color = color;
-        }
-      }
-    });
-  }
-
   clickHandler(block) {
     const chosenColor = block.gridData.color;
     this.logic.getPossibleMoves();
@@ -197,7 +184,7 @@ export default class MainScene extends Phaser.Scene {
             this.logic.setEmpty(cube.x, cube.y);
             if (deleted === 0) {
               this.handleEmptys();
-              this.refill();
+              this.logic.refill();
             }
           },
         });

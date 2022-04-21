@@ -1,6 +1,7 @@
+import Phaser from 'phaser';
 import CONST from '../utils/constants';
 
-const { INLINE_LIMIT } = CONST;
+const { INLINE_LIMIT, FRAMES } = CONST;
 
 export default class GameLogic extends Phaser.Scene {
   constructor(grid, connected, possibleMoves) {
@@ -66,6 +67,19 @@ export default class GameLogic extends Phaser.Scene {
       this.getConnections(x - 1, y, color);
       this.getConnections(x, y + 1, color);
       this.getConnections(x, y - 1, color);
+    }
+  }
+
+  refill() {
+    for (let i = 0; i < INLINE_LIMIT; i++) {
+      for (let j = 1; j < INLINE_LIMIT; j++) {
+        if (this.isEmpty(i, j)) {
+          const color = Phaser.Math.Between(0, FRAMES.length - 1);
+          this.grid[i][j].sprite.setFrame(FRAMES[color]);
+          this.grid[i][j].isEmpty = false;
+          this.grid[i][j].color = color;
+        }
+      }
     }
   }
 }
