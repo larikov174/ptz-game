@@ -4,11 +4,13 @@ import CONST from '../utils/constants';
 const { INLINE_LIMIT, FRAMES, START_Y, START_X, CUBE_HEIGHT, CUBE_WIDTH } = CONST;
 
 export default class GameLogic extends Phaser.Scene {
-  constructor(grid, connected, possibleMoves) {
+  constructor(grid, connected, possibleMoves, handler, scene) {
     super('GameLogic');
     this.grid = grid;
     this.connected = connected;
     this.possibleMoves = possibleMoves;
+    this.handler = handler;
+    this.scene = scene;
   }
 
   _isInGrid(x, y) {
@@ -71,6 +73,14 @@ export default class GameLogic extends Phaser.Scene {
     });
   }
 
+  _createCube(x, y) {
+    const block = this.scene.add.sprite(this.grid[x][y].sx, this.grid[x][y].sy, 'sprites', FRAMES[this.grid[x][y].color]);
+    block.gridData = this.grid[x][y];
+    this.grid[x][y].sprite = block;
+    block.setInteractive();
+    block.on('clicked', this.handler, this.scene);
+  }
+
   setEmpty(x, y) {
     this.grid[x][y].isEmpty = true;
   }
@@ -104,7 +114,7 @@ export default class GameLogic extends Phaser.Scene {
     this._refill();
   }
 
-  createGrid(handler, scene) {
+  createGrid() {
     for (let x = 0; x < INLINE_LIMIT; x++) {
       this.grid[x] = [];
       for (let y = 0; y < INLINE_LIMIT; y++) {
@@ -113,17 +123,9 @@ export default class GameLogic extends Phaser.Scene {
         const color = Phaser.Math.Between(0, FRAMES.length - 1);
         const id = Phaser.Utils.String.UUID();
         this.grid[x][y] = { x, y, sx, sy, color, id, isEmpty: false };
-        this.createCube(x, y, handler, scene);
+        this._createCube(x, y, this.handler, this.scene);
       }
     }
     this.getPossibleMoves();
-  }
-
-  createCube(x, y, handler, scene) {
-    const block = scene.add.sprite(this.grid[x][y].sx, this.grid[x][y].sy, 'sprites', FRAMES[this.grid[x][y].color]);
-    block.gridData = this.grid[x][y];
-    this.grid[x][y].sprite = block;
-    block.setInteractive();
-    block.on('clicked', handler, scene);
   }
 }

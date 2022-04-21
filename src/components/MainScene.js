@@ -28,7 +28,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   create() {
-    this.logic = new GameLogic(this.grid, this.connected, this.possibleMoves);
+    this.logic = new GameLogic(this.grid, this.connected, this.possibleMoves, this.clickHandler, this);
     this.sfx = new SFX({
       sprites: this.add.particles('sprites'),
       frames: FRAMES,
@@ -45,7 +45,7 @@ export default class MainScene extends Phaser.Scene {
     this.slash = this.createLabel(0, 0, '/', SIZE_M);
 
     this.createUI();
-    this.logic.createGrid(this.clickHandler, this);
+    this.logic.createGrid();
 
     this.registry.set('moves', this.movesLabel.get());
     this.registry.set('level', this.levelLabel.get());
