@@ -19,7 +19,6 @@ export default class MainScene extends Phaser.Scene {
     this.grid = [];
     this.connected = [];
     this.possibleMoves = [];
-    this.chosenColor = null;
     this.highscore = localStorage.highscore ? JSON.parse(localStorage.highscore) : HIGHSCORE;
     this.camera = this.cameras.add();
   }
@@ -46,7 +45,7 @@ export default class MainScene extends Phaser.Scene {
     this.slash = this.createLabel(0, 0, '/', SIZE_M);
 
     this.createUI();
-    this.createGrid();
+    this.logic.createGrid(this.clickHandler, this);
 
     this.registry.set('moves', this.movesLabel.get());
     this.registry.set('level', this.levelLabel.get());
@@ -107,39 +106,6 @@ export default class MainScene extends Phaser.Scene {
       },
       setScale: { x: 0.8, y: 0.8 },
     });
-  }
-
-  //render cubes and connect them to the grid
-  createCube(data) {
-    const block = this.add.sprite(data.sx, data.sy, 'sprites', FRAMES[data.color]);
-    block.gridData = data;
-    data.sprite = block;
-    block.setInteractive();
-    block.on('clicked', this.clickHandler, this);
-  }
-
-  renderGrid() {
-    for (let i = 0; i < INLINE_LIMIT; i++) {
-      for (let j = 0; j < INLINE_LIMIT; j++) {
-        let currentCube = this.grid[i][j];
-        this.createCube(currentCube);
-      }
-    }
-  }
-
-  createGrid() {
-    for (let x = 0; x < INLINE_LIMIT; x++) {
-      this.grid[x] = [];
-      for (let y = 0; y < INLINE_LIMIT; y++) {
-        const sx = START_X + x * CUBE_WIDTH;
-        const sy = START_Y + y * CUBE_HEIGHT;
-        const color = Phaser.Math.Between(0, FRAMES.length - 1);
-        const id = Phaser.Utils.String.UUID();
-        this.grid[x][y] = { x, y, sx, sy, color, id, isEmpty: false };
-      }
-    }
-    this.renderGrid();
-    this.logic.getPossibleMoves();
   }
 
   clickHandler(block) {

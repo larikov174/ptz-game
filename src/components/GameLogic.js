@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import CONST from '../utils/constants';
 
-const { INLINE_LIMIT, FRAMES, START_Y, CUBE_HEIGHT } = CONST;
+const { INLINE_LIMIT, FRAMES, START_Y, START_X, CUBE_HEIGHT, CUBE_WIDTH } = CONST;
 
 export default class GameLogic extends Phaser.Scene {
   constructor(grid, connected, possibleMoves) {
@@ -102,5 +102,28 @@ export default class GameLogic extends Phaser.Scene {
     this._pullUpEmptys();
     this._reassignCoords(tweens);
     this._refill();
+  }
+
+  createGrid(handler, scene) {
+    for (let x = 0; x < INLINE_LIMIT; x++) {
+      this.grid[x] = [];
+      for (let y = 0; y < INLINE_LIMIT; y++) {
+        const sx = START_X + x * CUBE_WIDTH;
+        const sy = START_Y + y * CUBE_HEIGHT;
+        const color = Phaser.Math.Between(0, FRAMES.length - 1);
+        const id = Phaser.Utils.String.UUID();
+        this.grid[x][y] = { x, y, sx, sy, color, id, isEmpty: false };
+        this.createCube(x, y, handler, scene);
+      }
+    }
+    this.getPossibleMoves();
+  }
+
+  createCube(x, y, handler, scene) {
+    const block = scene.add.sprite(this.grid[x][y].sx, this.grid[x][y].sy, 'sprites', FRAMES[this.grid[x][y].color]);
+    block.gridData = this.grid[x][y];
+    this.grid[x][y].sprite = block;
+    block.setInteractive();
+    block.on('clicked', handler, scene);
   }
 }
