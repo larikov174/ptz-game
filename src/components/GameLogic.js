@@ -1,12 +1,14 @@
 import CONST from '../utils/constants';
 
+const { INLINE_LIMIT } = CONST;
+
 export default class GameLogic extends Phaser.Scene {
   constructor() {
     super('GameLogic');
   }
 
   isInGrid(x, y, grid) {
-    return x >= 0 && x < CONST.INLINE_LIMIT && y >= 0 && y < CONST.INLINE_LIMIT && grid[x][y] !== undefined;
+    return x >= 0 && x < INLINE_LIMIT && y >= 0 && y < INLINE_LIMIT && grid[x][y] !== undefined;
   }
 
   setEmpty(x, y, grid) {
@@ -22,25 +24,10 @@ export default class GameLogic extends Phaser.Scene {
   }
 
   pullUpEmptys(grid) {
-    for (let i = 0; i < CONST.INLINE_LIMIT; i++) {
-      for (let j = 1; j < CONST.INLINE_LIMIT; j++) {
+    for (let i = 0; i < INLINE_LIMIT; i++) {
+      for (let j = 1; j < INLINE_LIMIT; j++) {
         if (this._isEmpty(i, j, grid)) this._ascentEmptys(i, j, grid);
       }
-    }
-  }
-
-  addScore(connected, score) {
-    if (connected.length === 2) {
-      return (score += 2);
-    }
-    if (connected.length === 3) {
-      return (score += Math.ceil(connected.length * 1.5));
-    }
-    if (connected.length === 4) {
-      return (score += Math.ceil(connected.length * 2));
-    }
-    if (connected.length >= 5) {
-      return (score += Math.ceil(connected.length * 3));
     }
   }
 
