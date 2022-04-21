@@ -2,9 +2,12 @@ import Phaser from 'phaser';
 import SFX from './SFX';
 import GameLogic from './GameLogic';
 import LabelCreator from '../ui/LabelCreator';
+import FONT_PROPS from '../ui/FontProps';
 import CONST from '../utils/constants';
 
 const { FRAMES, HIGHSCORE, SCORE, GOAL, MOVES, LEVEL, CUBE_HEIGHT, CUBE_WIDTH, INLINE_LIMIT, START_Y, START_X } = CONST;
+const { FAMILY, FILL } = FONT_PROPS;
+const { SIZE_XL, SIZE_M } = FONT_PROPS.SIZE;
 
 export default class MainScene extends Phaser.Scene {
   constructor() {
@@ -12,9 +15,6 @@ export default class MainScene extends Phaser.Scene {
   }
 
   init() {
-    this.gameWidth = this.sys.game.config.width;
-    this.gameHeigth = this.sys.game.config.height;
-    this.sceneZone = this.add.zone(this.gameWidth / 2, this.gameHeigth / 2, this.gameWidth, this.gameHeigth);
     this.grid = [];
     this.connected = [];
     this.possibleMoves = [];
@@ -38,12 +38,12 @@ export default class MainScene extends Phaser.Scene {
       frames: FRAMES,
     });
 
-    this.scoreLabel = this.createLabel(0, 0, SCORE, 32);
-    this.goalLabel = this.createLabel(0, 0, GOAL, 32);
-    this.movesLabel = this.createLabel(0, 0, MOVES, 100);
-    this.highscoreLabel = this.createLabel(0, 0, this.highscore, 32);
-    this.levelLabel = this.createLabel(0, 0, LEVEL, 32);
-    this.slash = this.createLabel(0, 0, '/', 32);
+    this.scoreLabel = this.createLabel(0, 0, SCORE, SIZE_M);
+    this.goalLabel = this.createLabel(0, 0, GOAL, SIZE_M);
+    this.movesLabel = this.createLabel(0, 0, MOVES, SIZE_XL);
+    this.highscoreLabel = this.createLabel(0, 0, this.highscore, SIZE_M);
+    this.levelLabel = this.createLabel(0, 0, LEVEL, SIZE_M);
+    this.slash = this.createLabel(0, 0, '/', SIZE_M);
 
     this.createUI();
     this.createGrid();
@@ -56,29 +56,30 @@ export default class MainScene extends Phaser.Scene {
     this.input.on('gameobjectdown', (pointer, gameObject) => gameObject.emit('clicked', gameObject), this);
   }
 
-  createLabel(x, y, score, size) {
-    const style = { fontSize: `${size}px`, fill: '#fff', fontFamily: 'Calibri' };
-    const label = new LabelCreator(this, x, y, score, style);
+  createLabel(x, y, value, size) {
+    const style = { fontSize: `${size}px`, fill: FILL, fontFamily: FAMILY };
+    const label = new LabelCreator(this, x, y, value, style);
     this.add.existing(label);
     label.depth = 3;
     return label;
   }
 
   createUI() {
-    let field = this.add.image(0, 0, 'sprites', 'field');
-    Phaser.Display.Align.In.BottomLeft(field, this.sceneZone);
-
-    let header = this.add.image(0, 0, 'sprites', 'bar1');
-    Phaser.Display.Align.In.TopCenter(header, this.sceneZone);
-    header.depth = -2;
+    const gameWidth = this.sys.game.config.width;
+    const gameHeigth = this.sys.game.config.height;
+    const screenCenter = this.add.zone(gameWidth / 2, gameHeigth / 2, gameWidth, gameHeigth);
+    const field = this.add.image(0, 0, 'sprites', 'field');
+    const header = this.add.image(0, 0, 'sprites', 'bar1');
+    const scoreboard = this.add.image(0, 0, 'sprites', 'scoreboard');
 
     this.progressOverlay.fillRectShape(this.rectOverlay);
     this.progressOverlay.depth = 0;
     this.progressBar.depth = 1;
+    header.depth = -1;
 
-    let scoreboard = this.add.image(0, 0, 'sprites', 'scoreboard');
-    Phaser.Display.Align.In.RightCenter(scoreboard, this.sceneZone);
-
+    Phaser.Display.Align.In.BottomLeft(field, screenCenter);
+    Phaser.Display.Align.In.TopCenter(header, screenCenter);
+    Phaser.Display.Align.In.RightCenter(scoreboard, screenCenter);
     Phaser.Display.Align.In.QuickSet(this.scoreLabel, scoreboard, 11, -50, -60);
     Phaser.Display.Align.In.QuickSet(this.slash, scoreboard, 11, 0, -60);
     Phaser.Display.Align.In.QuickSet(this.goalLabel, scoreboard, 11, 50, -60);
@@ -135,10 +136,10 @@ export default class MainScene extends Phaser.Scene {
     this.getPossibleMoves();
   }
 
+  //check if neighbour cube is the same color
   getConnected(x, y) {
     if (!this.logic.isInGrid(x, y, this.grid) || this.grid[x][y].isEmpty) return null;
     let currentCube = this.grid[x][y];
-    //check if neighbour cube is the same color
     if (currentCube.color === this.chosenColor && !this.logic.isCubeChecked(x, y, this.connected)) {
       //making an array of connected cubes
       this.connected.push({ x, y, id: currentCube.id, sprite: currentCube.sprite });
