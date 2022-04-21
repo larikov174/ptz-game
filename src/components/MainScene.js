@@ -7,6 +7,7 @@ import FONT_PROPS from '../ui/FontProps';
 import CONST from '../utils/constants';
 
 const { FRAMES, HIGHSCORE, SCORE, GOAL, MOVES, LEVEL, CUBE_HEIGHT, CUBE_WIDTH, INLINE_LIMIT, START_Y, START_X } = CONST;
+const { BAR_WIDTH, BAR_HEIGHT, COLOR_NAVY, COLOR_GREEN } = CONST.P_BAR;
 const { FAMILY, FILL } = FONT_PROPS;
 const { SIZE_XL, SIZE_M } = FONT_PROPS.SIZE;
 
@@ -35,8 +36,8 @@ export default class MainScene extends Phaser.Scene {
       frames: FRAMES,
     });
 
-    this.progressOverlay = this.createBar(420, 0x001a3e);
-    this.progressBar = this.createBar(0, 0x199d21);
+    this.progressOverlay = this.createBar(BAR_WIDTH, COLOR_NAVY);
+    this.progressBar = this.createBar(0, COLOR_GREEN);
 
     this.scoreLabel = this.createLabel(0, 0, SCORE, SIZE_M);
     this.goalLabel = this.createLabel(0, 0, GOAL, SIZE_M);
@@ -66,7 +67,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   createBar(width, color) {
-    const bar = new ProgressBar(this, 0, 0, width, 30, color);
+    const bar = new ProgressBar(this, 0, 0, width, BAR_HEIGHT, color);
     this.add.existing(bar);
     return bar;
   }
@@ -133,7 +134,7 @@ export default class MainScene extends Phaser.Scene {
       for (let y = 0; y < INLINE_LIMIT; y++) {
         const sx = START_X + x * CUBE_WIDTH;
         const sy = START_Y + y * CUBE_HEIGHT;
-        const color = Phaser.Math.Between(0, 4);
+        const color = Phaser.Math.Between(0, FRAMES.length - 1);
         const id = Phaser.Utils.String.UUID();
         this.grid[x][y] = { x, y, sx, sy, color, id, isEmpty: false };
       }
@@ -201,7 +202,7 @@ export default class MainScene extends Phaser.Scene {
     this.grid.forEach((item) => {
       for (let i = 0; i < INLINE_LIMIT; i++) {
         if (item[i].isEmpty) {
-          const color = Phaser.Math.Between(0, 4);
+          const color = Phaser.Math.Between(0, FRAMES.length - 1);
           item[i].isEmpty = false;
           item[i].sprite.setFrame(FRAMES[color]);
           item[i].color = color;
@@ -272,10 +273,10 @@ export default class MainScene extends Phaser.Scene {
     const moves = this.movesLabel.get();
     const score = this.scoreLabel.get();
     const goal = this.goalLabel.get();
-    const dynemicWidth = 420 * (score / goal);
+    const dynemicWidth = BAR_WIDTH * (score / goal);
 
     if (key === 'moves') {
-      this.progressBar.redraw(dynemicWidth)
+      this.progressBar.redraw(dynemicWidth);
       if (moves === 0 || this.possibleMoves.length === 0) this.onGameLoose();
       if (score >= goal) this.onGameWin();
     }

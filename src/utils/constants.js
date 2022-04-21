@@ -1,8 +1,6 @@
 const CONST = {
   START_X: 45,
   START_Y: 230,
-  END_X: 590,
-  END_Y: 690,
   CUBE_WIDTH: 60,
   CUBE_HEIGHT: 67,
   FRAMES: ['blue', 'purple', 'red', 'yellow', 'green'],
@@ -20,6 +18,12 @@ const CONST = {
     NEW_SCORE: 'Твой новый результат(очков):',
     BEST_SCORE: 'Твой лучший результат(очков):',
     AGAIN: 'Попробуем еще раз?!',
+  },
+  P_BAR: {
+    COLOR_GREEN: 0x199d21,
+    COLOR_NAVY: 0x001a3e,
+    BAR_WIDTH: 420,
+    BAR_HEIGHT: 30,
   },
 };
 
