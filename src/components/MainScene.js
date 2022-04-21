@@ -29,7 +29,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   create() {
-    this.logic = new GameLogic();
+    this.logic = new GameLogic(this.grid, this.connected, this.possibleMoves);
     this.sfx = new SFX({
       sprites: this.add.particles('sprites'),
       frames: FRAMES,
@@ -144,9 +144,9 @@ export default class MainScene extends Phaser.Scene {
 
   //check if neighbour cube is the same color
   getConnected(x, y) {
-    if (!this.logic.isInGrid(x, y, this.grid) || this.grid[x][y].isEmpty) return null;
+    if (!this.logic.isInGrid(x, y) || this.logic.isEmpty(x, y)) return null;
     let currentCube = this.grid[x][y];
-    if (currentCube.color === this.chosenColor && !this.logic.isCubeChecked(x, y, this.connected)) {
+    if (currentCube.color === this.chosenColor && !this.logic.isCubeChecked(x, y)) {
       //making an array of connected cubes
       this.connected.push({ x, y, id: currentCube.id, sprite: currentCube.sprite });
       this.getConnected(x + 1, y);
@@ -193,7 +193,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   handleEmptys() {
-    this.logic.pullUpEmptys(this.grid);
+    this.logic.pullUpEmptys();
     this.reassignCoords();
   }
 
@@ -228,7 +228,7 @@ export default class MainScene extends Phaser.Scene {
           callbackScope: this,
           onComplete: () => {
             deleted--;
-            this.logic.setEmpty(cube.x, cube.y, this.grid);
+            this.logic.setEmpty(cube.x, cube.y);
             if (deleted === 0) {
               this.handleEmptys();
               this.refill();
