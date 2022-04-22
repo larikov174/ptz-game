@@ -6,7 +6,7 @@ import LabelCreator from '../ui/LabelCreator';
 import FONT_PROPS from '../ui/FontProps';
 import CONST from '../utils/constants';
 
-const { FRAMES, HIGHSCORE, SCORE, GOAL, MOVES, LEVEL, CUBE_HEIGHT, CUBE_WIDTH, START_Y } = CONST;
+const { FRAMES, HIGHSCORE, SCORE, GOAL, MOVES, LEVEL, CUBE_HEIGHT, CUBE_WIDTH, START_Y, GAME_WIDTH, GAME_HEIGHT } = CONST;
 const { BAR_WIDTH, BAR_HEIGHT, COLOR_NAVY, COLOR_GREEN } = CONST.P_BAR;
 const { FAMILY, FILL, SIZE_XL, SIZE_M } = FONT_PROPS;
 
@@ -68,9 +68,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   createUI() {
-    const gameWidth = this.sys.game.config.width;
-    const gameHeigth = this.sys.game.config.height;
-    const screenCenter = this.add.zone(gameWidth / 2, gameHeigth / 2, gameWidth, gameHeigth);
+    const screenCenter = this.add.zone(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT);
     const field = this.add.image(0, 0, 'sprites', 'field');
     const header = this.add.image(0, 0, 'sprites', 'bar1');
     const scoreboard = this.add.image(0, 0, 'sprites', 'scoreboard');

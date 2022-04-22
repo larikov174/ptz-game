@@ -3,6 +3,8 @@ import LabelCreator from '../ui/LabelCreator';
 import FONT_PROPS from '../ui/FontProps';
 import CONST from '../utils/constants';
 
+const { GAME_WIDTH, GAME_HEIGHT, CUBE_HEIGHT, CUBE_WIDTH, FRAMES } = CONST;
+
 export default class GameOver extends Phaser.Scene {
   constructor() {
     super('GameOver');
@@ -24,9 +26,9 @@ export default class GameOver extends Phaser.Scene {
   createCubefall() {
     this.arr = [];
     for (let i = 0; i < 20; i++) {
-      const color = Phaser.Math.Between(0, 4);
-      const sx = Phaser.Math.Between(60, 990);
-      const sy = Phaser.Math.Between(-950, 0);
+      const color = Phaser.Math.Between(0, FRAMES.length - 1);
+      const sx = Phaser.Math.Between(CUBE_WIDTH, GAME_WIDTH);
+      const sy = Phaser.Math.Between(0, GAME_HEIGHT);
       let block = this.add.sprite(sx, sy, 'sprites', CONST.FRAMES[color]).setScale(0.5).setAlpha(0.7);
       this.arr[i] = block;
     }
@@ -36,18 +38,18 @@ export default class GameOver extends Phaser.Scene {
     this.createCubefall();
     const { AGAIN, CHEERUP, NEW_RECORD, NEW_SCORE, BEST_SCORE } = CONST.TEXT;
     const { SIZE_L, SIZE_S } = FONT_PROPS;
-    const width = this.sys.game.config.width;
-    const height = this.sys.game.config.height;
-    const screenCenter = this.add.zone(width / 2, height / 2, width, height);
+    const screenCenter = this.add.zone(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT);
     const content = () => {
-      if (this.registry.get('new')) return {
-        text1: NEW_RECORD,
-        text2: `${NEW_SCORE} ${localStorage.highscore}`
-      };
-      else return {
-        text1: CHEERUP,
-        text2: `${BEST_SCORE} ${localStorage.highscore}`
-      };
+      if (this.registry.get('new'))
+        return {
+          text1: NEW_RECORD,
+          text2: `${NEW_SCORE} ${localStorage.highscore}`,
+        };
+      else
+        return {
+          text1: CHEERUP,
+          text2: `${BEST_SCORE} ${localStorage.highscore}`,
+        };
     };
 
     const textAgain = this.createLabel(0, 0, AGAIN, SIZE_S);
@@ -66,7 +68,7 @@ export default class GameOver extends Phaser.Scene {
   update() {
     this.arr.forEach((block) => {
       block.y += 0.7;
-      if (block.y > 880) block.y = -100;
+      if (block.y > GAME_HEIGHT + CUBE_HEIGHT) block.y = -100;
     });
   }
 }
