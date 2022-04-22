@@ -9,7 +9,7 @@ export default class LabelCreator extends Phaser.GameObjects.Text {
   }
 
   set(value) {
-    this.value = value;
+    this.value = value > 0 ? value : 0;
     this._updateScoreText();
   }
 

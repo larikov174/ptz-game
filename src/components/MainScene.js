@@ -168,7 +168,7 @@ export default class MainScene extends Phaser.Scene {
 
     if (key === 'moves') {
       this.progressBar.redraw(dynemicWidth);
-      if (moves === 0 || this.possibleMoves.length === 0) this.onGameLoose();
+      if (moves === 0 && (score < goal) || this.possibleMoves.length === 0) this.onGameLoose();
       if (score >= goal) this.onGameWin();
     }
 
