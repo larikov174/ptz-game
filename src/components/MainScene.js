@@ -6,7 +6,7 @@ import LabelCreator from '../ui/LabelCreator';
 import FONT_PROPS from '../ui/FontProps';
 import CONST from '../utils/constants';
 
-const { FRAMES, HIGHSCORE, SCORE, GOAL, MOVES, LEVEL, CUBE_HEIGHT, CUBE_WIDTH, START_Y, GAME_WIDTH, GAME_HEIGHT } = CONST;
+const { HIGHSCORE, SCORE, GOAL, MOVES, LEVEL, CUBE_HEIGHT, CUBE_WIDTH, START_Y, GAME_WIDTH, GAME_HEIGHT } = CONST;
 const { BAR_WIDTH, BAR_HEIGHT, COLOR_NAVY, COLOR_GREEN } = CONST.P_BAR;
 const { FAMILY, FILL, SIZE_XL, SIZE_M } = FONT_PROPS;
 
@@ -29,7 +29,7 @@ export default class MainScene extends Phaser.Scene {
 
   create() {
     this.logic = new GameLogic(this.grid, this.connected, this.possibleMoves, this.clickHandler, this);
-    this.sfx = new SFX(this.add.particles('sprites'), FRAMES);
+    this.sfx = new SFX(this.add.particles('sprites'));
 
     this.progressOverlay = this.createBar(BAR_WIDTH, COLOR_NAVY);
     this.progressBar = this.createBar(0, COLOR_GREEN);

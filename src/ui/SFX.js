@@ -1,8 +1,11 @@
+import CONST from '../utils/constants';
+
+const { FRAMES } = CONST;
+
 export default class SFX {
-  constructor(sprites, frames) {
+  constructor(sprites) {
     this._emitters = {};
     this._particles = sprites;
-    this._frames = frames;
   }
 
   _createEmitter(color) {
@@ -19,14 +22,14 @@ export default class SFX {
   }
 
   _callEmitter() {
-    for (let i = 0; i < this._frames.length; i++) {
-      this._createEmitter(this._frames[i]);
+    for (let i = 0; i < FRAMES.length; i++) {
+      this._createEmitter(FRAMES[i]);
     }
   }
 
   emitt() {
     const color = Phaser.Math.Between(0, 4);
     this._callEmitter();
-    this._emitters[this._frames[color]].explode(26, 90, 70);
+    this._emitters[FRAMES[color]].explode(26, 90, 70);
   }
 }
