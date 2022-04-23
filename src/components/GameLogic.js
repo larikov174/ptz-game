@@ -78,6 +78,7 @@ export default class GameLogic extends Phaser.Scene {
     block.gridData = this.grid[x][y];
     this.grid[x][y].sprite = block;
     block.setInteractive();
+    block.setScale(0.5)
     block.on('clicked', this.handler, this.scene);
   }
 

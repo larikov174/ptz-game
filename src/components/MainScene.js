@@ -61,11 +61,11 @@ export default class MainScene extends Phaser.Scene {
   createUI() {
     const screenCenter = this.add.zone(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT);
 
-    const field = this.add.image(0, 0, 'sprites', 'FIELD');
-    const header = this.add.image(0, 0, 'sprites', 'HEADER');
-    const scoreboard = this.add.image(0, 0, 'sprites', 'SCORE_BOARD');
-    this.openModal = this.add.image(0, 0, 'sprites', 'BUTTON_RULES').setInteractive();
-    this.modal = this.add.image(0, 0, 'sprites', 'MODAL');
+    const field = this.add.image(0, 0, 'sprites', 'FIELD').setScale(0.5);
+    const header = this.add.image(0, 0, 'sprites', 'HEADER').setScale(0.5);
+    const scoreboard = this.add.image(0, 0, 'sprites', 'SCORE_BOARD').setScale(0.5);
+    this.openModal = this.add.image(0, 0, 'sprites', 'BUTTON_RULES').setScale(0.5).setInteractive();
+    this.modal = this.add.image(0, 0, 'sprites', 'MODAL').setScale(0.5);
 
     this.progressBar = this.createBar(0, BAR_COLOR);
     this.overlay = this.add.rectangle(0, 0, GAME_WIDTH, GAME_HEIGHT, OVERLAY_COLOR).setInteractive();
@@ -82,16 +82,16 @@ export default class MainScene extends Phaser.Scene {
     this.modal.depth = 4;
     this.modal.alpha = 0;
 
-    Phaser.Display.Align.In.QuickSet(header, screenCenter, 1, 0, -15);
-    Phaser.Display.Align.In.QuickSet(this.levelLabel, header, 4, -75, 20);
-    Phaser.Display.Align.In.QuickSet(this.highscoreLabel, header, 8, -115, 20);
+    Phaser.Display.Align.In.QuickSet(header, screenCenter, 1, 0, 50);
+    Phaser.Display.Align.In.QuickSet(this.levelLabel, header, 6, -405, 20);
+    Phaser.Display.Align.In.QuickSet(this.highscoreLabel, header, 6, 365, 20);
     Phaser.Display.Align.In.QuickSet(this.progressBar, header, 6, -210, 20);
-    Phaser.Display.Align.In.QuickSet(scoreboard, screenCenter, 8, 0, 50);
-    Phaser.Display.Align.In.QuickSet(this.movesLabel, scoreboard, 1, -5, -130);
+    Phaser.Display.Align.In.QuickSet(scoreboard, screenCenter, 8, 150, 50);
+    Phaser.Display.Align.In.QuickSet(this.movesLabel, scoreboard, 1, -5, -410);
     Phaser.Display.Align.In.QuickSet(this.scoreLabel, scoreboard, 6, 20, 77);
     Phaser.Display.Align.In.QuickSet(this.goalLabel, scoreboard, 6, 20, 137);
-    Phaser.Display.Align.In.QuickSet(this.openModal, scoreboard, 11, 0, -20);
-    Phaser.Display.Align.In.QuickSet(field, screenCenter, 4, 0, 50);
+    Phaser.Display.Align.In.QuickSet(this.openModal, scoreboard, 11, 0, -270);
+    Phaser.Display.Align.In.QuickSet(field, screenCenter, 6, -180, 50);
     Phaser.Display.Align.In.QuickSet(this.modal, field, 6, 0, 0);
     Phaser.Display.Align.In.QuickSet(this.overlay, screenCenter, 6, 0, 0);
   }

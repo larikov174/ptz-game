@@ -20,7 +20,7 @@ const CONST = {
     SIZE_M: 32,
     SIZE_S: 24,
     FC_YELLOW: '#F3B411',
-    FC_PURPLE: '#610C57',
+    FC_PURPLE: '#3D0E32',
     FC_WHITE: '#FFFFFF',
     FC_BLACK: '#000000',
   },
