@@ -77,12 +77,12 @@ export default class MainScene extends Phaser.Scene {
     Phaser.Display.Align.In.QuickSet(this.levelLabel, header, 4, -75, 20);
     Phaser.Display.Align.In.QuickSet(this.highscoreLabel, header, 8, -115, 20);
     Phaser.Display.Align.In.QuickSet(this.progressBar, header, 6, -210, 20);
-    Phaser.Display.Align.In.QuickSet(scoreboard, screenCenter, 8, 0, 0);
-    Phaser.Display.Align.In.QuickSet(this.movesLabel, scoreboard, 1, -5, -100);
-    Phaser.Display.Align.In.QuickSet(this.scoreLabel, scoreboard, 6, 20, 67);
-    Phaser.Display.Align.In.QuickSet(this.goalLabel, scoreboard, 6, 20, 115);
+    Phaser.Display.Align.In.QuickSet(scoreboard, screenCenter, 8, 0, 50);
+    Phaser.Display.Align.In.QuickSet(this.movesLabel, scoreboard, 1, -5, -130);
+    Phaser.Display.Align.In.QuickSet(this.scoreLabel, scoreboard, 6, 20, 77);
+    Phaser.Display.Align.In.QuickSet(this.goalLabel, scoreboard, 6, 20, 137);
     Phaser.Display.Align.In.QuickSet(button, scoreboard, 11, 0, -20);
-    Phaser.Display.Align.In.QuickSet(field, screenCenter, 4 , 0, 0);
+    Phaser.Display.Align.In.QuickSet(field, screenCenter, 4 , 0, 50);
   }
 
   clickHandler(block) {
