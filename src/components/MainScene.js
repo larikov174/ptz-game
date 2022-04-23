@@ -40,9 +40,7 @@ export default class MainScene extends Phaser.Scene {
 
     this.input.on('gameobjectdown', (pointer, gameObject) => gameObject.emit('clicked', gameObject), this);
     this.openModal.on('pointerdown', this.onModalOpen, this);
-    this.closeModal.on('pointerdown', this.onModalClose, this);
     this.overlay.on('pointerdown', this.onModalClose, this);
-
     this.input.keyboard.on('keydown-ESC', this.onModalClose, this);
   }
 
@@ -68,7 +66,6 @@ export default class MainScene extends Phaser.Scene {
     const scoreboard = this.add.image(0, 0, 'sprites', 'SCORE_BOARD');
     this.openModal = this.add.image(0, 0, 'sprites', 'BUTTON_RULES').setInteractive();
     this.modal = this.add.image(0, 0, 'sprites', 'MODAL');
-    this.closeModal = this.add.image(0, 0, 'sprites', 'CLOSE_BUTTON').setInteractive();
 
     this.progressBar = this.createBar(0, BAR_COLOR);
     this.overlay = this.add.rectangle(0, 0, GAME_WIDTH, GAME_HEIGHT, OVERLAY_COLOR).setInteractive();
@@ -81,11 +78,9 @@ export default class MainScene extends Phaser.Scene {
 
     header.depth = -1;
     this.overlay.depth = 3;
+    this.overlay.alpha = 0;
     this.modal.depth = 4;
     this.modal.alpha = 0;
-    this.closeModal.depth = 5;
-    this.closeModal.alpha = 0;
-    this.overlay.alpha = 0;
 
     Phaser.Display.Align.In.QuickSet(header, screenCenter, 1, 0, -15);
     Phaser.Display.Align.In.QuickSet(this.levelLabel, header, 4, -75, 20);
@@ -98,7 +93,6 @@ export default class MainScene extends Phaser.Scene {
     Phaser.Display.Align.In.QuickSet(this.openModal, scoreboard, 11, 0, -20);
     Phaser.Display.Align.In.QuickSet(field, screenCenter, 4, 0, 50);
     Phaser.Display.Align.In.QuickSet(this.modal, field, 6, 0, 0);
-    Phaser.Display.Align.In.QuickSet(this.closeModal, this.modal, 7, -15, -15);
     Phaser.Display.Align.In.QuickSet(this.overlay, screenCenter, 6, 0, 0);
   }
 
@@ -132,13 +126,11 @@ export default class MainScene extends Phaser.Scene {
 
   onModalOpen() {
     this.modal.alpha = 1;
-    this.closeModal.alpha = 1;
     this.overlay.alpha = 0.5;
   }
 
   onModalClose() {
     this.modal.alpha = 0;
-    this.closeModal.alpha = 0;
     this.overlay.alpha = 0;
   }
 
