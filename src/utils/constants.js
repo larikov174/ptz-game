@@ -13,8 +13,18 @@ const CONST = {
   LEVEL: 1,
   HIGHSCORE: 0,
   INLINE_LIMIT: 9,
+  FONT_PROPS: {
+    FAMILY: 'Calibri',
+    SIZE_XL: 100,
+    SIZE_L: 48,
+    SIZE_M: 32,
+    SIZE_S: 24,
+    FC_YELLOW: '#F3B411',
+    FC_PURPLE: '#610C57',
+    FC_WHITE: '#FFFFFF',
+    FC_BLACK: '#000000',
+  },
   TEXT: {
-    MAIN_TITLE: 'ЧЕТРикс',
     BEGIN_TEXT: 'Нажмите, чтобы начать игру',
     NEW_RECORD: 'Отлично, Вы установили свой рекорд!',
     CHEERUP: 'Вы можете лучше, поднажмите!',
@@ -22,14 +32,10 @@ const CONST = {
     BEST_SCORE: 'Ваш лучший результат(очков):',
     AGAIN: 'Попробуем еще раз?!',
   },
-  COLOR_YELLOW: '#F3B411',
-  COLOR_PURPLE: '#610C57',
-  COLOR_WHITE: '#ffffff',
   P_BAR: {
-    COLOR_GREEN: '#ffffff',
-    COLOR_NAVY: 0xffffff,
-    BAR_WIDTH: 420,
-    BAR_HEIGHT: 30,
+    BAR_COLOR: 0xF3B411,
+    BAR_WIDTH: 410,
+    BAR_HEIGHT: 25,
   },
 };
 

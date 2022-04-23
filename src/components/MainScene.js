@@ -6,9 +6,9 @@ import LabelCreator from '../ui/LabelCreator';
 import FONT_PROPS from '../ui/FontProps';
 import CONST from '../utils/constants';
 
-const { HIGHSCORE, SCORE, GOAL, MOVES, LEVEL, CUBE_HEIGHT, CUBE_WIDTH, START_Y, GAME_WIDTH, GAME_HEIGHT } = CONST;
-const { BAR_WIDTH, BAR_HEIGHT, COLOR_NAVY, COLOR_GREEN } = CONST.P_BAR;
-const { FAMILY, FILL, SIZE_XL, SIZE_M } = FONT_PROPS;
+const { HIGHSCORE, SCORE, GOAL, MOVES, LEVEL, CUBE_HEIGHT, CUBE_WIDTH, START_Y, GAME_WIDTH, GAME_HEIGHT} = CONST;
+const { BAR_WIDTH, BAR_HEIGHT, BAR_COLOR } = CONST.P_BAR;
+const { FAMILY, SIZE_XL, SIZE_M, FC_WHITE } = CONST.FONT_PROPS;
 
 export default class MainScene extends Phaser.Scene {
   constructor() {
@@ -31,16 +31,6 @@ export default class MainScene extends Phaser.Scene {
     this.logic = new GameLogic(this.grid, this.connected, this.possibleMoves, this.clickHandler, this);
     this.sfx = new SFX(this.add.particles('sprites'));
 
-    this.progressOverlay = this.createBar(BAR_WIDTH, COLOR_NAVY);
-    this.progressBar = this.createBar(0, COLOR_GREEN);
-
-    this.scoreLabel = this.createLabel(0, 0, SCORE, SIZE_M);
-    this.goalLabel = this.createLabel(0, 0, GOAL, SIZE_M);
-    this.movesLabel = this.createLabel(0, 0, MOVES, SIZE_XL);
-    this.highscoreLabel = this.createLabel(0, 0, this.highscore, SIZE_M);
-    this.levelLabel = this.createLabel(0, 0, LEVEL, SIZE_M);
-    this.slash = this.createLabel(0, 0, '/', SIZE_M);
-
     this.createUI();
     this.logic.createGrid();
 
@@ -49,43 +39,49 @@ export default class MainScene extends Phaser.Scene {
     this.registry.set('new', false);
     this.registry.events.on('changedata', this.updateData, this);
 
-    // emmit click event on each cube
     this.input.on('gameobjectdown', (pointer, gameObject) => gameObject.emit('clicked', gameObject), this);
   }
 
   createLabel(x, y, value, size) {
-    const style = { fontSize: `${size}px`, fill: FILL, fontFamily: FAMILY };
+    const style = { fontSize: `${size}px`, fill: FC_WHITE, fontFamily: FAMILY };
     const label = new LabelCreator(this, x, y, value, style);
     this.add.existing(label);
     label.depth = 1;
     return label;
   }
 
-  createBar(width, color) {
-    const bar = new ProgressBar(this, 0, 0, width, BAR_HEIGHT, color);
+  createBar(width) {
+    const bar = new ProgressBar(this, 0, 0, width, BAR_HEIGHT, BAR_COLOR);
     this.add.existing(bar);
     return bar;
   }
 
   createUI() {
     const screenCenter = this.add.zone(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT);
-    const field = this.add.image(0, 0, 'sprites', 'field');
-    const header = this.add.image(0, 0, 'sprites', 'bar1');
-    const scoreboard = this.add.image(0, 0, 'sprites', 'scoreboard');
+
+    const field = this.add.image(0, 0, 'sprites', 'FIELD');
+    const header = this.add.image(0, 0, 'sprites', 'HEADER');
+    const scoreboard = this.add.image(0, 0, 'sprites', 'SCORE_BOARD');
+
+    this.progressBar = this.createBar(0, BAR_COLOR);
+
+    this.scoreLabel = this.createLabel(0, 0, SCORE, SIZE_M);
+    this.goalLabel = this.createLabel(0, 0, GOAL, SIZE_M);
+    this.movesLabel = this.createLabel(0, 0, MOVES, SIZE_XL);
+    this.highscoreLabel = this.createLabel(0, 0, this.highscore, SIZE_M);
+    this.levelLabel = this.createLabel(0, 0, LEVEL, SIZE_M);
 
     header.depth = -1;
 
-    Phaser.Display.Align.In.BottomLeft(field, screenCenter);
-    Phaser.Display.Align.In.TopCenter(header, screenCenter);
-    Phaser.Display.Align.In.RightCenter(scoreboard, screenCenter);
-    Phaser.Display.Align.In.QuickSet(this.progressOverlay, header, 6, -35, 0);
-    Phaser.Display.Align.In.QuickSet(this.progressBar, this.progressOverlay, 3, 0, 0);
-    Phaser.Display.Align.In.QuickSet(this.scoreLabel, scoreboard, 11, -50, -60);
-    Phaser.Display.Align.In.QuickSet(this.slash, scoreboard, 11, 0, -60);
-    Phaser.Display.Align.In.QuickSet(this.goalLabel, scoreboard, 11, 50, -60);
-    Phaser.Display.Align.In.QuickSet(this.highscoreLabel, header, 2, -170, -32);
-    Phaser.Display.Align.In.QuickSet(this.movesLabel, scoreboard, 6, 0, -70);
-    Phaser.Display.Align.In.QuickSet(this.levelLabel, header, 4, -120, -10);
+    Phaser.Display.Align.In.QuickSet(header, screenCenter, 1, 0, -15);
+    Phaser.Display.Align.In.QuickSet(this.levelLabel, header, 4, -75, 20);
+    Phaser.Display.Align.In.QuickSet(this.highscoreLabel, header, 8, -115, 20);
+    Phaser.Display.Align.In.QuickSet(this.progressBar, header, 6, -210, 20);
+    Phaser.Display.Align.In.QuickSet(scoreboard, screenCenter, 8, 0, 0);
+    Phaser.Display.Align.In.QuickSet(this.movesLabel, scoreboard, 1, -5, -100);
+    Phaser.Display.Align.In.QuickSet(this.scoreLabel, scoreboard, 6, 20, 67);
+    Phaser.Display.Align.In.QuickSet(this.goalLabel, scoreboard, 6, 20, 115);
+    Phaser.Display.Align.In.QuickSet(field, screenCenter, 4 , 0, 0);
 
     this.add.group({
       key: 'sprites',
