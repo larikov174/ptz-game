@@ -39,6 +39,8 @@ export default class MainScene extends Phaser.Scene {
     this.registry.events.on('changedata', this.updateData, this);
 
     this.input.on('gameobjectdown', (pointer, gameObject) => gameObject.emit('clicked', gameObject), this);
+    this.openModal.on('pointerdown', this.onModalOpen, this)
+    this.closeModal.on('pointerdown', this.onModalClose, this)
   }
 
   createLabel(x, y, value, size) {
@@ -61,7 +63,10 @@ export default class MainScene extends Phaser.Scene {
     const field = this.add.image(0, 0, 'sprites', 'FIELD');
     const header = this.add.image(0, 0, 'sprites', 'HEADER');
     const scoreboard = this.add.image(0, 0, 'sprites', 'SCORE_BOARD');
-    const button = this.add.image(0, 0, 'sprites', 'BUTTON');
+    this.openModal = this.add.image(0, 0, 'sprites', 'BUTTON_RULES').setInteractive();
+    this.modal = this.add.image(0, 0, 'sprites', 'MODAL');
+    this.closeModal = this.add.image(0, 0, 'sprites', 'CLOSE_BUTTON').setInteractive();
+
 
     this.progressBar = this.createBar(0, BAR_COLOR);
 
@@ -72,6 +77,10 @@ export default class MainScene extends Phaser.Scene {
     this.levelLabel = this.createLabel(0, 0, LEVEL, SIZE_M);
 
     header.depth = -1;
+    this.modal.depth = 3;
+    this.modal.alpha = 0;
+    this.closeModal.depth = 4;
+    this.closeModal.alpha = 0;
 
     Phaser.Display.Align.In.QuickSet(header, screenCenter, 1, 0, -15);
     Phaser.Display.Align.In.QuickSet(this.levelLabel, header, 4, -75, 20);
@@ -81,8 +90,10 @@ export default class MainScene extends Phaser.Scene {
     Phaser.Display.Align.In.QuickSet(this.movesLabel, scoreboard, 1, -5, -130);
     Phaser.Display.Align.In.QuickSet(this.scoreLabel, scoreboard, 6, 20, 77);
     Phaser.Display.Align.In.QuickSet(this.goalLabel, scoreboard, 6, 20, 137);
-    Phaser.Display.Align.In.QuickSet(button, scoreboard, 11, 0, -20);
+    Phaser.Display.Align.In.QuickSet(this.openModal, scoreboard, 11, 0, -20);
     Phaser.Display.Align.In.QuickSet(field, screenCenter, 4 , 0, 50);
+    Phaser.Display.Align.In.QuickSet(this.modal, field, 6 , 0, 0);
+    Phaser.Display.Align.In.QuickSet(this.closeModal, this.modal, 7 , -10, -10);
   }
 
   clickHandler(block) {
@@ -111,6 +122,16 @@ export default class MainScene extends Phaser.Scene {
         });
       });
     }
+  }
+
+  onModalOpen () {
+    this.modal.alpha = 1;
+    this.closeModal.alpha = 1;
+  }
+
+  onModalClose () {
+    this.modal.alpha = 0;
+    this.closeModal.alpha = 0;
   }
 
   gameOver(cam = null, progress = 0) {
