@@ -3,7 +3,7 @@ body {
   max-height: 90%;
   width: 100vw;
   margin: 0 auto;
-  background-color: #a1a1a1;
+  background-color: #fff;
   display: flex;
   justify-content: center;
 }
@@ -19,6 +19,6 @@ body {
 }
 
 .footer__text {
-  font: normal 400 20px/24px Calibri, serif;
+  font: normal 400 20px/24px Roboto, serif;
   margin: 0 10px;
 }

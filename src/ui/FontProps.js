@@ -1,6 +1,6 @@
 const FONT_PROPS = {
   FAMILY: 'Calibri',
-  FILL: '#fff',
+  FILL: '#610C57',
   SIZE_XL: 100,
   SIZE_L: 48,
   SIZE_M: 32,
