@@ -5,8 +5,8 @@ import ProgressBar from '../ui/ProgressBar';
 import LabelCreator from '../ui/LabelCreator';
 import CONST from '../utils/constants';
 
-const { HIGHSCORE, SCORE, GOAL, MOVES, LEVEL, CUBE_HEIGHT, START_Y, GAME_WIDTH, GAME_HEIGHT} = CONST;
-const { BAR_WIDTH, BAR_HEIGHT, BAR_COLOR } = CONST.P_BAR;
+const { HIGHSCORE, SCORE, GOAL, MOVES, LEVEL, CUBE_HEIGHT, START_Y, GAME_WIDTH, GAME_HEIGHT } = CONST;
+const { BAR_WIDTH, BAR_HEIGHT, BAR_COLOR, OVERLAY_COLOR } = CONST.P_BAR;
 const { FAMILY, SIZE_XL, SIZE_M, FC_WHITE } = CONST.FONT_PROPS;
 
 export default class MainScene extends Phaser.Scene {
@@ -39,8 +39,11 @@ export default class MainScene extends Phaser.Scene {
     this.registry.events.on('changedata', this.updateData, this);
 
     this.input.on('gameobjectdown', (pointer, gameObject) => gameObject.emit('clicked', gameObject), this);
-    this.openModal.on('pointerdown', this.onModalOpen, this)
-    this.closeModal.on('pointerdown', this.onModalClose, this)
+    this.openModal.on('pointerdown', this.onModalOpen, this);
+    this.closeModal.on('pointerdown', this.onModalClose, this);
+    this.overlay.on('pointerdown', this.onModalClose, this);
+
+    this.input.keyboard.on('keydown-ESC', this.onModalClose, this);
   }
 
   createLabel(x, y, value, size) {
@@ -67,8 +70,8 @@ export default class MainScene extends Phaser.Scene {
     this.modal = this.add.image(0, 0, 'sprites', 'MODAL');
     this.closeModal = this.add.image(0, 0, 'sprites', 'CLOSE_BUTTON').setInteractive();
 
-
     this.progressBar = this.createBar(0, BAR_COLOR);
+    this.overlay = this.add.rectangle(0, 0, GAME_WIDTH, GAME_HEIGHT, OVERLAY_COLOR).setInteractive();
 
     this.scoreLabel = this.createLabel(0, 0, SCORE, SIZE_M);
     this.goalLabel = this.createLabel(0, 0, GOAL, SIZE_M);
@@ -77,10 +80,12 @@ export default class MainScene extends Phaser.Scene {
     this.levelLabel = this.createLabel(0, 0, LEVEL, SIZE_M);
 
     header.depth = -1;
-    this.modal.depth = 3;
+    this.overlay.depth = 3;
+    this.modal.depth = 4;
     this.modal.alpha = 0;
-    this.closeModal.depth = 4;
+    this.closeModal.depth = 5;
     this.closeModal.alpha = 0;
+    this.overlay.alpha = 0;
 
     Phaser.Display.Align.In.QuickSet(header, screenCenter, 1, 0, -15);
     Phaser.Display.Align.In.QuickSet(this.levelLabel, header, 4, -75, 20);
@@ -91,9 +96,10 @@ export default class MainScene extends Phaser.Scene {
     Phaser.Display.Align.In.QuickSet(this.scoreLabel, scoreboard, 6, 20, 77);
     Phaser.Display.Align.In.QuickSet(this.goalLabel, scoreboard, 6, 20, 137);
     Phaser.Display.Align.In.QuickSet(this.openModal, scoreboard, 11, 0, -20);
-    Phaser.Display.Align.In.QuickSet(field, screenCenter, 4 , 0, 50);
-    Phaser.Display.Align.In.QuickSet(this.modal, field, 6 , 0, 0);
-    Phaser.Display.Align.In.QuickSet(this.closeModal, this.modal, 7 , -10, -10);
+    Phaser.Display.Align.In.QuickSet(field, screenCenter, 4, 0, 50);
+    Phaser.Display.Align.In.QuickSet(this.modal, field, 6, 0, 0);
+    Phaser.Display.Align.In.QuickSet(this.closeModal, this.modal, 7, -15, -15);
+    Phaser.Display.Align.In.QuickSet(this.overlay, screenCenter, 6, 0, 0);
   }
 
   clickHandler(block) {
@@ -124,14 +130,16 @@ export default class MainScene extends Phaser.Scene {
     }
   }
 
-  onModalOpen () {
+  onModalOpen() {
     this.modal.alpha = 1;
     this.closeModal.alpha = 1;
+    this.overlay.alpha = 0.5;
   }
 
-  onModalClose () {
+  onModalClose() {
     this.modal.alpha = 0;
     this.closeModal.alpha = 0;
+    this.overlay.alpha = 0;
   }
 
   gameOver(cam = null, progress = 0) {
@@ -171,7 +179,7 @@ export default class MainScene extends Phaser.Scene {
 
     if (key === 'moves') {
       this.progressBar.redraw(dynemicWidth);
-      if (moves === 0 && (score < goal) || this.possibleMoves.length === 0) this.onGameLoose();
+      if ((moves === 0 && score < goal) || this.possibleMoves.length === 0) this.onGameLoose();
       if (score >= goal) this.onGameWin();
     }
 

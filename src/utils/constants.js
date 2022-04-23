@@ -34,6 +34,7 @@ const CONST = {
   },
   P_BAR: {
     BAR_COLOR: 0xF3B411,
+    OVERLAY_COLOR: 0x000000,
     BAR_WIDTH: 410,
     BAR_HEIGHT: 25,
   },
