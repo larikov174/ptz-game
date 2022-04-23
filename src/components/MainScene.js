@@ -3,10 +3,9 @@ import GameLogic from './GameLogic';
 import SFX from '../ui/SFX';
 import ProgressBar from '../ui/ProgressBar';
 import LabelCreator from '../ui/LabelCreator';
-import FONT_PROPS from '../ui/FontProps';
 import CONST from '../utils/constants';
 
-const { HIGHSCORE, SCORE, GOAL, MOVES, LEVEL, CUBE_HEIGHT, CUBE_WIDTH, START_Y, GAME_WIDTH, GAME_HEIGHT} = CONST;
+const { HIGHSCORE, SCORE, GOAL, MOVES, LEVEL, CUBE_HEIGHT, START_Y, GAME_WIDTH, GAME_HEIGHT} = CONST;
 const { BAR_WIDTH, BAR_HEIGHT, BAR_COLOR } = CONST.P_BAR;
 const { FAMILY, SIZE_XL, SIZE_M, FC_WHITE } = CONST.FONT_PROPS;
 
@@ -62,6 +61,7 @@ export default class MainScene extends Phaser.Scene {
     const field = this.add.image(0, 0, 'sprites', 'FIELD');
     const header = this.add.image(0, 0, 'sprites', 'HEADER');
     const scoreboard = this.add.image(0, 0, 'sprites', 'SCORE_BOARD');
+    const button = this.add.image(0, 0, 'sprites', 'BUTTON');
 
     this.progressBar = this.createBar(0, BAR_COLOR);
 
@@ -81,22 +81,8 @@ export default class MainScene extends Phaser.Scene {
     Phaser.Display.Align.In.QuickSet(this.movesLabel, scoreboard, 1, -5, -100);
     Phaser.Display.Align.In.QuickSet(this.scoreLabel, scoreboard, 6, 20, 67);
     Phaser.Display.Align.In.QuickSet(this.goalLabel, scoreboard, 6, 20, 115);
+    Phaser.Display.Align.In.QuickSet(button, scoreboard, 11, 0, -20);
     Phaser.Display.Align.In.QuickSet(field, screenCenter, 4 , 0, 0);
-
-    this.add.group({
-      key: 'sprites',
-      frame: ['bonus'],
-      frameQuantity: 3,
-      gridAlign: {
-        width: 3,
-        height: 1,
-        cellWidth: CUBE_WIDTH * 2,
-        cellHeight: CUBE_HEIGHT,
-        x: 660,
-        y: 700,
-      },
-      setScale: { x: 0.8, y: 0.8 },
-    });
   }
 
   clickHandler(block) {
