@@ -11,11 +11,11 @@ export default class SFX {
   _createEmitter(color) {
     this._emitters[color] = this._particles.createEmitter({
       frame: color,
-      lifespan: 1000,
+      lifespan: 1200,
       speed: { min: 200, max: 400 },
       alpha: { start: 1, end: 0 },
-      scale: { start: 0.5, end: 0 },
-      rotate: { start: 0, end: 360, ease: 'Power2' },
+      scale: { start: 0.25, end: 0 },
+      rotate: { start: 0, end: 460, ease: 'Power2' },
       blendMode: 'ADD',
       on: false
     });
@@ -30,6 +30,6 @@ export default class SFX {
   emitt() {
     const color = Phaser.Math.Between(0, 4);
     this._callEmitter();
-    this._emitters[FRAMES[color]].explode(26, 90, 70);
+    this._emitters[FRAMES[color]].explode(26, 90, 100);
   }
 }

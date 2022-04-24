@@ -29,7 +29,7 @@ export default class GameOver extends Phaser.Scene {
       const color = Phaser.Math.Between(0, FRAMES.length - 1);
       const sx = Phaser.Math.Between(CUBE_WIDTH, GAME_WIDTH);
       const sy = Phaser.Math.Between(0, GAME_HEIGHT);
-      let block = this.add.sprite(sx, sy, 'sprites', CONST.FRAMES[color]).setScale(0.5).setAlpha(0.7);
+      let block = this.add.sprite(sx, sy, 'sprites_2', CONST.FRAMES[color]).setScale(0.5).setAlpha(0.7);
       this.arr[i] = block;
     }
   }
