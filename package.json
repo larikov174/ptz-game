@@ -1,5 +1,5 @@
 {
-  "name": "blast",
+  "name": "chetra-game",
   "version": "1.0.0",
   "description": "arcade game",
   "main": "index.js",
@@ -22,9 +22,9 @@
   "author": "Andrey Larikov",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/larikov174/blast/issues"
+    "url": "https://github.com/larikov174/chetra-game/issues"
   },
-  "homepage": "https://github.com/larikov174/blast#readme",
+  "homepage": "https://larikov.online/chetra",
   "dependencies": {
     "phaser": "^3.55.2"
   },
