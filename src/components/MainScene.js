@@ -125,13 +125,37 @@ export default class MainScene extends Phaser.Scene {
   }
 
   onModalOpen() {
-    this.modal.alpha = 1;
-    this.overlay.alpha = 0.5;
+    this.tweens.add({
+      targets: this.overlay,
+      alpha: 0.5,
+      ease: 'Power1',
+      duration: 250,
+      delay: 0,
+    });
+    this.tweens.add({
+      targets: this.modal,
+      alpha: 1,
+      ease: 'Power1',
+      duration: 250,
+      delay: 50,
+    });
   }
 
   onModalClose() {
-    this.modal.alpha = 0;
-    this.overlay.alpha = 0;
+    this.tweens.add({
+      targets: this.overlay,
+      alpha: 0,
+      ease: 'Power1',
+      duration: 250,
+      delay: 50,
+    });
+    this.tweens.add({
+      targets: this.modal,
+      alpha: 0,
+      ease: 'Power1',
+      duration: 250,
+      delay: 0,
+    });
   }
 
   gameOver(cam = null, progress = 0) {
