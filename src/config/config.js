@@ -8,13 +8,13 @@ const { GAME_WIDTH, GAME_HEIGHT, GAME_BACKGROUND } = CONST;
 
 const config = {
   type: Phaser.AUTO,
-  parent: 'blast game',
+  parent: 'body',
   width: GAME_WIDTH,
   height: GAME_HEIGHT,
   backgroundColor: GAME_BACKGROUND,
   scene: [Preloader, MainScene, GameOver],
   scale: {
-    parent: 'body',
+    parent: 'phaser-game',
     mode: Phaser.Scale.ScaleModes.FIT,
     width: GAME_WIDTH,
     height: GAME_HEIGHT,
