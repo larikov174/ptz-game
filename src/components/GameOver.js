@@ -67,7 +67,7 @@ export default class GameOver extends Phaser.Scene {
 
   update() {
     this.arr.forEach((block) => {
-      block.y += 0.7;
+      block.y += 0.5;
       if (block.y > GAME_HEIGHT + CUBE_HEIGHT) block.y = -100;
     });
   }

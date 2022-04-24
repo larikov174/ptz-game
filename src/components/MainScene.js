@@ -28,7 +28,7 @@ export default class MainScene extends Phaser.Scene {
 
   create() {
     this.logic = new GameLogic(this.grid, this.connected, this.possibleMoves, this.clickHandler, this);
-    this.sfx = new SFX(this.add.particles('sprites'));
+    this.sfx = new SFX(this.add.particles('sprites_2'));
 
     this.createUI();
     this.logic.createGrid();
@@ -61,11 +61,11 @@ export default class MainScene extends Phaser.Scene {
   createUI() {
     const screenCenter = this.add.zone(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT);
 
-    const field = this.add.image(0, 0, 'sprites', 'FIELD').setScale(0.5);
-    const header = this.add.image(0, 0, 'sprites', 'HEADER').setScale(0.5);
-    const scoreboard = this.add.image(0, 0, 'sprites', 'SCORE_BOARD').setScale(0.5);
-    this.openModal = this.add.image(0, 0, 'sprites', 'BUTTON_RULES').setScale(0.5).setInteractive();
-    this.modal = this.add.image(0, 0, 'sprites', 'MODAL').setScale(0.5);
+    const field = this.add.image(0, 0, 'sprites_1', 'FIELD').setScale(0.5);
+    const header = this.add.image(0, 0, 'sprites_1', 'HEADER').setScale(0.5);
+    const scoreboard = this.add.image(0, 0, 'sprites_1', 'SCORE_BOARD').setScale(0.5);
+    this.openModal = this.add.image(0, 0, 'sprites_2', 'BUTTON_RULES').setScale(0.5).setInteractive();
+    this.modal = this.add.image(0, 0, 'sprites_2', 'MODAL').setScale(0.5);
 
     this.progressBar = this.createBar(0, BAR_COLOR);
     this.overlay = this.add.rectangle(0, 0, GAME_WIDTH, GAME_HEIGHT, OVERLAY_COLOR).setInteractive();

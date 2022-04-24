@@ -74,7 +74,7 @@ export default class GameLogic extends Phaser.Scene {
   }
 
   _createCube(x, y) {
-    const block = this.scene.add.sprite(this.grid[x][y].sx, this.grid[x][y].sy, 'sprites', FRAMES[this.grid[x][y].color]);
+    const block = this.scene.add.sprite(this.grid[x][y].sx, this.grid[x][y].sy, 'sprites_2', FRAMES[this.grid[x][y].color]);
     block.gridData = this.grid[x][y];
     this.grid[x][y].sprite = block;
     block.setInteractive();

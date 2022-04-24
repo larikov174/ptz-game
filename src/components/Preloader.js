@@ -1,7 +1,11 @@
 import LabelCreator from '../ui/LabelCreator';
 import CONST from '../utils/constants';
-import sprites from '../assets/sprites.png';
-import json from '../assets/sprites.json';
+import sprites_1 from '../assets/sprites_1.png';
+import sprites_2 from '../assets/sprites_2.png';
+import sprites_3 from '../assets/sprites_3.png';
+import json_1 from '../assets/sprites_1.json';
+import json_2 from '../assets/sprites_2.json';
+import json_3 from '../assets/sprites_3.json';
 
 
 export default class Preloader extends Phaser.Scene {
@@ -10,7 +14,9 @@ export default class Preloader extends Phaser.Scene {
   }
 
   preload() {
-    this.load.atlas('sprites', sprites, json);
+    this.load.atlas('sprites_1', sprites_1, json_1);
+    this.load.atlas('sprites_2', sprites_2, json_2);
+    this.load.atlas('sprites_3', sprites_3, json_3);
   }
 
   createLabel(x, y, value) {
@@ -26,7 +32,7 @@ export default class Preloader extends Phaser.Scene {
     const { BEGIN_TEXT } = CONST.TEXT;
     const screenCenter = this.add.zone(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT);
     const text = this.createLabel(0, 0, BEGIN_TEXT);
-    const image = this.add.image(0, 0, 'sprites', 'FRONT_COVER').setScale(0.5);
+    const image = this.add.image(0, 0, 'sprites_3', 'FRONT_COVER').setScale(0.5);
 
     Phaser.Display.Align.In.QuickSet(image, screenCenter, 6, 0, 0);
     Phaser.Display.Align.In.QuickSet(text, screenCenter, 6, 0, 250);
