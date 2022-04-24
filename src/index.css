@@ -29,7 +29,6 @@ body {
   max-width: 1330px;
   height: 150px;
   width: 100%;
-  margin-top: 10px;
   padding: 0 10px;
   box-sizing: border-box;
   background-color: #3d0e32;
@@ -40,7 +39,13 @@ body {
   align-items: center;
 }
 
+.footer__column {
+  display: flex;
+  flex-direction: column;
+}
+
 .footer__contacts {
+  display: flex;
   width: 30%;
 }
 
@@ -100,6 +105,7 @@ body {
 
 .footer__link_email {
   font-size: 32px;
+  margin-top: 10px;
 }
 
 
