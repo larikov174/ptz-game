@@ -144,10 +144,27 @@ body {
   }
 }
 
+@media screen and (max-width: 850px) {
+  body {
+    max-height: 940px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .footer {
+    max-height: 770px;
+  }
+}
+
 @media screen and (max-width: 468px) {
+  body {
+    max-height: 650px;
+  }
+
   .footer__logo_fpk {
     height: 30px;
   }
+
 
   .footer__logo_chetra {
     height: 30px;
@@ -163,7 +180,19 @@ body {
 }
 
 @media screen and (max-width: 360px) {
+  body {
+    max-height: 560px;
+  }
+
   .footer__text_email {
+    font-size: 24px;
+  }
+
+  .footer__link_email {
+    font-size: 24px;
+  }
+
+  .footer__text_phone {
     font-size: 24px;
   }
 }
