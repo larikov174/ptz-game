@@ -22,7 +22,7 @@ body {
 }
 
 .footer {
-  max-width: 1330px;
+  max-width: 1120px;
   height: 150px;
   width: 100%;
   padding: 0 10px;
@@ -146,6 +146,10 @@ body {
 
 @media screen and (max-width: 468px) {
   .footer__logo_fpk {
+    height: 30px;
+  }
+
+  .footer__logo_chetra {
     height: 30px;
   }
 

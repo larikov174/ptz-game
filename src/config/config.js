@@ -15,7 +15,7 @@ const config = {
   scene: [Preloader, MainScene, GameOver],
   scale: {
     parent: 'phaser-game',
-    mode: Phaser.Scale.ScaleModes.WIDTH_CONTROLS_HEIGHT,
+    mode: Phaser.Scale.ScaleModes.FIT,
     width: GAME_WIDTH,
     height: GAME_HEIGHT,
   },
