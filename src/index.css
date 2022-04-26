@@ -1,5 +1,6 @@
 body {
-  max-width: 990px;
+  outline: 1px solid red;
+  max-width: 1200px;
   max-height: 1125px;
   width: 100vw;
   margin: 0 auto;
@@ -8,6 +9,10 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+canvas {
+  outline: 1px solid blue;
 }
 
 .page__title {
@@ -143,7 +148,7 @@ body {
 
 @media screen and (max-width: 468px) {
   body {
-    max-height: 650px;
+    max-height: 608px;
   }
 
   .footer__logo_fpk {
