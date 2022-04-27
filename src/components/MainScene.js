@@ -33,8 +33,7 @@ export default class MainScene extends Phaser.Scene {
     this.createUI();
     this.logic.createGrid();
 
-    this.registry.set('moves', this.movesLabel.get());
-    this.registry.set('level', this.levelLabel.get());
+    this.registry.set('moves', this.timerLabel.get());
     this.registry.set('new', false);
     this.registry.events.on('changedata', this.updateData, this);
 
@@ -63,32 +62,30 @@ export default class MainScene extends Phaser.Scene {
 
     const field = this.add.image(0, 0, 'sprites_1', 'FIELD').setScale(0.5);
     const header = this.add.image(0, 0, 'sprites_3', 'HEADER').setScale(0.5);
-    // const scoreboard = this.add.image(0, 0, 'sprites_1', 'SCORE_BOARD').setScale(0.5);
     this.openModal = this.add.image(0, 0, 'sprites_2', 'BUTTON_RULES').setScale(0.5).setInteractive();
     this.modal = this.add.image(0, 0, 'sprites_2', 'MODAL').setScale(0.5);
 
     this.overlay = this.add.rectangle(0, 0, GAME_WIDTH, GAME_HEIGHT, OVERLAY_COLOR).setInteractive();
     this.scoreLabel = this.createLabel(0, 0, SCORE, SIZE_M);
-    this.goalLabel = this.createLabel(0, 0, GOAL, SIZE_M);
-    this.movesLabel = this.createLabel(0, 0, MOVES, SIZE_XL);
+    this.timerLabel = this.createLabel(0, 0, MOVES, SIZE_XL);
     this.highscoreLabel = this.createLabel(0, 0, this.highscore, SIZE_M);
-    this.levelLabel = this.createLabel(0, 0, LEVEL, SIZE_M);
 
-    header.depth = 5;
-    field.depth = 0;
-    this.overlay.depth = 3;
+    this.overlay.depth = 2;
     this.overlay.alpha = 0;
-    this.modal.depth = 4;
+    this.modal.depth = 3;
     this.modal.alpha = 0;
-    const canvas = document.querySelector('canvas');
+
     Phaser.Display.Bounds.CenterOn(header, GAME_WIDTH / 2, 50);
-    Phaser.Display.Align.In.QuickSet(field, header, 1, 0, 300)
-    Phaser.Display.Align.In.QuickSet(this.highscoreLabel, header, 6, 0, 0);
-    Phaser.Display.Align.In.QuickSet(this.movesLabel, header, 1, -5, -410);
-    Phaser.Display.Align.In.QuickSet(this.scoreLabel, header, 6, 20, 77);
-    Phaser.Display.Align.In.QuickSet(this.openModal, header, 11, 0, -270);
-    Phaser.Display.Align.In.QuickSet(this.modal, field, 6, 0, 0);
+    Phaser.Display.Align.In.QuickSet(field, header, 1, 0, 300);
+    Phaser.Display.Bounds.SetLeft(this.highscoreLabel, 880);
+    this.highscoreLabel.y = 60
+    Phaser.Display.Bounds.SetLeft(this.scoreLabel, 880);
+    this.scoreLabel.y = 17;
+    Phaser.Display.Bounds.SetLeft(this.timerLabel, 452);
+    this.timerLabel.y = 10
     Phaser.Display.Align.In.QuickSet(this.overlay, screenCenter, 6, 0, 0);
+    Phaser.Display.Align.In.QuickSet(this.openModal, header, 6, -400, 10);
+    Phaser.Display.Align.In.QuickSet(this.modal, field, 6, 0, 0);
   }
 
   clickHandler(block) {
@@ -98,8 +95,8 @@ export default class MainScene extends Phaser.Scene {
     if (this.connected.length > 1) {
       let deleted = 0;
       this.scoreLabel.addScore(this.connected.length);
-      this.movesLabel.reduce(1);
-      this.registry.set('moves', this.movesLabel.get());
+      this.timerLabel.reduce(1);
+      this.registry.set('moves', this.timerLabel.get());
       this.connected.forEach((cube) => {
         deleted++;
         this.tweens.timeline({
@@ -171,9 +168,8 @@ export default class MainScene extends Phaser.Scene {
   }
 
   levelChange() {
-    this.movesLabel.set(MOVES);
+    this.timerLabel.set(MOVES);
     this.levelLabel.add(LEVEL);
-    this.goalLabel.add(Math.ceil(this.goalLabel.get() * 1.5));
     this.registry.set('level', this.levelLabel.get());
   }
 
@@ -182,20 +178,20 @@ export default class MainScene extends Phaser.Scene {
     this.levelChange();
   }
 
+  textAlignHanlder(textElement, xPos) {
+    console.log(xPos - textElement.width);
+    return (textElement.x = xPos + textElement.width);
+  }
+
   updateData(parent, key, data) {
-    const moves = this.movesLabel.get();
+    const timer = this.timerLabel.get();
     const score = this.scoreLabel.get();
-    const goal = this.goalLabel.get();
-    const dynemicWidth = BAR_WIDTH * (score / goal);
 
     if (key === 'moves') {
-      // this.progressBar.redraw(dynemicWidth);
-      if ((moves === 0 && score < goal) || this.possibleMoves.length === 0) this.onGameLoose();
-      if (score >= goal) this.onGameWin();
+      // this.textAlignHanlder(this.timerLabel, 545);
+      // this.textAlignHanlder(this.scoreLabel, 850);
+      if (timer === 0 || this.possibleMoves.length === 0) this.onGameLoose();
+      // if (score >= goal) this.onGameWin();
     }
-
-    // if (key === 'level') {
-    //   this.progressBar.redraw(dynemicWidth);
-    // }
   }
 }
