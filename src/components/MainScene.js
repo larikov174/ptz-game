@@ -33,7 +33,7 @@ export default class MainScene extends Phaser.Scene {
     this.createUI();
     this.logic.createGrid();
 
-    this.registry.set('moves', this.timerLabel.get());
+    this.registry.set('time', this.timerLabel.get());
     this.registry.set('new', false);
     this.registry.events.on('changedata', this.updateData, this);
 
@@ -41,6 +41,18 @@ export default class MainScene extends Phaser.Scene {
     this.openModal.on('pointerdown', this.onModalOpen, this);
     this.overlay.on('pointerdown', this.onModalClose, this);
     this.input.keyboard.on('keydown-ESC', this.onModalClose, this);
+
+    this.timedEvent = this.time.addEvent({
+      delay: 1000,
+      callback: onTimeEvent,
+      callbackScope: this,
+      loop: true,
+    });
+
+    function onTimeEvent() {
+      this.timerLabel.reduce(10);
+      this.registry.set('time', this.timerLabel.get())
+    }
   }
 
   createLabel(x, y, value, size) {
@@ -78,11 +90,11 @@ export default class MainScene extends Phaser.Scene {
     Phaser.Display.Bounds.CenterOn(header, GAME_WIDTH / 2, 50);
     Phaser.Display.Align.In.QuickSet(field, header, 1, 0, 300);
     Phaser.Display.Bounds.SetLeft(this.highscoreLabel, 880);
-    this.highscoreLabel.y = 60
+    this.highscoreLabel.y = 60;
     Phaser.Display.Bounds.SetLeft(this.scoreLabel, 880);
     this.scoreLabel.y = 17;
     Phaser.Display.Bounds.SetLeft(this.timerLabel, 452);
-    this.timerLabel.y = 10
+    this.timerLabel.y = 10;
     Phaser.Display.Align.In.QuickSet(this.overlay, screenCenter, 6, 0, 0);
     Phaser.Display.Align.In.QuickSet(this.openModal, header, 6, -400, 10);
     Phaser.Display.Align.In.QuickSet(this.modal, field, 6, 0, 0);
@@ -95,8 +107,6 @@ export default class MainScene extends Phaser.Scene {
     if (this.connected.length > 1) {
       let deleted = 0;
       this.scoreLabel.addScore(this.connected.length);
-      this.timerLabel.reduce(1);
-      this.registry.set('moves', this.timerLabel.get());
       this.connected.forEach((cube) => {
         deleted++;
         this.tweens.timeline({
@@ -167,31 +177,15 @@ export default class MainScene extends Phaser.Scene {
     this.camera.shake(1000, 0.04, false, this.cameraFadeOut);
   }
 
-  levelChange() {
-    this.timerLabel.set(MOVES);
-    this.levelLabel.add(LEVEL);
-    this.registry.set('level', this.levelLabel.get());
-  }
-
   onGameWin() {
     this.sfx.emitt();
     this.levelChange();
   }
 
-  textAlignHanlder(textElement, xPos) {
-    console.log(xPos - textElement.width);
-    return (textElement.x = xPos + textElement.width);
-  }
-
   updateData(parent, key, data) {
-    const timer = this.timerLabel.get();
-    const score = this.scoreLabel.get();
-
-    if (key === 'moves') {
-      // this.textAlignHanlder(this.timerLabel, 545);
-      // this.textAlignHanlder(this.scoreLabel, 850);
+    if (key === 'time') {
+      const timer = this.timerLabel.get();
       if (timer === 0 || this.possibleMoves.length === 0) this.onGameLoose();
-      // if (score >= goal) this.onGameWin();
     }
   }
 }

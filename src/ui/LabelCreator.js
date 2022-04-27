@@ -34,8 +34,8 @@ export default class LabelCreator extends Phaser.GameObjects.Text {
     }
   }
 
-  reduce(move) {
-    this.set(this.value - move);
+  reduce(value) {
+    this.set(this.value - value);
   }
 
   get() {
