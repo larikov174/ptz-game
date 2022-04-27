@@ -8,7 +8,7 @@ const { GAME_WIDTH, GAME_HEIGHT, GAME_BACKGROUND } = CONST;
 
 const config = {
   type: Phaser.AUTO,
-  parent: 'body',
+  parent: 'phaser-game',
   width: GAME_WIDTH,
   height: GAME_HEIGHT,
   backgroundColor: GAME_BACKGROUND,
@@ -28,16 +28,23 @@ window.onload = function() {
 
 function resize() {
   const canvas = document.querySelector("canvas");
+  const body = document.querySelector("body");
+  const footer = document.querySelector(".footer");
+  console.log(footer.getBoundingClientRect().height);
   const windowWidth = window.innerWidth;
   const windowHeight = window.innerHeight;
   const windowRatio = windowWidth / windowHeight;
   const gameRatio = GAME_WIDTH /GAME_HEIGHT;
   if(windowRatio < gameRatio) {
-      canvas.style.width = windowWidth + "px";
-      canvas.style.height = (windowWidth / gameRatio) + "px";
+    canvas.style.width = windowWidth + "px";
+    canvas.style.height = (windowWidth / gameRatio) + "px";
+    body.style.height = (windowWidth / gameRatio) - 150 + "px";
+    footer.style.width = windowWidth + "px"
   } else {
-      canvas.style.width = (windowHeight * gameRatio) + "px";
-      canvas.style.height = windowHeight + "px";
+    canvas.style.width = (windowHeight * gameRatio) + "px";
+    canvas.style.height = windowHeight - 150 + "px";
+    body.style.height = (windowWidth * gameRatio) - 150 + "px";
+    footer.style.width = (windowHeight * gameRatio) + "px";
   }
 }
 
