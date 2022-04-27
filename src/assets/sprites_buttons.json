@@ -50,19 +50,19 @@
 },
 "MODAL":
 {
-	"frame": {"x":352,"y":272,"w":1044,"h":944},
+	"frame": {"x":352,"y":272,"w":1044,"h":798},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":1044,"h":944},
-	"sourceSize": {"w":1044,"h":944}
+	"spriteSourceSize": {"x":0,"y":0,"w":1044,"h":798},
+	"sourceSize": {"w":1044,"h":798}
 }},
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "sprites_buttons.png",
 	"format": "RGBA8888",
-	"size": {"w":1400,"h":1220},
+	"size": {"w":1400,"h":1074},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:363387f30a1dcebb80d1fbb7e7f570a8:d5561cd72771b1753a8e30b34ca065fc:e4f1bdee8ca3d6839ee0788b9ce2c53b$"
+	"smartupdate": "$TexturePacker:SmartUpdate:329df313c5e98816bce271df0f331b19:c962efc1763ffe5e668871a40be14a60:e4f1bdee8ca3d6839ee0788b9ce2c53b$"
 }
 }

@@ -2,7 +2,7 @@
 
 "FRONT_COVER":
 {
-	"frame": {"x":4,"y":4,"w":2030,"h":680},
+	"frame": {"x":0,"y":0,"w":2030,"h":680},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":2030,"h":680},
@@ -10,7 +10,7 @@
 },
 "HEADER":
 {
-	"frame": {"x":4,"y":688,"w":1980,"h":213},
+	"frame": {"x":0,"y":680,"w":1980,"h":213},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":1980,"h":213},
@@ -21,8 +21,8 @@
 	"version": "1.0",
 	"image": "sprites_header.png",
 	"format": "RGBA8888",
-	"size": {"w":2038,"h":905},
+	"size": {"w":2030,"h":893},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:d0ec1c4ec569092c48e640663760ba06:c6949749c0bf92fbf8e57d4616507469:aec09f83b54c8fcf181f9579179abcc3$"
+	"smartupdate": "$TexturePacker:SmartUpdate:d468d2f728bd683f532cffd050f9bb2e:ecc0835a82da8d35dbb64179bb28b2f1:aec09f83b54c8fcf181f9579179abcc3$"
 }
 }

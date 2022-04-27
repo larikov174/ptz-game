@@ -26,7 +26,7 @@ body {
   width: 100%;
   padding: 0 10px;
   box-sizing: border-box;
-  background-color: #3d0e32;
+  background-color: #4B2942;
 }
 
 .footer__row {
@@ -54,7 +54,7 @@ body {
 }
 
 .footer__devider {
-  border-right: 2px solid #f4b313;
+  border-right: 2px solid #F0AF1D;
   height: 100px;
   margin: 10px;
 }
@@ -90,11 +90,11 @@ body {
 
 .footer__text_credits {
   font-size: 16px;
-  color: #f4b313;
+  color: #F0AF1D;
 }
 
 .footer__text_email {
-  color: #f4b313;
+  color: #F0AF1D;
 }
 
 .footer__link {
