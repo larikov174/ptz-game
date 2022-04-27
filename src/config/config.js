@@ -30,7 +30,6 @@ function resize() {
   const canvas = document.querySelector("canvas");
   const body = document.querySelector("body");
   const footer = document.querySelector(".footer");
-  console.log(footer.getBoundingClientRect().height);
   const windowWidth = window.innerWidth;
   const windowHeight = window.innerHeight;
   const windowRatio = windowWidth / windowHeight;

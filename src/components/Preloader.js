@@ -1,11 +1,11 @@
 import LabelCreator from '../ui/LabelCreator';
 import CONST from '../utils/constants';
-import sprites_1 from '../assets/sprites_1.png';
-import sprites_2 from '../assets/sprites_2.png';
-import sprites_3 from '../assets/sprites_3.png';
-import json_1 from '../assets/sprites_1.json';
-import json_2 from '../assets/sprites_2.json';
-import json_3 from '../assets/sprites_3.json';
+import sprites_1 from '../assets/sprites_field.png';
+import sprites_2 from '../assets/sprites_buttons.png';
+import sprites_3 from '../assets/sprites_header.png';
+import json_1 from '../assets/sprites_field.json';
+import json_2 from '../assets/sprites_buttons.json';
+import json_3 from '../assets/sprites_header.json';
 
 
 export default class Preloader extends Phaser.Scene {

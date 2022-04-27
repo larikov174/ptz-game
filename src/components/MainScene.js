@@ -61,37 +61,32 @@ export default class MainScene extends Phaser.Scene {
   createUI() {
     const screenCenter = this.add.zone(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT);
 
-    const field = this.add.image(0, 0, 'sprites_1', 'FIELD').setScale(0.7);
-    const header = this.add.image(0, 0, 'sprites_1', 'HEADER').setScale(0.5);
+    const field = this.add.image(0, 0, 'sprites_1', 'FIELD').setScale(0.5);
+    const header = this.add.image(0, 0, 'sprites_3', 'HEADER').setScale(0.5);
     // const scoreboard = this.add.image(0, 0, 'sprites_1', 'SCORE_BOARD').setScale(0.5);
     this.openModal = this.add.image(0, 0, 'sprites_2', 'BUTTON_RULES').setScale(0.5).setInteractive();
     this.modal = this.add.image(0, 0, 'sprites_2', 'MODAL').setScale(0.5);
 
-    this.progressBar = this.createBar(0, BAR_COLOR);
     this.overlay = this.add.rectangle(0, 0, GAME_WIDTH, GAME_HEIGHT, OVERLAY_COLOR).setInteractive();
-
     this.scoreLabel = this.createLabel(0, 0, SCORE, SIZE_M);
     this.goalLabel = this.createLabel(0, 0, GOAL, SIZE_M);
     this.movesLabel = this.createLabel(0, 0, MOVES, SIZE_XL);
     this.highscoreLabel = this.createLabel(0, 0, this.highscore, SIZE_M);
     this.levelLabel = this.createLabel(0, 0, LEVEL, SIZE_M);
 
-    header.depth = -1;
+    header.depth = 5;
+    field.depth = 0;
     this.overlay.depth = 3;
     this.overlay.alpha = 0;
     this.modal.depth = 4;
     this.modal.alpha = 0;
-
-    Phaser.Display.Align.In.QuickSet(header, screenCenter, 1, 0, 50);
-    Phaser.Display.Align.In.QuickSet(this.levelLabel, header, 6, -405, 20);
-    Phaser.Display.Align.In.QuickSet(this.highscoreLabel, header, 6, 365, 20);
-    // Phaser.Display.Align.In.QuickSet(this.progressBar, header, 6, -210, 20);
-    // Phaser.Display.Align.In.QuickSet(scoreboard, screenCenter, 8, 150, 50);
-    // Phaser.Display.Align.In.QuickSet(this.movesLabel, scoreboard, 1, -5, -410);
-    // Phaser.Display.Align.In.QuickSet(this.scoreLabel, scoreboard, 6, 20, 77);
-    // Phaser.Display.Align.In.QuickSet(this.goalLabel, scoreboard, 6, 20, 137);
-    // Phaser.Display.Align.In.QuickSet(this.openModal, scoreboard, 11, 0, -270);
-    Phaser.Display.Align.In.QuickSet(field, header, 1, 0, 50);
+    const canvas = document.querySelector('canvas');
+    Phaser.Display.Bounds.CenterOn(header, GAME_WIDTH / 2, 50);
+    Phaser.Display.Align.In.QuickSet(field, header, 1, 0, 300)
+    Phaser.Display.Align.In.QuickSet(this.highscoreLabel, header, 6, 0, 0);
+    Phaser.Display.Align.In.QuickSet(this.movesLabel, header, 1, -5, -410);
+    Phaser.Display.Align.In.QuickSet(this.scoreLabel, header, 6, 20, 77);
+    Phaser.Display.Align.In.QuickSet(this.openModal, header, 11, 0, -270);
     Phaser.Display.Align.In.QuickSet(this.modal, field, 6, 0, 0);
     Phaser.Display.Align.In.QuickSet(this.overlay, screenCenter, 6, 0, 0);
   }
@@ -194,13 +189,13 @@ export default class MainScene extends Phaser.Scene {
     const dynemicWidth = BAR_WIDTH * (score / goal);
 
     if (key === 'moves') {
-      this.progressBar.redraw(dynemicWidth);
+      // this.progressBar.redraw(dynemicWidth);
       if ((moves === 0 && score < goal) || this.possibleMoves.length === 0) this.onGameLoose();
       if (score >= goal) this.onGameWin();
     }
 
-    if (key === 'level') {
-      this.progressBar.redraw(dynemicWidth);
-    }
+    // if (key === 'level') {
+    //   this.progressBar.redraw(dynemicWidth);
+    // }
   }
 }
