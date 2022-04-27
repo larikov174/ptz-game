@@ -117,6 +117,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   onModalOpen() {
+    this.timedEvent.paused = true;
     this.tweens.add({
       targets: this.overlay,
       alpha: 0.5,
@@ -134,6 +135,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   onModalClose() {
+    this.timedEvent.paused = false;
     this.tweens.add({
       targets: this.overlay,
       alpha: 0,
