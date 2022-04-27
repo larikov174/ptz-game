@@ -36,12 +36,12 @@ function resize() {
   const windowRatio = windowWidth / windowHeight;
   const gameRatio = GAME_WIDTH /GAME_HEIGHT;
   if(windowRatio < gameRatio) {
-    canvas.style.width = windowWidth + "px";
+    canvas.style.width = `${windowWidth - (windowWidth > 500 ? 30 : 0)}px`;
     canvas.style.height = (windowWidth / gameRatio) + "px";
     body.style.height = (windowWidth / gameRatio) - 150 + "px";
-    footer.style.width = windowWidth + "px"
+    footer.style.width = `${windowWidth - (windowWidth > 500 ? 30 : 0)}px`;
   } else {
-    canvas.style.width = (windowHeight * gameRatio) + "px";
+    canvas.style.width = (windowHeight * gameRatio)  + "px";
     canvas.style.height = windowHeight - 150 + "px";
     body.style.height = (windowWidth * gameRatio) - 150 + "px";
     footer.style.width = (windowHeight * gameRatio) + "px";
