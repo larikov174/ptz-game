@@ -4,8 +4,7 @@ import SFX from '../ui/SFX';
 import LabelCreator from '../ui/LabelCreator';
 import CONST from '../utils/constants';
 
-const { HIGHSCORE, SCORE, TIME, CUBE_HEIGHT, START_Y, GAME_WIDTH, GAME_HEIGHT } = CONST;
-const { OVERLAY_COLOR } = CONST.P_BAR;
+const { HIGHSCORE, SCORE, TIME, CUBE_HEIGHT, START_Y, GAME_WIDTH, GAME_HEIGHT, OVERLAY_COLOR } = CONST;
 const { FAMILY, SIZE_XL, SIZE_M, FC_WHITE } = CONST.FONT_PROPS;
 
 export default class MainScene extends Phaser.Scene {

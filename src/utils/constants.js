@@ -2,6 +2,7 @@ const CONST = {
   GAME_WIDTH: 990,
   GAME_HEIGHT: 1100,
   GAME_BACKGROUND: 0xffffff,
+  OVERLAY_COLOR: 0x000000,
   START_X: 75 ,
   START_Y: 203,
   CUBE_WIDTH: 140,
@@ -32,12 +33,6 @@ const CONST = {
     NEW_SCORE: 'Ваш новый результат(очков):',
     BEST_SCORE: 'Ваш лучший результат(очков):',
     AGAIN: 'Попробуем еще раз?!',
-  },
-  P_BAR: {
-    BAR_COLOR: 0xF3B411,
-    OVERLAY_COLOR: 0x000000,
-    BAR_WIDTH: 410,
-    BAR_HEIGHT: 25,
   },
 };
 
