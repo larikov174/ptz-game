@@ -1,9 +1,11 @@
 import Phaser from 'phaser';
 import LabelCreator from '../ui/LabelCreator';
-import FONT_PROPS from '../ui/FontProps';
 import CONST from '../utils/constants';
 
 const { GAME_WIDTH, GAME_HEIGHT, CUBE_HEIGHT, CUBE_WIDTH, FRAMES } = CONST;
+const { FAMILY, FC_PURPLE, SIZE_L, SIZE_S } = CONST.FONT_PROPS;
+const { AGAIN, CHEERUP, NEW_RECORD, NEW_SCORE, BEST_SCORE } = CONST.TEXT;
+
 
 export default class GameOver extends Phaser.Scene {
   constructor() {
@@ -15,8 +17,7 @@ export default class GameOver extends Phaser.Scene {
   }
 
   createLabel(x, y, value, size) {
-    const { FAMILY, FILL } = FONT_PROPS;
-    const style = { fontSize: `${size}px`, fill: FILL, fontFamily: FAMILY };
+    const style = { fontSize: `${size}px`, fill: FC_PURPLE, fontFamily: FAMILY };
     const label = new LabelCreator(this, x, y, value, style);
     this.add.existing(label);
     label.depth = 3;
@@ -36,8 +37,6 @@ export default class GameOver extends Phaser.Scene {
 
   create() {
     this.createCubefall();
-    const { AGAIN, CHEERUP, NEW_RECORD, NEW_SCORE, BEST_SCORE } = CONST.TEXT;
-    const { SIZE_L, SIZE_S } = FONT_PROPS;
     const screenCenter = this.add.zone(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT);
     const highscore = localStorage.highscore ? localStorage.highscore : 0;
     const content = () => {
