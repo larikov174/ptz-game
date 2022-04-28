@@ -34,7 +34,7 @@ export default class Preloader extends Phaser.Scene {
     const text = this.createLabel(0, 0, BEGIN_TEXT);
     const image = this.add.image(0, 0, 'sprites_3', 'FRONT_COVER').setScale(0.5);
 
-    Phaser.Display.Align.In.QuickSet(image, screenCenter, 6, 0, 0);
+    Phaser.Display.Align.In.QuickSet(image, screenCenter, 6, -2, 0);
     Phaser.Display.Align.In.QuickSet(text, screenCenter, 6, 0, 250);
 
     this.input.once('pointerdown', () => {
