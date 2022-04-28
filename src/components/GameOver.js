@@ -29,7 +29,7 @@ export default class GameOver extends Phaser.Scene {
       const color = Phaser.Math.Between(0, FRAMES.length - 1);
       const sx = Phaser.Math.Between(CUBE_WIDTH, GAME_WIDTH);
       const sy = Phaser.Math.Between(0, GAME_HEIGHT);
-      let block = this.add.sprite(sx, sy, 'sprites_2', CONST.FRAMES[color]).setScale(0.5).setAlpha(0.7);
+      let block = this.add.sprite(sx, sy, 'sprites_2', CONST.FRAMES[color]).setScale(0.3).setAlpha(0.7);
       this.arr[i] = block;
     }
   }
@@ -39,16 +39,17 @@ export default class GameOver extends Phaser.Scene {
     const { AGAIN, CHEERUP, NEW_RECORD, NEW_SCORE, BEST_SCORE } = CONST.TEXT;
     const { SIZE_L, SIZE_S } = FONT_PROPS;
     const screenCenter = this.add.zone(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT);
+    const highscore = localStorage.highscore ? localStorage.highscore : 0;
     const content = () => {
       if (this.registry.get('new'))
         return {
           text1: NEW_RECORD,
-          text2: `${NEW_SCORE} ${localStorage.highscore}`,
+          text2: `${NEW_SCORE} ${highscore}`,
         };
       else
         return {
           text1: CHEERUP,
-          text2: `${BEST_SCORE} ${localStorage.highscore}`,
+          text2: `${BEST_SCORE} ${highscore}`,
         };
     };
 
