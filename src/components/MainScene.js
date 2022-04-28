@@ -117,6 +117,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   onModalOpen() {
+    this.sfx.emitt(300, 300)
     this.timedEvent.paused = true;
     this.tweens.add({
       targets: this.overlay,
@@ -167,11 +168,6 @@ export default class MainScene extends Phaser.Scene {
       localStorage.setItem('highscore', score);
     }
     this.camera.shake(1000, 0.04, false, this.cameraFadeOut);
-  }
-
-  onGameWin() {
-    this.sfx.emitt();
-    this.levelChange();
   }
 
   updateData(parent, key, data) {
