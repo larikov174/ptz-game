@@ -4,8 +4,22 @@ import SFX from '../ui/SFX';
 import LabelCreator from '../ui/LabelCreator';
 import CONST from '../utils/constants';
 
-const { HIGHSCORE, SCORE, TIME, CUBE_HEIGHT, START_Y, GAME_WIDTH, GAME_HEIGHT, OVERLAY_COLOR } = CONST;
-const { FAMILY, SIZE_XL, SIZE_M, FC_WHITE } = CONST.FONT_PROPS;
+const {
+  HIGHSCORE,
+  SCORE,
+  TIME,
+  CUBE_HEIGHT,
+  START_Y,
+  GAME_WIDTH,
+  GAME_HEIGHT,
+  OVERLAY_COLOR
+} = CONST;
+const {
+  FAMILY,
+  SIZE_XL,
+  SIZE_M,
+  FC_WHITE
+} = CONST.FONT_PROPS;
 
 export default class MainScene extends Phaser.Scene {
   constructor() {
@@ -25,6 +39,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   create() {
+
     this.logic = new GameLogic(this.grid, this.connected, this.possibleMoves, this.clickHandler, this);
     this.sfx = new SFX(this.add.particles('sprites_2'));
 
@@ -42,19 +57,19 @@ export default class MainScene extends Phaser.Scene {
 
     this.timedEvent = this.time.addEvent({
       delay: 1000,
-      callback: onTimeEvent,
+      callback: this.onTimeEvent,
       callbackScope: this,
       loop: true,
     });
 
-    function onTimeEvent() {
-      this.timerLabel.reduce(1);
-      this.registry.set('time', this.timerLabel.get())
-    }
   }
 
   createLabel(x, y, value, size) {
-    const style = { fontSize: `${size}px`, fill: FC_WHITE, fontFamily: FAMILY };
+    const style = {
+      fontSize: `${size}px`,
+      fill: FC_WHITE,
+      fontFamily: FAMILY
+    };
     const label = new LabelCreator(this, x, y, value, style);
     this.add.existing(label);
     label.depth = 1;
@@ -89,6 +104,14 @@ export default class MainScene extends Phaser.Scene {
     Phaser.Display.Align.In.QuickSet(this.modal, field, 6, 0, 0);
   }
 
+  onTimeEvent() {
+    const container = document.querySelector('.container')
+    if (!container.classList.contains('idle')) {
+      this.timerLabel.reduce(1);
+      this.registry.set('time', this.timerLabel.get())
+    }
+  }
+
   clickHandler(block) {
     const chosenColor = block.gridData.color;
     this.logic.getPossibleMoves();
@@ -100,7 +123,11 @@ export default class MainScene extends Phaser.Scene {
         deleted++;
         this.tweens.timeline({
           targets: cube.sprite,
-          tweens: [{ alpha: 1 }, { y: START_Y - CUBE_HEIGHT }],
+          tweens: [{
+            alpha: 1
+          }, {
+            y: START_Y - CUBE_HEIGHT
+          }],
           duration: 0,
           callbackScope: this,
           onComplete: () => {
@@ -153,7 +180,17 @@ export default class MainScene extends Phaser.Scene {
   }
 
   gameOver(cam = null, progress = 0) {
-    if (progress === 1) this.scene.start('GameOver');
+    if (progress === 1) {
+      this.scene.start('Preloader');
+
+      const mainBlock = document.querySelector('.main__block');
+      const container = document.querySelector('.container');
+      const footer = document.querySelector('.footer');
+
+      container.classList.add('idle')
+      mainBlock.classList.remove('idle')
+      footer.classList.remove('idle')
+    }
   }
 
   cameraFadeOut(cam = null, progress = 0) {
