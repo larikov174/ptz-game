@@ -1,7 +1,29 @@
+@keyframes myScale {
+  0% {
+    background-size: 100%;
+  }
+
+  50% {
+    background-size: 115%;
+    background-position: left;
+  }
+
+  100% {
+    background-size: 100%;
+    background-position: center;
+
+  }
+}
+
+html {
+  height: 100%;
+}
+
 body {
   max-width: 1200px;
   max-height: 789px;
   width: 95vw;
+  height: 100%;
   margin: 0 auto;
   background-color: #fff;
   display: flex;
@@ -10,17 +32,46 @@ body {
 }
 
 .idle {
-display: none !important;
+  display: none !important;
 }
 
 .main__block {
-outline: 1px solid red;
-display: flex;
-align-items: center;
-justify-content: center;
-width: 100%;
-height: 100%;
-margin: 0 auto;
+  outline: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  background-image: url("./assets/bg_image.JPG");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  animation: myScale 25s infinite;
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: #000;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.button {
+  z-index: 1;
+}
+
+.info {
+  width: 100%;
+  height: 100px;
+  background-color: #fff;
+  margin: 100px 0;
+  z-index: 1;
 }
 
 .page__title {
@@ -156,7 +207,6 @@ margin: 0 auto;
     flex-direction: column;
     align-items: center;
   }
-
 
   .footer__logo_fpk {
     height: 25px;
