@@ -1,0 +1,6 @@
+.main__title {
+  font: normal 600 130px/100px Arial, serif;
+  color: #fff;
+  z-index: 1;
+  text-transform: uppercase;
+}

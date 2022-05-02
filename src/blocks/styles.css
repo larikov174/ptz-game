@@ -1,5 +1,11 @@
+@import './vendor/normolize.css';
+
 @import './header/header.css';
 @import './header/__title/header__title.css';
 @import './header/__button/header__button.css';
 
-@import './wrapper/wrapper.css';
+@import './main/main.css';
+@import './main/__overlay/main__overlay.css';
+@import './main/__title/main__title.css';
+@import './main/__link/main__link.css';
+@import './main/__info/main__info.css';
