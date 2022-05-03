@@ -11,3 +11,15 @@
     'logo phone email'
     'credits credits credits';
 }
+
+@media screen and (max-width: 845px) {
+  .footer {
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'logo'
+      'phone'
+      'email'
+      'credits';
+  }
+}
