@@ -1,0 +1,4 @@
+.footer__email {
+  grid-area: email;
+  place-content: center;
+}

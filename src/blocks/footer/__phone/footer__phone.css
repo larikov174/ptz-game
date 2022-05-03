@@ -1,0 +1,4 @@
+.footer__phone {
+  grid-area: phone;
+  place-content: center;
+}

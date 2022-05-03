@@ -1,0 +1,4 @@
+.footer__credits {
+  grid-area: credits;
+  place-content: center;
+}

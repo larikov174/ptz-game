@@ -1,0 +1,8 @@
+.footer__icon_phone {
+  background-image: url(../../../assets/icon-phone.png);
+  width: 30px;
+  height: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

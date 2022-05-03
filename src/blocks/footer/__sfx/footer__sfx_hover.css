@@ -1,0 +1,4 @@
+.footer__sfx_hover:hover {
+  opacity: 0.7;
+  transition: opacity 0.15s ease-in;
+}

@@ -9,3 +9,19 @@
 @import './main/__title/main__title.css';
 @import './main/__link/main__link.css';
 @import './main/__info/main__info.css';
+
+@import './footer/footer.css';
+@import './footer/__cell/footer__cell.css';
+@import './footer/__logo/footer__logo.css';
+@import './footer/__logo/footer__logo_chetra.css';
+@import './footer/__logo/footer__logo_fpk.css';
+@import './footer/__phone/footer__phone.css';
+@import './footer/__email/footer__email.css';
+@import './footer/__devider/footer__devider.css';
+@import './footer/__credits/footer__credits.css';
+@import './footer/__icon/footer__icon_phone.css';
+@import './footer/__text/footer__text.css';
+@import './footer/__text/footer__text_color.css';
+@import './footer/__text/footer__text_small.css';
+@import './footer/__link/footer__link.css';
+@import './footer/__sfx/footer__sfx_hover.css';

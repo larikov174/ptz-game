@@ -1,0 +1,4 @@
+.footer__logo {
+  grid-area: logo;
+  place-content: center;
+}
