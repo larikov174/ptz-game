@@ -7,7 +7,7 @@
       name="description"
       content="Официальный дилер ООО ФПК, продажа бульдозеров ЧЕТРА и мини погрузчиков ЧЕТРА МКСМ на Дальнем Востоке. Продажа запасных частей бренда ЧЕТРА. Интерактивная игра, кубики по цвету."
     />
-    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="telephone=no" />
     <link rel="icon" type="image/png" href="./assets/fav.ico" />
     <title>ЧЕТРА - ФПК</title>
   </head>
@@ -27,54 +27,98 @@
       <a class="main__link" href="#mainInfo">узнать подробнее</a>
     </section>
 
-    <article class="main__info" id="mainInfo">
-      <h3 class="main__article-title">Some info</h3>
-      <p class="main__text">Some text to show in the article</p>
-      <button class="button">Press to Start</button>
-    </article>
-
-    <footer class="footer">
-      <div class="footer__logo footer__cell">
-        <a href="https://www.chetra.ru/" target="_blank">
-          <img
-            src="./assets/chetra-logo.png"
-            class="footer__logo_chetra footer__sfx_hover"
-            alt="логотип ЧЕТРА"
-            title="Производитель техники. Бульдозеры, погрузчики. Сделано в России!"
-          />
-        </a>
-        <div class="footer__devider"></div>
-        <a href="https://www.fpktech.ru/" target="_blank">
-          <img
-            src="./assets/fpk-logo.png"
-            class="footer__logo_fpk footer__sfx_hover"
-            alt="логотип ФПК"
-            title="Продажа спецтехники, бульдозеры, фронтальные погрузчики, минипогрузчики."
-          />
-        </a>
-      </div>
-      <div class="footer__phone footer__cell">
-        <div class="footer__icon_phone" role="img" title="Номер телефона ООО ФПК"></div>
-        <p class="footer__text">8(351)264-22-44</p>
-      </div>
-      <div class="footer__email footer__cell">
-        <p class="footer__text footer__text_color">E-mail:</p>
-        <a
-          class="footer__text footer__link footer__sfx_hover"
-          type="email"
-          href="mailto:fpk@fpktech.ru?subject=Вопрос по технике ЧЕТРА"
-          >&nbsp;fpk@fpktech.ru</a
-        >
-      </div>
-      <div class="footer__credits footer__cell">
-        <p class="footer__text footer__text_small footer__text_color">&copy; 2022. Андрей Лариков.&nbsp;</p>
-        <a class="footer__text footer__text_small footer__link  footer__sfx_hover" href="https://github.com/larikov174" target="_blank"
-          >Профиль разработчика на Github.com</a
-        >
-      </div>
-    </footer>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <section class="info" id="mainInfo">
+      <h3 class="info__title info__slide_left" id="aboutPrize">
+        Получите возможность выиграть главный приз -
+        <span class="info__text_color">Гриль (угольный) для барбекю!</span>
+      </h3>
+      <p class="info__text info__slide_right">
+        Для этого Вам необходимо набрать максимальное количество очков в нашей игре и приз Ваш!
+      </p>
+      <h3 class="info__title info__slide_left" id="terms">Условия проведения акции:</h3>
+      <ul class="info__text info__slide_right">
+        <li>Сроки проведения: <span class="info__text_color">с 15.05.2022г по 15.06.2022г</span></li>
+        <li>
+          В период проведения акции, необходимо набрать
+          <span class="info__text_color">наибольшее количество очков</span> среди всех участников.
+        </li>
+        <li>
+          Так же от участника требуется указать его актуальный адрес электронной почты, чтобы мы смогли связаться с ним.
+        </li>
+        <li>
+          Итоги будут подведены в течение 5 рабочих дней с момента окончания
+          сроков проведения акции.
+        </li>
+        <li>
+          Отправка приза победителю (в пределах Российской Федерации) будет осуществлена за счет ООО "ФПК"!
+        </li>
+      </ul>
+      <h3 class="info__title info__slide_left" id="gameRules">Правила игры:</h3>
+      <ul class="info__text info__slide_right">
+        <li>
+          <span class="info__text_color">Цель игры - </span>набрать наибольшее количество очков
+          <span class="info__text_color">за 30 секунд</span>
+        </li>
+        <li>Необходимо искать цепочки <span class="info__text_color">одинаковых</span> кубиков (от 2-х и более)</li>
+        <li>
+          При сгорании кубиков игроку начисляются очки по схеме:
+          <ul>
+            <li>2 кубика = 2 очка,</li>
+            <li>3 кубика = 5 очков,</li>
+            <li>4 кубика = 8 очков,</li>
+            <li>5 кубиков и более = х3 очков.</li>
+          </ul>
+        </li>
+      </ul>
+      <h3 class="info__title info__slide_left">Играйте и выигрывайте вместе с нами, <span class="info__text_color">ООО "ФПК"</span> надежный партнер!</h3>
+      <button class="info__button info__slide_right">Начать игру!</button>
+    </section>
   </body>
+  <footer class="footer">
+    <div class="footer__logo footer__cell">
+      <a href="https://www.chetra.ru/" target="_blank">
+        <img
+          src="./assets/chetra-logo.png"
+          class="footer__logo_chetra footer__sfx_hover"
+          alt="логотип ЧЕТРА"
+          title="Производитель техники. Бульдозеры, погрузчики. Сделано в России!"
+        />
+      </a>
+      <div class="footer__devider"></div>
+      <a href="https://www.fpktech.ru/" target="_blank">
+        <img
+          src="./assets/fpk-logo.png"
+          class="footer__logo_fpk footer__sfx_hover"
+          alt="логотип ФПК"
+          title="Продажа спецтехники, бульдозеры, фронтальные погрузчики, минипогрузчики."
+        />
+      </a>
+    </div>
+    <div class="footer__phone footer__cell">
+      <div class="footer__icon_phone" role="img" title="Номер телефона ООО ФПК"></div>
+      <p class="footer__text">8(351)264-22-44</p>
+    </div>
+    <div class="footer__email footer__cell">
+      <p class="footer__text footer__text_color">E-mail:</p>
+      <a
+        class="footer__text footer__link footer__sfx_hover"
+        type="email"
+        href="mailto:fpk@fpktech.ru?subject=Вопрос по технике ЧЕТРА"
+        >&nbsp;fpk@fpktech.ru</a
+      >
+    </div>
+    <div class="footer__credits footer__cell">
+      <p class="footer__text footer__text_small footer__text_color">&copy; 2022. Андрей Лариков.&nbsp;</p>
+      <a
+        class="footer__text footer__text_small footer__link footer__sfx_hover"
+        href="https://github.com/larikov174"
+        target="_blank"
+        >Профиль разработчика на Github.com</a
+      >
+    </div>
+  </footer>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+
   <div
     class="container idle"
     id="phaser-game"

@@ -1,0 +1,35 @@
+.info__button {
+  font: normal 400 32px/32px Calibri, Arial, serif;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #4b2942;
+  border-radius: 10px;
+  width: auto;
+  height: 50px;
+  box-sizing: border-box;
+  padding: 0 10px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.5);
+}
+
+.info__button:hover {
+  opacity: 0.7;
+  transition: opacity 0.15s ease-in;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 630px) {
+  .info__button {
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .info__button {
+    font-size: 18px;
+  }
+}

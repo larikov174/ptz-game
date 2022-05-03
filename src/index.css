@@ -12,17 +12,16 @@ body {
   background-color: #fff;
 }
 
+
+ul, li {
+  margin: 20px 0;
+}
+
 .idle {
   display: none !important;
 }
 
-.info {
-  width: 100%;
-  height: 100px;
-  background-color: #fff;
-  margin: 100px 0;
-  z-index: 1;
-}
+
 
 .container {
   max-width: 100%;
@@ -30,72 +29,3 @@ body {
   display: flex;
   justify-content: center;
 }
-
-/* @media screen and (max-width: 888px) {
-  .footer__row {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .footer__cell {
-    margin-top: 10px;
-  }
-
-  .footer__credits {
-    margin-top: 10px;
-  }
-
-  .footer {
-    height: 270px;
-  }
-}
-
-@media screen and (max-width: 650px) {
-  .footer {
-    max-height: 770px;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .footer__credits {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .footer__logo_fpk {
-    height: 25px;
-  }
-
-  .footer__logo_chetra {
-    height: 25px;
-    margin: 0px;
-  }
-}
-
-@media screen and (max-width: 468px) {
-  .footer__text_credits {
-    text-align: center;
-  }
-
-  .footer__link_credits {
-    text-align: center;
-  }
-}
-
-@media screen and (max-width: 360px) {
-  .footer__text_email {
-    font-size: 24px;
-  }
-
-  .footer__link_email {
-    font-size: 24px;
-  }
-
-  .footer__text_phone {
-    font-size: 24px;
-  }
-
-  .footer__link_credits {
-    font-size: 14px;
-  }
-} */

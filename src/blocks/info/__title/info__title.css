@@ -1,0 +1,10 @@
+.info__title {
+  font: normal 400 32px/32px Calibri, Arial, serif;
+  margin: 50px 0;
+}
+
+@media screen and (max-width: 500px) {
+  .info__text {
+    font-size: 24px;
+  }
+}

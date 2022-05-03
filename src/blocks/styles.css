@@ -10,6 +10,12 @@
 @import './main/__link/main__link.css';
 @import './main/__info/main__info.css';
 
+@import './info/info.css';
+@import './info/__title/info__title.css';
+@import './info/__text/info__text.css';
+@import './info/__text/info__text_color.css';
+@import './info/__button/info__button.css';
+
 @import './footer/footer.css';
 @import './footer/__cell/footer__cell.css';
 @import './footer/__logo/footer__logo.css';
