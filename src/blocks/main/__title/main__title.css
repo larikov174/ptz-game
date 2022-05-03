@@ -6,4 +6,5 @@
   user-select: none;
   grid-area: title;
   margin: 0;
+  text-shadow: 5px 5px 12px rgba(0, 0, 0, 0.5);
 }
