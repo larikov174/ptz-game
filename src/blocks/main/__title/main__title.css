@@ -1,5 +1,5 @@
 .main__title {
-  font: normal 600 130px/130px Arial, serif;
+  font: normal 600 130px/130px Calibri, Arial, serif;
   color: #fff;
   z-index: 1;
   text-transform: uppercase;
@@ -7,4 +7,16 @@
   grid-area: title;
   margin: 0;
   text-shadow: 5px 5px 12px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 630px) {
+  .main__title {
+    font-size: 100px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .main__title {
+    font-size: 65px;
+  }
 }

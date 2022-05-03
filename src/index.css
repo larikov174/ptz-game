@@ -6,13 +6,10 @@ html {
 
 body {
   max-width: 1200px;
-  width: 100vw;
-  height: 100%;
+  width: 100%;
+  height: 100vh;
   margin: 0 auto;
   background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .idle {
@@ -34,7 +31,7 @@ body {
   justify-content: center;
 }
 
-@media screen and (max-width: 888px) {
+/* @media screen and (max-width: 888px) {
   .footer__row {
     flex-direction: column;
     align-items: center;
@@ -101,4 +98,4 @@ body {
   .footer__link_credits {
     font-size: 14px;
   }
-}
+} */

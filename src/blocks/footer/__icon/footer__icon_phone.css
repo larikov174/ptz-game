@@ -5,4 +5,12 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 500px) {
+  .footer__icon_phone {
+    width: 24px;
+    height: 24px;
+  }
 }

@@ -1,11 +1,11 @@
 .footer {
   max-width: 1200px;
-  height: 150px;
+  max-height: 240px;
   width: 100%;
   box-sizing: border-box;
   background-color: #4b2942;
   display: grid;
-  grid-template-rows: 2fr 1fr;
+  grid-template-rows: 4fr 1fr;
   grid-template-columns: repeat(3, 1fr);
   grid-template-areas:
     'logo phone email'
@@ -14,7 +14,7 @@
 
 @media screen and (max-width: 845px) {
   .footer {
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: 6fr 3fr 3fr 1fr;
     grid-template-columns: 1fr;
     grid-template-areas:
       'logo'

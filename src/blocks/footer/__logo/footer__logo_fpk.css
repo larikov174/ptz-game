@@ -2,3 +2,9 @@
   height: 40px;
   background-color: white;
 }
+
+@media screen and (max-width: 500px) {
+  .footer__logo_fpk {
+    height: 30px;
+  }
+}

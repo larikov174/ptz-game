@@ -1,5 +1,11 @@
 .footer__text {
   font: normal 400 24px/24px Calibri, serif;
   color: white;
-  margin: 0 10px;
+  margin: 0;
+}
+
+@media screen and (max-width: 500px) {
+  .footer__text {
+    font-size: 20px;
+  }
 }

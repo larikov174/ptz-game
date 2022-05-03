@@ -1,3 +1,9 @@
 .footer__text_small {
   font-size: 16px;
 }
+
+@media screen and (max-width: 500px) {
+  .footer__text_small {
+    font-size: 12px;
+  }
+}

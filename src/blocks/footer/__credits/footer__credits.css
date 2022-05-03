@@ -2,3 +2,10 @@
   grid-area: credits;
   place-content: center;
 }
+
+@media screen and (max-width: 500px) {
+  .footer__credits {
+    display: flex;
+    flex-direction: column;
+  }
+}
