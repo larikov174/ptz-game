@@ -15,6 +15,7 @@
 @import './info/__text/info__text.css';
 @import './info/__text/info__text_color.css';
 @import './info/__button/info__button.css';
+@import './info/__button/info__button_wrapper.css';
 
 @import './footer/footer.css';
 @import './footer/__cell/footer__cell.css';

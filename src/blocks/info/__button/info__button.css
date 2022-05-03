@@ -5,7 +5,7 @@
   color: #fff;
   background-color: #4b2942;
   border-radius: 10px;
-  width: auto;
+  width: fit-content;
   height: 50px;
   box-sizing: border-box;
   padding: 0 10px;
@@ -25,11 +25,5 @@
 @media screen and (max-width: 630px) {
   .info__button {
     font-size: 24px;
-  }
-}
-
-@media screen and (max-width: 430px) {
-  .info__button {
-    font-size: 18px;
   }
 }
