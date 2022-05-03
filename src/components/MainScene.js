@@ -183,7 +183,7 @@ export default class MainScene extends Phaser.Scene {
     if (progress === 1) {
       this.scene.start('Preloader');
 
-      const mainBlock = document.querySelector('.main__block');
+      const mainBlock = document.querySelector('.info');
       const container = document.querySelector('.container');
       const footer = document.querySelector('.footer');
 

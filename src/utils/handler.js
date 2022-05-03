@@ -1,5 +1,5 @@
-const button = document.querySelector('.button');
-const mainBlock = document.querySelector('.main__block');
+const button = document.querySelector('.info__button');
+const mainBlock = document.querySelector('.info');
 const container = document.querySelector('.container');
 const footer = document.querySelector('.footer');
 
