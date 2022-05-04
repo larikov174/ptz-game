@@ -13,6 +13,7 @@
 @import './main/main.css';
 @import './main/__intro/main__intro.css';
 @import './main/__title/main__title.css';
+@import './main/__text/main__text.css';
 @import './main/__link/main__link.css';
 @import './main/__info/main__info.css';
 @import './main/__results/main__results.css';
@@ -44,6 +45,7 @@
 @import './footer/__link/footer__link.css';
 @import './footer/__sfx/footer__sfx_hover.css';
 
+@import './form/form.css';
 @import './form/__input/form__input.css';
 @import './form/__button/form__button_submit.css';
 @import './form/__button/form__button_restart.css';

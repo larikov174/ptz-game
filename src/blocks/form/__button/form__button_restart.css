@@ -16,3 +16,10 @@
   transition: opacity 0.15s ease-in;
   cursor: pointer;
 }
+
+@media screen and (max-width: 630px) {
+  .form__button_restart {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+}

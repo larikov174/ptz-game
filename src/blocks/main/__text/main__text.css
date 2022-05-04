@@ -1,0 +1,10 @@
+.main__text {
+  margin: 30px 0;
+}
+
+@media screen and (max-width: 630px) {
+  .main__text {
+    margin: 10px 0;
+    font-size: 20px;
+  }
+}

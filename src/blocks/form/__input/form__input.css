@@ -8,3 +8,11 @@
 .form__input::placeholder {
   color: #db9905;
 }
+
+@media screen and (max-width: 630px) {
+  .form__input {
+    /* margin-top: 20px; */
+    height: 20px;
+    font-size: 20px;
+  }
+}
