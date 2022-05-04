@@ -16,3 +16,10 @@
   transition: opacity 0.15s ease-in;
   cursor: pointer;
 }
+
+@media screen and (max-width: 500px) {
+  .header__button {
+    width: 35px;
+    height: 35px;
+  }
+}

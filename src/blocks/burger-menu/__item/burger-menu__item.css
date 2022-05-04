@@ -8,3 +8,9 @@
   text-decoration: underline;
   transition: text-decoration 0.15s ease-in;
 }
+
+@media screen and (max-width: 500px) {
+  .burger-menu__item {
+    font-size: 20px;
+  }
+}
