@@ -5,7 +5,6 @@ const footer = document.querySelector('.footer');
 const burgerButton = document.querySelector('.header__button');
 const burgerMenu = document.querySelector('.burger-menu');
 
-
 window.location.replace('#');
 
 if (typeof window.history.replaceState == 'function') {
