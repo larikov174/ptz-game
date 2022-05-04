@@ -32,8 +32,28 @@
 
   <section class="main">
     <div class="main__overlay"></div>
-    <h2 class="main__title">конкурс</h2>
-    <a class="main__link" href="#mainInfo">узнать подробнее</a>
+    <article class="main__intro">
+      <h2 class="main__title">конкурс</h2>
+      <a class="main__link" href="#mainInfo">узнать подробнее</a>
+    </article>
+    <article class="main__results">
+      <div class="main__score">
+        <p class="main__text">Вы набрали(очков):&nbsp;</p>
+        <p class="main__text" id="resultToShow">0</p>
+      </div>
+      <p class="main__text">Для получения возможности <span class="info__text_color">выиграть приз</span>, необходимо
+        сохранить Ваш результат!</p>
+      <p class="main__text">Введие адрес Вашей <span class="info__text_color">электронной почты</span> и нажмите
+        отправить*</p>
+      <form method="post" action="submit" class="form" name="form" id="form">
+        <label for="email">E-mail:</label>
+        <input type="email" name="email" id="userEmail" class="form__input" placeholder="Введите email..."
+          pattern="^[a-z0-9+_.-]+@[a-z0-9.-]+\.[a-z]+$" required />
+        <button type="submit" class="form__button_submit">Отправить</button>
+      </form>
+      <button type="button" class="form__button_restart">Играть снова</button>
+      <p class="main__text">*количество попыток не ограничено.</p>
+    </article>
   </section>
 
   <section class="info" id="mainInfo">
@@ -53,6 +73,12 @@
       </li>
       <li>
         Так же от участника требуется указать его актуальный адрес электронной почты, чтобы мы смогли связаться с ним.
+      </li>
+      <li>
+        Количество попыток не ограничено, просто не забывайте сохранять своей результат.
+      </li>
+      <li>
+        Связь с победителем будет осуществлятся исключительно по адресу электронной почты, по этому проверьте доступ к Вашей почте.
       </li>
       <li>Итоги будут подведены в течение 5 рабочих дней с момента окончания сроков проведения акции.</li>
       <li>Отправка приза победителю (в пределах Российской Федерации) будет осуществлена за счет ООО "ФПК"!</li>
@@ -81,6 +107,7 @@
       <button class="info__button info__slide_right">Начать игру!</button>
     </div>
   </section>
+
 </body>
 <footer class="footer" id="contacts">
   <div class="footer__logo footer__cell">
@@ -109,9 +136,10 @@
       target="_blank">Профиль разработчика на Github.com</a>
   </div>
 </footer>
+
 <noscript>You need to enable JavaScript to run this app.</noscript>
 
-<section class="game idle" id="phaser-game"
-  title="Интерактивная игра, поиск одинаковых кубиков. Техника ЧЕТРА. Официальный дилер ООО ФПК."></section>
+<template class="game idle" id="phaser-game"
+  title="Интерактивная игра, поиск одинаковых кубиков. Техника ЧЕТРА. Официальный дилер ООО ФПК."></template>
 
 </html>

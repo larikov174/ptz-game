@@ -1,0 +1,9 @@
+.main__results {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  z-index: 1;
+  font: normal 400 32px/32px Calibri, Arial, serif;
+  max-width: 600px;
+  margin: 0 10px;
+}

@@ -1,0 +1,18 @@
+.form__button_restart {
+  border: 3px solid #fff;
+  color: #fff;
+  background-color: transparent;
+  border-radius: 10px;
+  box-shadow: 5px 5px 12px rgb(0 0 0 / 50%);
+  box-sizing: border-box;
+  text-shadow: 5px 5px 12px rgb(0 0 0 / 50%);
+  text-transform: uppercase;
+  width: auto;
+  margin-top: 50px;
+}
+
+.form__button_restart:hover {
+  opacity: 0.7;
+  transition: opacity 0.15s ease-in;
+  cursor: pointer;
+}
