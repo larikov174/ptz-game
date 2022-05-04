@@ -4,22 +4,8 @@ import SFX from '../ui/SFX';
 import LabelCreator from '../ui/LabelCreator';
 import CONST from '../utils/constants';
 
-const {
-  HIGHSCORE,
-  SCORE,
-  TIME,
-  CUBE_HEIGHT,
-  START_Y,
-  GAME_WIDTH,
-  GAME_HEIGHT,
-  OVERLAY_COLOR
-} = CONST;
-const {
-  FAMILY,
-  SIZE_XL,
-  SIZE_M,
-  FC_WHITE
-} = CONST.FONT_PROPS;
+const { HIGHSCORE, SCORE, TIME, CUBE_HEIGHT, START_Y, GAME_WIDTH, GAME_HEIGHT, OVERLAY_COLOR } = CONST;
+const { FAMILY, SIZE_XL, SIZE_M, FC_WHITE } = CONST.FONT_PROPS;
 
 export default class MainScene extends Phaser.Scene {
   constructor() {
@@ -39,7 +25,6 @@ export default class MainScene extends Phaser.Scene {
   }
 
   create() {
-
     this.logic = new GameLogic(this.grid, this.connected, this.possibleMoves, this.clickHandler, this);
     this.sfx = new SFX(this.add.particles('sprites_2'));
 
@@ -51,9 +36,7 @@ export default class MainScene extends Phaser.Scene {
     this.registry.events.on('changedata', this.updateData, this);
 
     this.input.on('gameobjectdown', (pointer, gameObject) => gameObject.emit('clicked', gameObject), this);
-    this.openModal.on('pointerdown', this.onModalOpen, this);
-    this.overlay.on('pointerdown', this.onModalClose, this);
-    this.input.keyboard.on('keydown-ESC', this.onModalClose, this);
+    this.backHome.on('pointerdown', this.goBackHome, this);
 
     this.timedEvent = this.time.addEvent({
       delay: 1000,
@@ -61,14 +44,13 @@ export default class MainScene extends Phaser.Scene {
       callbackScope: this,
       loop: true,
     });
-
   }
 
   createLabel(x, y, value, size) {
     const style = {
       fontSize: `${size}px`,
       fill: FC_WHITE,
-      fontFamily: FAMILY
+      fontFamily: FAMILY,
     };
     const label = new LabelCreator(this, x, y, value, style);
     this.add.existing(label);
@@ -77,38 +59,27 @@ export default class MainScene extends Phaser.Scene {
   }
 
   createUI() {
-    const screenCenter = this.add.zone(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT);
-
     const field = this.add.image(0, 0, 'sprites_1', 'FIELD').setScale(0.5);
     const header = this.add.image(0, 0, 'sprites_3', 'HEADER').setScale(0.5);
-    this.openModal = this.add.image(0, 0, 'sprites_2', 'BUTTON_RULES').setScale(0.5).setInteractive();
-    this.modal = this.add.image(0, 0, 'sprites_2', 'MODAL').setScale(0.5);
+    this.backHome = this.add.image(0, 0, 'sprites_2', 'BUTTON_RULES').setScale(0.5).setInteractive();
 
-    this.overlay = this.add.rectangle(0, 0, GAME_WIDTH, GAME_HEIGHT, OVERLAY_COLOR).setInteractive();
     this.scoreLabel = this.createLabel(0, 17, SCORE, SIZE_M);
     this.timerLabel = this.createLabel(0, 10, TIME, SIZE_XL);
     this.highscoreLabel = this.createLabel(0, 60, this.highscore, SIZE_M);
-
-    this.overlay.depth = 2;
-    this.overlay.alpha = 0;
-    this.modal.depth = 3;
-    this.modal.alpha = 0;
 
     Phaser.Display.Bounds.CenterOn(header, GAME_WIDTH / 2, 50);
     Phaser.Display.Align.In.QuickSet(field, header, 1, 0, 300);
     Phaser.Display.Bounds.SetLeft(this.highscoreLabel, 880);
     Phaser.Display.Bounds.SetLeft(this.scoreLabel, 880);
     Phaser.Display.Bounds.SetLeft(this.timerLabel, 452);
-    Phaser.Display.Align.In.QuickSet(this.overlay, screenCenter, 6, 0, 0);
-    Phaser.Display.Align.In.QuickSet(this.openModal, header, 6, -400, 10);
-    Phaser.Display.Align.In.QuickSet(this.modal, field, 6, 0, 0);
+    Phaser.Display.Align.In.QuickSet(this.backHome, header, 6, -400, 10);
   }
 
   onTimeEvent() {
-    const game = document.querySelector('.game')
+    const game = document.querySelector('.game');
     if (!game.classList.contains('idle')) {
       this.timerLabel.reduce(1);
-      this.registry.set('time', this.timerLabel.get())
+      this.registry.set('time', this.timerLabel.get());
     }
   }
 
@@ -123,11 +94,14 @@ export default class MainScene extends Phaser.Scene {
         deleted++;
         this.tweens.timeline({
           targets: cube.sprite,
-          tweens: [{
-            alpha: 1
-          }, {
-            y: START_Y - CUBE_HEIGHT
-          }],
+          tweens: [
+            {
+              alpha: 1,
+            },
+            {
+              y: START_Y - CUBE_HEIGHT,
+            },
+          ],
           duration: 0,
           callbackScope: this,
           onComplete: () => {
@@ -142,41 +116,24 @@ export default class MainScene extends Phaser.Scene {
     }
   }
 
-  onModalOpen() {
-    this.sfx.emitt(300, 300)
-    this.timedEvent.paused = true;
-    this.tweens.add({
-      targets: this.overlay,
-      alpha: 0.5,
-      ease: 'Power1',
-      duration: 250,
-      delay: 0,
-    });
-    this.tweens.add({
-      targets: this.modal,
-      alpha: 1,
-      ease: 'Power1',
-      duration: 250,
-      delay: 50,
-    });
-  }
+  goBackHome() {
+    this.scene.start('Preloader');
 
-  onModalClose() {
-    this.timedEvent.paused = false;
-    this.tweens.add({
-      targets: this.overlay,
-      alpha: 0,
-      ease: 'Power1',
-      duration: 250,
-      delay: 50,
-    });
-    this.tweens.add({
-      targets: this.modal,
-      alpha: 0,
-      ease: 'Power1',
-      duration: 250,
-      delay: 0,
-    });
+    const header = document.querySelector('.header');
+    const mainBlock = document.querySelector('.main');
+    const introSection = document.querySelector('.main__intro');
+    const resultSection = document.querySelector('.main__results');
+    const infoBlock = document.querySelector('.info');
+    const game = document.querySelector('.game');
+    const footer = document.querySelector('.footer');
+
+    game.classList.add('idle');
+    header.classList.remove('idle');
+    mainBlock.classList.remove('idle');
+    infoBlock.classList.remove('idle');
+    footer.classList.remove('idle');
+    introSection.classList.remove('idle');
+    resultSection.classList.add('idle');
   }
 
   gameOver(cam = null, progress = 0) {
@@ -192,11 +149,11 @@ export default class MainScene extends Phaser.Scene {
 
       resultBlock.innerHTML = this.scoreLabel.get();
 
-      game.classList.add('idle')
-      header.classList.remove('idle')
-      mainBlock.classList.remove('idle')
-      infoBlock.classList.remove('idle')
-      footer.classList.remove('idle')
+      game.classList.add('idle');
+      header.classList.remove('idle');
+      mainBlock.classList.remove('idle');
+      infoBlock.classList.remove('idle');
+      footer.classList.remove('idle');
     }
   }
 
