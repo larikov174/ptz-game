@@ -1,3 +1,9 @@
 .burger-menu__li {
   margin: 50px auto;
 }
+
+@media screen and (max-width: 500px) {
+  .burger-menu__li {
+    margin: 30px auto;
+  }
+}

@@ -105,8 +105,8 @@ export default class MainScene extends Phaser.Scene {
   }
 
   onTimeEvent() {
-    const container = document.querySelector('.container')
-    if (!container.classList.contains('idle')) {
+    const game = document.querySelector('.game')
+    if (!game.classList.contains('idle')) {
       this.timerLabel.reduce(1);
       this.registry.set('time', this.timerLabel.get())
     }
@@ -184,10 +184,10 @@ export default class MainScene extends Phaser.Scene {
       this.scene.start('Preloader');
 
       const mainBlock = document.querySelector('.info');
-      const container = document.querySelector('.container');
+      const game = document.querySelector('.game');
       const footer = document.querySelector('.footer');
 
-      container.classList.add('idle')
+      game.classList.add('idle')
       mainBlock.classList.remove('idle')
       footer.classList.remove('idle')
     }

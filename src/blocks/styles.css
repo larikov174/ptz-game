@@ -23,6 +23,8 @@
 @import './info/__button/info__button.css';
 @import './info/__button/info__button_wrapper.css';
 
+@import './game/game.css';
+
 @import './footer/footer.css';
 @import './footer/__cell/footer__cell.css';
 @import './footer/__logo/footer__logo.css';

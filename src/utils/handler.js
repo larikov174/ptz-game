@@ -1,6 +1,6 @@
 const startGameButton = document.querySelector('.info__button');
 const mainBlock = document.querySelector('.info');
-const gameCanvas = document.querySelector('.container');
+const gameCanvas = document.querySelector('.game');
 const footer = document.querySelector('.footer');
 const burgerButton = document.querySelector('.header__button');
 const burgerMenu = document.querySelector('.burger-menu');
