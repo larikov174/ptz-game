@@ -47,6 +47,7 @@
 
 @import './form/form.css';
 @import './form/__input/form__input.css';
+@import './form/__actions/form__actions.css';
 @import './form/__button/form__button_submit.css';
 @import './form/__button/form__button_restart.css';
 

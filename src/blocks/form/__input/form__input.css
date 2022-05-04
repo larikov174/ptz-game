@@ -1,8 +1,10 @@
 .form__input {
-  border: 3px solid #fff;
+  border: 3px solid #f0af1d;
   border-radius: 10px;
-  color: #db9905;
-  max-width: 250px;
+  color: #f0af1d;
+  width: 80%;
+  height: 35px;
+  margin-left: 10px;
 }
 
 .form__input::placeholder {
@@ -11,7 +13,6 @@
 
 @media screen and (max-width: 630px) {
   .form__input {
-    /* margin-top: 20px; */
     height: 20px;
     font-size: 20px;
   }

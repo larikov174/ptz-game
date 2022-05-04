@@ -39,20 +39,22 @@
     <article class="main__results idle">
       <div class="main__score">
         <p class="main__text">Вы набрали(очков):&nbsp;</p>
-        <p class="main__text" id="resultToShow">0</p>
+        <span class="info__text_color">
+          <p class="main__text" id="resultToShow">0</p>
+        </span>
       </div>
-      <p class="main__text">Для получения возможности <span class="info__text_color">выиграть приз</span>, необходимо
-        сохранить Ваш результат!</p>
-      <p class="main__text">Введие адрес Вашей <span class="info__text_color">электронной почты</span> и нажмите
-        отправить*</p>
+      <p class="main__text">
+        Для участияв акции введие адрес Вашей <span class="info__text_color">электронной почты</span> и нажмите отправить
+      </p>
       <form method="post" action="submit" class="form" name="form" id="form">
         <label for="email" class="main__text">E-mail:</label>
         <input type="email" name="email" id="userEmail" class="form__input" placeholder="Введите email..."
           pattern="^[a-z0-9+_.-]+@[a-z0-9.-]+\.[a-z]+$" required />
-        <button type="submit" class="form__button_submit">Отправить</button>
+        <div class="form__actions">
+          <button type="submit" class="form__button_submit">Отправить</button>
+          <button type="button" class="form__button_restart">Играть снова</button>
+        </div>
       </form>
-      <button type="button" class="form__button_restart">Играть снова</button>
-      <p class="main__text">*количество попыток не ограничено.</p>
     </article>
   </section>
 
@@ -74,8 +76,9 @@
       <li>
         Так же от участника требуется указать его актуальный адрес электронной почты, чтобы мы смогли связаться с ним.
       </li>
+      <li>Количество попыток не ограничено, просто не забывайте сохранять своей результат.</li>
       <li>
-        Количество попыток не ограничено, просто не забывайте сохранять своей результат.
+        Если результат игры лучше чем уже был сохранен ранее - рейтинг игрока обновится иначе останется без изменения.
       </li>
       <li>
         Связь с победителем будет осуществлятся исключительно по адресу электронной почты, по этому проверьте доступ к
@@ -108,7 +111,6 @@
       <button class="info__button">Начать игру!</button>
     </div>
   </section>
-
 </body>
 
 <footer class="footer" id="contacts">
