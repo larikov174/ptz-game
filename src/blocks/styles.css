@@ -40,3 +40,5 @@
 @import './footer/__text/footer__text_small.css';
 @import './footer/__link/footer__link.css';
 @import './footer/__sfx/footer__sfx_hover.css';
+
+@import './idle/idle.css';

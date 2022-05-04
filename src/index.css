@@ -12,11 +12,7 @@ body {
   background-color: #fff;
 }
 
-
-ul, li {
+ul,
+li {
   margin: 20px 0;
-}
-
-.idle {
-  display: none !important;
 }
