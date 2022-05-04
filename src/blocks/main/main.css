@@ -1,16 +1,12 @@
 @keyframes myScale {
   0% {
-    /* background-size: 100%; */
-  }
-
-  50% {
-    /* background-size: 115%; */
-    background-position: left;
+    background-size: 80%;
+    background-position: 50%;
   }
 
   100% {
-    /* background-size: 100%; */
-    background-position: center;
+    background-size: 120%;
+    background-position: 100%;
   }
 }
 
@@ -19,7 +15,7 @@
   height: 100vh;
   max-height: 1200px;
   margin: 0 auto;
-  background-image: url('../../assets/bg_image.webp');
+  background-image: url('../../assets/bg_image.png');
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
