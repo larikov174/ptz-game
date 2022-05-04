@@ -183,12 +183,19 @@ export default class MainScene extends Phaser.Scene {
     if (progress === 1) {
       this.scene.start('Preloader');
 
-      const mainBlock = document.querySelector('.info');
+      const header = document.querySelector('.header');
+      const mainBlock = document.querySelector('.main');
+      const infoBlock = document.querySelector('.info');
       const game = document.querySelector('.game');
       const footer = document.querySelector('.footer');
+      const resultBlock = document.querySelector('#resultToShow');
+
+      resultBlock.innerHTML = this.scoreLabel.get();
 
       game.classList.add('idle')
+      header.classList.remove('idle')
       mainBlock.classList.remove('idle')
+      infoBlock.classList.remove('idle')
       footer.classList.remove('idle')
     }
   }
