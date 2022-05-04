@@ -1,0 +1,10 @@
+.burger-menu__item {
+  font: normal 400 32px/32px Calibri, Arial, serif;
+  color: #fff;
+  text-decoration: none;
+}
+
+.burger-menu__item:hover {
+  text-decoration: underline;
+  transition: text-decoration 0.15s ease-in;
+}

@@ -3,6 +3,12 @@
 @import './header/header.css';
 @import './header/__title/header__title.css';
 @import './header/__button/header__button.css';
+@import './header/__button/header__button_close.css';
+
+@import './burger-menu/burger-menu.css';
+@import './burger-menu/__list/burger-menu__list.css';
+@import './burger-menu/__item/burger-menu__item.css';
+@import './burger-menu/__li/burger-menu__li.css';
 
 @import './main/main.css';
 @import './main/__overlay/main__overlay.css';

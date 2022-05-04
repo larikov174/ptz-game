@@ -21,6 +21,16 @@
       <button type="button" class="header__button"></button>
     </header>
 
+    <section class="burger-menu idle">
+      <ul class="burger-menu__list">
+        <li class="burger-menu__li"><a class="burger-menu__item" href="#headerAnchor">В начало</a></li>
+        <li class="burger-menu__li"><a class="burger-menu__item" href="#mainInfo">Об акции</a></li>
+        <li class="burger-menu__li"><a class="burger-menu__item" href="#terms">Условия проведения акции</a></li>
+        <li class="burger-menu__li"><a class="burger-menu__item" href="#gameRules">Правила игры</a></li>
+        <li class="burger-menu__li"><a class="burger-menu__item" href="#contacts">Контакты</a></li>
+      </ul>
+    </section>
+
     <section class="main">
       <div class="main__overlay"></div>
       <h2 class="main__title">конкурс</h2>
@@ -45,13 +55,8 @@
         <li>
           Так же от участника требуется указать его актуальный адрес электронной почты, чтобы мы смогли связаться с ним.
         </li>
-        <li>
-          Итоги будут подведены в течение 5 рабочих дней с момента окончания
-          сроков проведения акции.
-        </li>
-        <li>
-          Отправка приза победителю (в пределах Российской Федерации) будет осуществлена за счет ООО "ФПК"!
-        </li>
+        <li>Итоги будут подведены в течение 5 рабочих дней с момента окончания сроков проведения акции.</li>
+        <li>Отправка приза победителю (в пределах Российской Федерации) будет осуществлена за счет ООО "ФПК"!</li>
       </ul>
       <h3 class="info__title info__slide_left" id="gameRules">Правила игры:</h3>
       <ul class="info__text info__slide_right">
@@ -70,13 +75,15 @@
           </ul>
         </li>
       </ul>
-      <h3 class="info__title info__slide_left">Играйте и выигрывайте вместе с нами, <span class="info__text_color">ООО "ФПК"</span> надежный партнер!</h3>
+      <h3 class="info__title info__slide_left">
+        Играйте и выигрывайте вместе с нами, <span class="info__text_color">ООО "ФПК"</span> надежный партнер!
+      </h3>
       <div class="info__button_wrapper">
         <button class="info__button info__slide_right">Начать игру!</button>
       </div>
     </section>
   </body>
-  <footer class="footer">
+  <footer class="footer" id="contacts">
     <div class="footer__logo footer__cell">
       <a href="https://www.chetra.ru/" target="_blank">
         <img
@@ -121,9 +128,12 @@
   </footer>
   <noscript>You need to enable JavaScript to run this app.</noscript>
 
-  <div
+  <section
     class="container idle"
     id="phaser-game"
-    title="Интерактивная игра, поиск одинаковых кубиков. Техника ЧЕТРА. Официальный дилер ООО ФПК."
-  ></div>
+    title="Интерактивная игра, поиск одинаковых кубиков. Техника ЧЕТРА. Официальный дилер ООО ФПК.">
+  </section>
+
+
+
 </html>
