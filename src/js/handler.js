@@ -10,6 +10,7 @@ const footer = document.querySelector('.footer');
 const burgerButton = document.querySelector('.header__button');
 const burgerMenu = document.querySelector('.burger-menu');
 const submitButton = document.querySelector('.form__button_submit');
+const scrollUpButton = document.querySelector('.info__button_back');
 
 window.location.replace('#');
 
@@ -42,10 +43,10 @@ restartButton.addEventListener('click', () => {
 burgerButton.addEventListener('click', () => {
   burgerMenu.classList.toggle('idle');
   burgerButton.classList.toggle('header__button_close');
-  if (!burgerMenu.classList.contains('idle')){
+  if (!burgerMenu.classList.contains('idle')) {
     introSection.style.visibility = 'hidden';
     resultSection.style.visibility = 'hidden';
-  }else{
+  } else {
     introSection.style.visibility = 'visible';
     resultSection.style.visibility = 'visible';
   }
@@ -61,5 +62,15 @@ burgerMenu.addEventListener('click', () => {
 submitButton.addEventListener('click', (e) => {
   e.preventDefault();
   //eslint-disable-next-line
-  alert('Ваше результат сохранен!')
+  alert('Ваше результат сохранен!');
+});
+
+window.addEventListener('scroll', () => {
+  const bottom = introSection.getBoundingClientRect().bottom;
+  const buttonIsIdle = scrollUpButton.classList.contains('idle');
+  if (bottom < 20 && buttonIsIdle) {
+    scrollUpButton.classList.remove('idle');
+  } else if (bottom > 20 && !buttonIsIdle) {
+    scrollUpButton.classList.add('idle');
+  }
 });
