@@ -16,7 +16,7 @@ if (typeof window.history.replaceState == 'function') {
   history.replaceState({}, '', window.location.href.slice(0, -1));
 }
 
-window.screenY = 0;
+window.scrollTo(0, 0);
 
 startGameButton.addEventListener('click', () => {
   header.classList.add('idle');
@@ -26,6 +26,7 @@ startGameButton.addEventListener('click', () => {
   introSection.classList.add('idle');
   resultSection.classList.remove('idle');
   gameCanvas.classList.remove('idle');
+  window.scrollTo(0, 0);
 });
 
 restartButton.addEventListener('click', () => {
@@ -34,6 +35,7 @@ restartButton.addEventListener('click', () => {
   infoBlock.classList.add('idle');
   footer.classList.add('idle');
   gameCanvas.classList.remove('idle');
+  window.scrollTo(0, 0);
 });
 
 burgerButton.addEventListener('click', () => {
