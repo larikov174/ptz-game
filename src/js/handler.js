@@ -41,9 +41,11 @@ restartButton.addEventListener('click', () => {
 burgerButton.addEventListener('click', () => {
   burgerMenu.classList.toggle('idle');
   burgerButton.classList.toggle('header__button_close');
+  introSection.classList.toggle('idle');
 });
 
 burgerMenu.addEventListener('click', () => {
   burgerMenu.classList.add('idle');
   burgerButton.classList.remove('header__button_close');
+  introSection.classList.remove('idle');
 });
