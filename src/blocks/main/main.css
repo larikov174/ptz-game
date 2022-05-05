@@ -1,10 +1,14 @@
-@keyframes myScale {
+@keyframes mySlide {
   0% {
     background-position: 100%  100%;
   }
 
+  50% {
+    background-position: 60%  100%;
+  }
+
   100% {
-    background-position: 0%  100%;
+    background-position: 100%  100%;
   }
 }
 
@@ -14,12 +18,12 @@
   max-height: 1200px;
   margin: 0 auto;
   background-image: url('../../assets/bg_image.png');
-  background-attachment: fixed;
-  background-position: center;
+  /* background-attachment: fixed; */
+  background-position: bottom;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  animation: myScale 60s infinite;
+  animation: mySlide 15s infinite linear;
   display: flex;
   flex-direction: column;
   justify-content: center;
