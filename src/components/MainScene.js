@@ -38,6 +38,22 @@ export default class MainScene extends Phaser.Scene {
     this.input.on('gameobjectdown', (pointer, gameObject) => gameObject.emit('clicked', gameObject), this);
     this.backHome.on('pointerdown', this.goBackHome, this);
 
+    this.backHome.on(
+      'pointerover',
+      function (event, gameObjects) {
+        this.backHome.setTint(0xf0af1d);
+      },
+      this,
+    );
+
+    this.backHome.on(
+      'pointerout',
+      function (event, gameObjects) {
+        this.backHome.clearTint();
+      },
+      this,
+    );
+
     this.timedEvent = this.time.addEvent({
       delay: 1000,
       callback: this.onTimeEvent,
