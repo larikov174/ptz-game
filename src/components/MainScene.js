@@ -5,7 +5,7 @@ import LabelCreator from '../ui/LabelCreator';
 import CONST from '../utils/constants';
 
 const { HIGHSCORE, SCORE, TIME, CUBE_HEIGHT, START_Y, GAME_WIDTH } = CONST;
-const { FAMILY, SIZE_XL, SIZE_M, FC_WHITE } = CONST.FONT_PROPS;
+const { FAMILY, SIZE_XL, FC_WHITE } = CONST.FONT_PROPS;
 
 export default class MainScene extends Phaser.Scene {
   constructor() {
@@ -79,14 +79,12 @@ export default class MainScene extends Phaser.Scene {
     const header = this.add.image(0, 0, 'sprites_3', 'HEADER').setScale(0.5);
     this.backHome = this.add.image(0, 0, 'sprites_2', 'BUTTON_RULES').setScale(0.5).setInteractive();
 
-    this.scoreLabel = this.createLabel(0, 17, SCORE, SIZE_M);
+    this.scoreLabel = this.createLabel(0, 17, SCORE, SIZE_XL);
     this.timerLabel = this.createLabel(0, 10, TIME, SIZE_XL);
-    this.highscoreLabel = this.createLabel(0, 60, this.highscore, SIZE_M);
 
     Phaser.Display.Bounds.CenterOn(header, GAME_WIDTH / 2, 50);
     Phaser.Display.Align.In.QuickSet(field, header, 1, 0, 300);
-    Phaser.Display.Bounds.SetLeft(this.highscoreLabel, 880);
-    Phaser.Display.Bounds.SetLeft(this.scoreLabel, 880);
+    Phaser.Display.Align.In.QuickSet(this.scoreLabel, header, 6, 375, 4);
     Phaser.Display.Bounds.SetLeft(this.timerLabel, 452);
     Phaser.Display.Align.In.QuickSet(this.backHome, header, 6, -400, 10);
   }
