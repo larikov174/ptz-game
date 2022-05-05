@@ -9,6 +9,7 @@ const gameCanvas = document.querySelector('.game');
 const footer = document.querySelector('.footer');
 const burgerButton = document.querySelector('.header__button');
 const burgerMenu = document.querySelector('.burger-menu');
+const submitButton = document.querySelector('.form__button_submit');
 
 window.location.replace('#');
 
@@ -48,4 +49,10 @@ burgerMenu.addEventListener('click', () => {
   burgerMenu.classList.add('idle');
   burgerButton.classList.remove('header__button_close');
   introSection.classList.remove('idle');
+});
+
+submitButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  //eslint-disable-next-line
+  alert('Ваше результат сохранен!')
 });
