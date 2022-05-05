@@ -42,13 +42,20 @@ restartButton.addEventListener('click', () => {
 burgerButton.addEventListener('click', () => {
   burgerMenu.classList.toggle('idle');
   burgerButton.classList.toggle('header__button_close');
-  introSection.classList.toggle('idle');
+  if (!burgerMenu.classList.contains('idle')){
+    introSection.style.visibility = 'hidden';
+    resultSection.style.visibility = 'hidden';
+  }else{
+    introSection.style.visibility = 'visible';
+    resultSection.style.visibility = 'visible';
+  }
 });
 
 burgerMenu.addEventListener('click', () => {
   burgerMenu.classList.add('idle');
   burgerButton.classList.remove('header__button_close');
-  introSection.classList.remove('idle');
+  introSection.style.visibility = 'visible';
+  resultSection.style.visibility = 'visible';
 });
 
 submitButton.addEventListener('click', (e) => {
