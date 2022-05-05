@@ -2,6 +2,8 @@
   font: normal 400 32px/32px Calibri, Arial, serif;
   text-decoration: none;
   text-transform: uppercase;
+  text-align: center;
+  margin-top: 20px;
   color: #fff;
   border: 3px solid #fff;
   border-radius: 10px;

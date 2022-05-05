@@ -12,11 +12,13 @@
 @media screen and (max-width: 630px) {
   .main__title {
     font-size: 100px;
+    line-height: 100px;
   }
 }
 
 @media screen and (max-width: 500px) {
   .main__title {
     font-size: 65px;
+    line-height: 65px;
   }
 }
