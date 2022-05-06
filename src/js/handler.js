@@ -15,7 +15,7 @@ const scrollUpButton = document.querySelector('.info__button_back');
 window.location.replace('#');
 
 if (typeof window.history.replaceState === 'function') {
-// eslint-disable-next-line
+  // eslint-disable-next-line
   history.replaceState({}, '', window.location.href.slice(0, -1));
 }
 

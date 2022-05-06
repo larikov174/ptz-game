@@ -160,10 +160,13 @@ export default class MainScene extends Phaser.Scene {
       const game = document.querySelector('.game');
       const footer = document.querySelector('.footer');
       const resultBlock = document.querySelector('#resultToShow');
+      const scrollUpButton = document.querySelector('.info__button_back');
+
 
       resultBlock.innerHTML = this.scoreLabel.get();
 
       game.classList.add('idle');
+      scrollUpButton.classList.add('idle');
       header.classList.remove('idle');
       mainBlock.classList.remove('idle');
       infoBlock.classList.remove('idle');
