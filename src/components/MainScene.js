@@ -154,6 +154,7 @@ export default class MainScene extends Phaser.Scene {
     resultSection.classList.add('idle');
   }
 
+  // eslint-disable-next-line
   gameOver(cam = null, progress = 0) {
     if (progress === 1) {
       this.scene.start('Preloader');
@@ -178,6 +179,7 @@ export default class MainScene extends Phaser.Scene {
     }
   }
 
+  // eslint-disable-next-line
   cameraFadeOut(cam = null, progress = 0) {
     if (progress === 1) this.camera.fade(1000, 0, 0, 0, false, this.gameOver);
   }
@@ -186,7 +188,7 @@ export default class MainScene extends Phaser.Scene {
     this.camera.shake(1000, 0.04, false, this.cameraFadeOut);
   }
 
-  updateData(parent, key, data) {
+  updateData(parent, key) {
     if (key === 'time') {
       const timer = this.timerLabel.get();
       if (timer === 0 || this.possibleMoves.length === 0) this.onGameLoose();
