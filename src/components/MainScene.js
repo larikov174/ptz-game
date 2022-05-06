@@ -1,6 +1,5 @@
-import Phaser from 'phaser';
+import { Scene, Display } from 'phaser';
 import GameLogic from './GameLogic';
-import SFX from '../ui/SFX';
 import LabelCreator from '../ui/LabelCreator';
 import CONST from '../utils/constants';
 
@@ -17,7 +16,7 @@ const {
   FC_WHITE
 } = CONST.FONT_PROPS;
 
-export default class MainScene extends Phaser.Scene {
+export default class MainScene extends Scene {
   constructor() {
     super('MainScene');
   }
@@ -35,7 +34,6 @@ export default class MainScene extends Phaser.Scene {
 
   create() {
     this.logic = new GameLogic(this.grid, this.connected, this.possibleMoves, this.clickHandler, this);
-    this.sfx = new SFX(this.add.particles('sprites_2'));
 
     this.createUI();
     this.logic.createGrid();
@@ -80,18 +78,18 @@ export default class MainScene extends Phaser.Scene {
   }
 
   createUI() {
-    const field = this.add.image(0, 0, 'sprites_1', 'FIELD').setScale(0.5);
-    const header = this.add.image(0, 0, 'sprites_3', 'HEADER').setScale(0.5);
-    this.backHome = this.add.image(0, 0, 'sprites_2', 'BUTTON_RULES').setScale(0.5).setInteractive();
+    const field = this.add.image(0, 0, 'spritesField', 'FIELD').setScale(0.5);
+    const header = this.add.image(0, 0, 'spritesHeader', 'HEADER').setScale(0.5);
+    this.backHome = this.add.image(0, 0, 'spritesButtons', 'BUTTON_RULES').setScale(0.5).setInteractive();
 
     this.scoreLabel = this.createLabel(0, 17, SCORE, SIZE_XL);
     this.timerLabel = this.createLabel(0, 10, TIME, SIZE_XL);
 
-    Phaser.Display.Bounds.CenterOn(header, GAME_WIDTH / 2, 50);
-    Phaser.Display.Align.In.QuickSet(field, header, 1, 0, 300);
-    Phaser.Display.Align.In.QuickSet(this.scoreLabel, header, 6, 375, 4);
-    Phaser.Display.Bounds.SetLeft(this.timerLabel, 452);
-    Phaser.Display.Align.In.QuickSet(this.backHome, header, 6, -400, 10);
+    Display.Bounds.CenterOn(header, GAME_WIDTH / 2, 50);
+    Display.Align.In.QuickSet(field, header, 1, 0, 300);
+    Display.Align.In.QuickSet(this.scoreLabel, header, 6, 375, 4);
+    Display.Bounds.SetLeft(this.timerLabel, 452);
+    Display.Align.In.QuickSet(this.backHome, header, 6, -400, 10);
   }
 
   onTimeEvent() {
