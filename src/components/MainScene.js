@@ -4,8 +4,18 @@ import SFX from '../ui/SFX';
 import LabelCreator from '../ui/LabelCreator';
 import CONST from '../utils/constants';
 
-const { HIGHSCORE, SCORE, TIME, CUBE_HEIGHT, START_Y, GAME_WIDTH } = CONST;
-const { FAMILY, SIZE_XL, FC_WHITE } = CONST.FONT_PROPS;
+const {
+  SCORE,
+  TIME,
+  CUBE_HEIGHT,
+  START_Y,
+  GAME_WIDTH
+} = CONST;
+const {
+  FAMILY,
+  SIZE_XL,
+  FC_WHITE
+} = CONST.FONT_PROPS;
 
 export default class MainScene extends Phaser.Scene {
   constructor() {
@@ -16,7 +26,6 @@ export default class MainScene extends Phaser.Scene {
     this.grid = [];
     this.connected = [];
     this.possibleMoves = [];
-    this.highscore = localStorage.highscore ? JSON.parse(localStorage.highscore) : HIGHSCORE;
     this.camera = this.cameras.add();
   }
 
@@ -40,17 +49,13 @@ export default class MainScene extends Phaser.Scene {
 
     this.backHome.on(
       'pointerover',
-      function (event, gameObjects) {
-        this.backHome.setTint(0xf0af1d);
-      },
+      () => this.backHome.setTint(0xf0af1d),
       this,
     );
 
     this.backHome.on(
       'pointerout',
-      function (event, gameObjects) {
-        this.backHome.clearTint();
-      },
+      () => this.backHome.clearTint(),
       this,
     );
 
@@ -105,11 +110,10 @@ export default class MainScene extends Phaser.Scene {
       let deleted = 0;
       this.scoreLabel.addScore(this.connected.length);
       this.connected.forEach((cube) => {
-        deleted++;
+        deleted += 1;
         this.tweens.timeline({
           targets: cube.sprite,
-          tweens: [
-            {
+          tweens: [{
               alpha: 1,
             },
             {
@@ -119,7 +123,7 @@ export default class MainScene extends Phaser.Scene {
           duration: 0,
           callbackScope: this,
           onComplete: () => {
-            deleted--;
+            deleted -= 1;
             this.logic.setEmpty(cube.x, cube.y);
             if (deleted === 0) {
               this.logic.handleEmptys(this.tweens);
@@ -179,11 +183,6 @@ export default class MainScene extends Phaser.Scene {
   }
 
   onGameLoose() {
-    const score = this.scoreLabel.get();
-    if (score > this.highscore) {
-      this.registry.set('new', true);
-      localStorage.setItem('highscore', score);
-    }
     this.camera.shake(1000, 0.04, false, this.cameraFadeOut);
   }
 
