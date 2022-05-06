@@ -14,7 +14,8 @@ const scrollUpButton = document.querySelector('.info__button_back');
 
 window.location.replace('#');
 
-if (typeof window.history.replaceState == 'function') {
+if (typeof window.history.replaceState === 'function') {
+// eslint-disable-next-line
   history.replaceState({}, '', window.location.href.slice(0, -1));
 }
 
@@ -61,16 +62,17 @@ burgerMenu.addEventListener('click', () => {
 
 submitButton.addEventListener('click', (e) => {
   e.preventDefault();
-  //eslint-disable-next-line
+  // eslint-disable-next-line
   alert('Ваше результат сохранен!');
 });
 
 window.addEventListener('scroll', () => {
-  const bottom = introSection.getBoundingClientRect().bottom;
+  const introImage = mainBlock.getBoundingClientRect();
   const buttonIsIdle = scrollUpButton.classList.contains('idle');
-  if (bottom < 20 && buttonIsIdle) {
+
+  if (introImage.bottom < 20 && buttonIsIdle) {
     scrollUpButton.classList.remove('idle');
-  } else if (bottom > 20 && !buttonIsIdle) {
+  } else if (introImage.bottom > 20 && !buttonIsIdle) {
     scrollUpButton.classList.add('idle');
   }
 });
