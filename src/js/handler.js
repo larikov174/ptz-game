@@ -1,4 +1,4 @@
-import mainApi from '../utils/api';
+import saveResult from '../utils/api';
 const startGameButton = document.querySelector('.info__button');
 const restartButton = document.querySelector('.form__button_restart');
 const header = document.querySelector('.header');
@@ -65,7 +65,7 @@ burgerMenu.addEventListener('click', () => {
 submitButton.addEventListener('click', (e) => {
   e.preventDefault();
   const email = input.value;
-  mainApi.getUser({ email });
+ saveResult({ result: 200, email });
 
   // const res = fetch(`http://localhost:3001/user`, {
   //   method: 'POST',
