@@ -65,23 +65,23 @@ burgerMenu.addEventListener('click', () => {
 submitButton.addEventListener('click', (e) => {
   e.preventDefault();
   const email = input.value;
-  // mainApi.getUser({ email: email });
+  mainApi.getUser({ email });
 
-  const res = fetch(`http://localhost:3001/user`, {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email }),
-  })
-    .then((res) => {
-      if (res.status === 200) return res.json()
-      return console.log('anothrer fetch and quit')
-    })
-    .then((id) => console.log(id))
-    .catch((err) => console.log(err));
-  return res;
+  // const res = fetch(`http://localhost:3001/user`, {
+  //   method: 'POST',
+  //   credentials: 'include',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //   },
+  //   body: JSON.stringify({ email }),
+  // })
+  //   .then((res) => {
+  //     if (res.status === 200) return res.json()
+  //     return console.log('anothrer fetch and quit')
+  //   })
+  //   .then((id) => console.log(id))
+  //   .catch((err) => console.log(err));
+  // return res;
 });
 
 window.addEventListener('scroll', () => {

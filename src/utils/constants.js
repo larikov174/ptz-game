@@ -35,7 +35,7 @@ const CONST = {
     AGAIN: 'Попробуем еще раз?!',
   },
   // DB_URL: 'https://chetra.herokuapp.com',
-  DB_URL: 'http://localhost:8080',
+  DB_URL: 'http://localhost:3001',
 };
 
 export default CONST;

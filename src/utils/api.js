@@ -18,6 +18,7 @@ const postResult = ({ result, email }) => {
 const patchResult = ({ result, id }) => {
   const res = fetch(`${DB_URL}/result/${id}`, {
     method: 'PUT',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
