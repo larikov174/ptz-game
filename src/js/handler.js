@@ -1,4 +1,4 @@
-import useMainApi from '../utils/api';
+import mainApi from '../utils/api';
 const startGameButton = document.querySelector('.info__button');
 const restartButton = document.querySelector('.form__button_restart');
 const header = document.querySelector('.header');
@@ -63,22 +63,25 @@ burgerMenu.addEventListener('click', () => {
 });
 
 submitButton.addEventListener('click', (e) => {
-  const emailValue = input.value;
-  console.log(useMainApi);
-  const { getUser } = useMainApi;
-
   e.preventDefault();
-  getUser({ email: emailValue });
+  const email = input.value;
+  // mainApi.getUser({ email: email });
 
-  // const res = fetch(`http://localhost:3001/user`, {
-  //   method: 'POST',
-  //   credentials: 'include',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  //   body: JSON.stringify({ email: emailValue }),
-  // });
-  // return console.log(res.json());
+  const res = fetch(`http://localhost:3001/user`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email }),
+  })
+    .then((res) => {
+      if (res.status === 200) return res.json()
+      return console.log('anothrer fetch and quit')
+    })
+    .then((id) => console.log(id))
+    .catch((err) => console.log(err));
+  return res;
 });
 
 window.addEventListener('scroll', () => {

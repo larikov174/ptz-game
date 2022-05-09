@@ -20,7 +20,7 @@ const config = {
 };
 
 function resize() {
-  const canvas = document.querySelector("canvas");
+  const canvas = document.querySelector("#phaser-game");
   const body = document.querySelector("body");
   const windowWidth = window.innerWidth;
   const windowHeight = window.innerHeight;
