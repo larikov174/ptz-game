@@ -1,4 +1,6 @@
-import { DB_URL } from './constants';
+import CONST from './constants';
+
+const { DB_URL } = CONST;
 
 export default function useMainApi() {
   const handleResponse = (res) => {
@@ -8,6 +10,7 @@ export default function useMainApi() {
 
   return {
     async getUser({ email }) {
+      console.log(email);
       const res = await fetch(`${DB_URL}/user`, {
         method: 'GET',
         headers: {

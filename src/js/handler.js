@@ -1,3 +1,4 @@
+import useMainApi from '../utils/api';
 const startGameButton = document.querySelector('.info__button');
 const restartButton = document.querySelector('.form__button_restart');
 const header = document.querySelector('.header');
@@ -11,6 +12,7 @@ const burgerButton = document.querySelector('.header__button');
 const burgerMenu = document.querySelector('.burger-menu');
 const submitButton = document.querySelector('.form__button_submit');
 const scrollUpButton = document.querySelector('.info__button_back');
+const input = document.querySelector('.form__input');
 
 window.location.replace('#');
 
@@ -61,9 +63,22 @@ burgerMenu.addEventListener('click', () => {
 });
 
 submitButton.addEventListener('click', (e) => {
+  const emailValue = input.value;
+  console.log(useMainApi);
+  const { getUser } = useMainApi;
+
   e.preventDefault();
-  // eslint-disable-next-line
-  alert('Ваше результат сохранен!');
+  getUser({ email: emailValue });
+
+  // const res = fetch(`http://localhost:3001/user`, {
+  //   method: 'POST',
+  //   credentials: 'include',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //   },
+  //   body: JSON.stringify({ email: emailValue }),
+  // });
+  // return console.log(res.json());
 });
 
 window.addEventListener('scroll', () => {
