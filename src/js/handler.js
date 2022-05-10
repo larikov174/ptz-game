@@ -1,4 +1,6 @@
 import saveResult from '../utils/api';
+import { scoreToSave } from '../components/MainScene';
+
 const startGameButton = document.querySelector('.info__button');
 const restartButton = document.querySelector('.form__button_restart');
 const header = document.querySelector('.header');
@@ -66,7 +68,7 @@ burgerMenu.addEventListener('click', () => {
 submitButton.addEventListener('click', (e) => {
   e.preventDefault();
   const email = input.value;
-  const result = JSON.parse(sessionStorage.result);
+  const result = scoreToSave.value;
   saveResult({ result, email });
   localStorage.setItem('email', email);
 });

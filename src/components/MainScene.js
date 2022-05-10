@@ -16,7 +16,9 @@ const {
   FC_WHITE
 } = CONST.FONT_PROPS;
 
-export default class MainScene extends Scene {
+export let scoreToSave = {value: 0};
+
+export class MainScene extends Scene {
   constructor() {
     super('MainScene');
   }
@@ -39,7 +41,6 @@ export default class MainScene extends Scene {
     this.logic.createGrid();
 
     this.registry.set('time', this.timerLabel.get());
-    this.registry.set('new', false);
     this.registry.events.on('changedata', this.updateData, this);
 
     this.input.on('gameobjectdown', (pointer, gameObject) => gameObject.emit('clicked', gameObject), this);
@@ -166,9 +167,8 @@ export default class MainScene extends Scene {
       const scrollUpButton = document.querySelector('.info__button_back');
       const thisGameResult = this.scoreLabel.get();
 
-
       resultBlock.innerHTML = thisGameResult;
-      sessionStorage.setItem('result', thisGameResult);
+      scoreToSave = {value: thisGameResult};
 
       game.classList.add('idle');
       scrollUpButton.classList.add('idle');
@@ -195,4 +195,5 @@ export default class MainScene extends Scene {
     }
   }
 }
+
 

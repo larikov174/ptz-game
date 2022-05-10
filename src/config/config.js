@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import Preloader from '../components/Preloader';
-import MainScene from '../components/MainScene';
+import {MainScene} from '../components/MainScene';
 import GameOver from '../components/GameOver';
 import CONST from '../utils/constants';
 
