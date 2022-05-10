@@ -32,6 +32,7 @@ startGameButton.addEventListener('click', () => {
   resultSection.classList.remove('idle');
   gameCanvas.classList.remove('idle');
   window.scrollTo(0, 0);
+  input.value = localStorage.email || '';
 });
 
 restartButton.addEventListener('click', () => {
@@ -65,23 +66,9 @@ burgerMenu.addEventListener('click', () => {
 submitButton.addEventListener('click', (e) => {
   e.preventDefault();
   const email = input.value;
- saveResult({ result: 200, email });
-
-  // const res = fetch(`http://localhost:3001/user`, {
-  //   method: 'POST',
-  //   credentials: 'include',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  //   body: JSON.stringify({ email }),
-  // })
-  //   .then((res) => {
-  //     if (res.status === 200) return res.json()
-  //     return console.log('anothrer fetch and quit')
-  //   })
-  //   .then((id) => console.log(id))
-  //   .catch((err) => console.log(err));
-  // return res;
+  const result = JSON.parse(sessionStorage.result);
+  saveResult({ result, email });
+  localStorage.setItem('email', email);
 });
 
 window.addEventListener('scroll', () => {

@@ -164,9 +164,11 @@ export default class MainScene extends Scene {
       const footer = document.querySelector('.footer');
       const resultBlock = document.querySelector('#resultToShow');
       const scrollUpButton = document.querySelector('.info__button_back');
+      const thisGameResult = this.scoreLabel.get();
 
 
-      resultBlock.innerHTML = this.scoreLabel.get();
+      resultBlock.innerHTML = thisGameResult;
+      sessionStorage.setItem('result', thisGameResult);
 
       game.classList.add('idle');
       scrollUpButton.classList.add('idle');
@@ -193,3 +195,4 @@ export default class MainScene extends Scene {
     }
   }
 }
+
