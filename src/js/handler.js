@@ -33,8 +33,9 @@ startGameButton.addEventListener('click', () => {
   introSection.classList.add('idle');
   resultSection.classList.remove('idle');
   gameCanvas.classList.remove('idle');
-  window.scrollTo(0, 0);
   input.value = localStorage.email || '';
+
+  window.scrollTo(0, 0);
 });
 
 restartButton.addEventListener('click', () => {
@@ -43,6 +44,8 @@ restartButton.addEventListener('click', () => {
   infoBlock.classList.add('idle');
   footer.classList.add('idle');
   gameCanvas.classList.remove('idle');
+  submitButton.disabled = false;
+
   window.scrollTo(0, 0);
 });
 
@@ -66,9 +69,10 @@ burgerMenu.addEventListener('click', () => {
 });
 
 submitButton.addEventListener('click', (e) => {
-  e.preventDefault();
   const email = input.value;
   const result = scoreToSave.value;
+  e.preventDefault();
+  submitButton.disabled = true;
   saveResult({ result, email });
   localStorage.setItem('email', email);
 });

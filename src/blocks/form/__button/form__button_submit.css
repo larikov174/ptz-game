@@ -16,6 +16,11 @@
   cursor: pointer;
 }
 
+.form__button_submit:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
 @media screen and (max-width: 630px) {
   .form__button_submit {
     margin-top: 20px;
