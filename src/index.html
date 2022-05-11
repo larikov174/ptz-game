@@ -40,18 +40,19 @@
 
     </article>
     <article class="main__results idle">
-      <div class="main__score">
+      <div class="main__score" id="yourScoreText">
         <p class="main__text">Вы набрали(очков):&nbsp;</p>
         <span class="info__text_color">
           <p class="main__text" id="resultToShow">0</p>
         </span>
       </div>
-      <p class="main__text">
+      <p class="main__text idle" id="playAgainText">Сохранение <span class="info__text_color">успешно!</span> Попробуем сыграть еще раз?</p>
+      <p class="main__text" id="textAboutRegistration">
         Для участия в акции введие адрес Вашей <span class="info__text_color">электронной почты</span> и нажмите
         отправить
       </p>
       <form method="post" action="submit" class="form" name="form" id="form">
-        <label for="email" class="main__text">E-mail:</label>
+        <label for="email" class="main__text" id="inputLabel">E-mail:</label>
         <input type="email" name="email" id="userEmail" class="form__input" placeholder="Введите email..."
           pattern="^[a-z0-9+_.-]+@[a-z0-9.-]+\.[a-z]+$" required />
         <div class="form__actions">

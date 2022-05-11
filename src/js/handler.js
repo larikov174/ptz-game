@@ -5,8 +5,13 @@ const startGameButton = document.querySelector('.info__button');
 const restartButton = document.querySelector('.form__button_restart');
 const header = document.querySelector('.header');
 const mainBlock = document.querySelector('.main');
+const mainScore = document.querySelector('.main__score');
 const introSection = document.querySelector('.main__intro');
 const resultSection = document.querySelector('.main__results');
+const registrationText = document.querySelector('#textAboutRegistration');
+const playAgainText = document.querySelector('#playAgainText');
+const inputLabel = document.querySelector('#inputLabel');
+const input = document.querySelector('.form__input');
 const infoBlock = document.querySelector('.info');
 const gameCanvas = document.querySelector('.game');
 const footer = document.querySelector('.footer');
@@ -15,7 +20,6 @@ const burgerMenu = document.querySelector('.burger-menu');
 const submitButton = document.querySelector('.form__button_submit');
 const scrollUpButton = document.querySelector('.info__button_back');
 const spinner = document.querySelector('.main__preloader');
-const input = document.querySelector('.form__input');
 
 window.location.replace('#');
 
@@ -57,8 +61,13 @@ restartButton.addEventListener('click', () => {
   mainBlock.classList.add('idle');
   infoBlock.classList.add('idle');
   footer.classList.add('idle');
+  playAgainText.classList.add('idle');
   gameCanvas.classList.remove('idle');
-  submitButton.disabled = false;
+  registrationText.classList.remove('idle');
+  inputLabel.classList.remove('idle');
+  input.classList.remove('idle');
+  submitButton.classList.remove('idle');
+  mainScore.classList.remove('idle');
 
   window.scrollTo(0, 0);
 });
@@ -88,7 +97,14 @@ submitButton.addEventListener('click', (e) => {
   e.preventDefault();
   saveResult({ result, email });
   loadingHandler();
-  submitButton.disabled = true;
+
+  registrationText.classList.add('idle');
+  inputLabel.classList.add('idle');
+  input.classList.add('idle');
+  submitButton.classList.add('idle');
+  mainScore.classList.add('idle');
+  playAgainText.classList.remove('idle');
+
   localStorage.setItem('email', email);
 });
 
