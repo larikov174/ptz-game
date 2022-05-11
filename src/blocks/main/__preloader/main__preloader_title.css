@@ -1,0 +1,24 @@
+.main__preloader_title {
+  font: normal 600 32px/32px Calibri, Arial, serif;
+  color: #fff;
+  z-index: 0;
+  text-transform: uppercase;
+  user-select: none;
+  grid-area: title;
+  margin: 0 20px;
+  text-shadow: 5px 5px 12px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 630px) {
+  .main__preloader_title {
+    font-size: 24px;
+    line-height: 24px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .main__preloader_title {
+    font-size: 18px;
+    line-height: 18px;
+  }
+}

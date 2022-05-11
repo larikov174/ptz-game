@@ -19,6 +19,10 @@
 @import './main/__results/main__results.css';
 @import './main/__score/main__score.css';
 @import './main/__overlay/main__overlay.css';
+@import './main/__preloader/main__preloader.css';
+@import './main/__preloader/main__preloader_container.css';
+@import './main/__preloader/main__preloader_round.css';
+@import './main/__preloader/main__preloader_title.css';
 
 @import './info/info.css';
 @import './info/__title/info__title.css';

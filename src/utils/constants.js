@@ -34,8 +34,8 @@ const CONST = {
     BEST_SCORE: 'Ваш лучший результат(очков):',
     AGAIN: 'Попробуем еще раз?!',
   },
-  // DB_URL: 'https://chetra.herokuapp.com',
-  DB_URL: 'http://localhost:3001',
+  DB_URL: 'https://chetra.herokuapp.com',
+  // DB_URL: 'http://localhost:3001',
 };
 
 export default CONST;

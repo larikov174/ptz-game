@@ -4,7 +4,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, maximum-scale=1" />
-  <meta name="description" content="Официальный дилер ООО ФПК, продажа бульдозеров ЧЕТРА и мини погрузчиков ЧЕТРА МКСМ на Дальнем Востоке. Продажа запасных частей бренда ЧЕТРА. Интерактивная игра, кубики по цвету." />
+  <meta name="description"
+    content="Официальный дилер ООО ФПК, продажа бульдозеров ЧЕТРА и мини погрузчиков ЧЕТРА МКСМ на Дальнем Востоке. Продажа запасных частей бренда ЧЕТРА. Интерактивная игра, кубики по цвету." />
   <meta name="format-detection" content="telephone=no" />
   <link rel="preload" href="./assets/bg_image.png" as="image">
   <link rel="icon" type="image/png" href="./assets/fav.ico" />
@@ -51,13 +52,21 @@
       </p>
       <form method="post" action="submit" class="form" name="form" id="form">
         <label for="email" class="main__text">E-mail:</label>
-        <input type="email" name="email" id="userEmail" class="form__input" placeholder="Введите email..." pattern="^[a-z0-9+_.-]+@[a-z0-9.-]+\.[a-z]+$" required />
+        <input type="email" name="email" id="userEmail" class="form__input" placeholder="Введите email..."
+          pattern="^[a-z0-9+_.-]+@[a-z0-9.-]+\.[a-z]+$" required />
         <div class="form__actions">
           <button type="submit" class="form__button_submit">отправить</button>
           <button type="button" class="form__button_restart">играть снова</button>
           <a class="main__link" href="#terms">подробности акции</a>
         </div>
       </form>
+    </article>
+
+    <article class="main__preloader idle">
+      <h2 class="main__preloader_title">Сохранение</h2>
+      <div class="main__preloader_container">
+        <span class="main__preloader_round"></span>
+      </div>
     </article>
   </section>
 
@@ -105,11 +114,13 @@
 <footer class="footer" id="contacts">
   <div class="footer__logo footer__cell">
     <a href="https://www.chetra.ru/" target="_blank">
-      <img src="./assets/chetra-logo.png" class="footer__logo_chetra footer__sfx_hover" alt="логотип ЧЕТРА" title="Производитель техники. Бульдозеры, погрузчики. Сделано в России!" />
+      <img src="./assets/chetra-logo.png" class="footer__logo_chetra footer__sfx_hover" alt="логотип ЧЕТРА"
+        title="Производитель техники. Бульдозеры, погрузчики. Сделано в России!" />
     </a>
     <div class="footer__devider"></div>
     <a href="https://www.fpktech.ru/" target="_blank">
-      <img src="./assets/fpk-logo.png" class="footer__logo_fpk footer__sfx_hover" alt="логотип ФПК" title="Продажа спецтехники, бульдозеры, фронтальные погрузчики, минипогрузчики." />
+      <img src="./assets/fpk-logo.png" class="footer__logo_fpk footer__sfx_hover" alt="логотип ФПК"
+        title="Продажа спецтехники, бульдозеры, фронтальные погрузчики, минипогрузчики." />
     </a>
   </div>
   <div class="footer__phone footer__cell">
@@ -118,16 +129,19 @@
   </div>
   <div class="footer__email footer__cell">
     <p class="footer__text footer__text_color">E-mail:</p>
-    <a class="footer__text footer__link footer__sfx_hover" type="email" href="mailto:fpk@fpktech.ru?subject=Вопрос по технике ЧЕТРА">&nbsp;fpk@fpktech.ru</a>
+    <a class="footer__text footer__link footer__sfx_hover" type="email"
+      href="mailto:fpk@fpktech.ru?subject=Вопрос по технике ЧЕТРА">&nbsp;fpk@fpktech.ru</a>
   </div>
   <div class="footer__credits footer__cell">
     <p class="footer__text footer__text_small footer__text_color">&copy; 2022. Андрей Лариков.&nbsp;</p>
-    <a class="footer__text footer__text_small footer__link footer__sfx_hover" href="https://github.com/larikov174" target="_blank">Профиль разработчика на Github.com</a>
+    <a class="footer__text footer__text_small footer__link footer__sfx_hover" href="https://github.com/larikov174"
+      target="_blank">Профиль разработчика на Github.com</a>
   </div>
 </footer>
 
 <noscript>You need to enable JavaScript to run this app.</noscript>
 
-<template class="game idle" id="phaser-game" title="Интерактивная игра, поиск одинаковых кубиков. Техника ЧЕТРА. Официальный дилер ООО ФПК."></template>
+<template class="game idle" id="phaser-game"
+  title="Интерактивная игра, поиск одинаковых кубиков. Техника ЧЕТРА. Официальный дилер ООО ФПК."></template>
 
 </html>
