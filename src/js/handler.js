@@ -1,4 +1,4 @@
-import saveResult from '../utils/api';
+import { saveResult, isLoading } from '../utils/api';
 import { scoreToSave } from '../components/MainScene';
 
 const startGameButton = document.querySelector('.info__button');
@@ -14,6 +14,7 @@ const burgerButton = document.querySelector('.header__button');
 const burgerMenu = document.querySelector('.burger-menu');
 const submitButton = document.querySelector('.form__button_submit');
 const scrollUpButton = document.querySelector('.info__button_back');
+const spinner = document.querySelector('.main__preloader');
 const input = document.querySelector('.form__input');
 
 window.location.replace('#');
@@ -24,6 +25,19 @@ if (typeof window.history.replaceState === 'function') {
 }
 
 window.scrollTo(0, 0);
+
+const loadingHandler = () => {
+  resultSection.classList.add('idle');
+  spinner.classList.remove('idle');
+
+  let checkInterval = setInterval(() => {
+    if (isLoading === 200) {
+      resultSection.classList.remove('idle');
+      spinner.classList.add('idle');
+      clearInterval(checkInterval);
+    }
+  }, 500);
+};
 
 startGameButton.addEventListener('click', () => {
   header.classList.add('idle');
@@ -72,8 +86,9 @@ submitButton.addEventListener('click', (e) => {
   const email = input.value;
   const result = scoreToSave.value;
   e.preventDefault();
-  submitButton.disabled = true;
   saveResult({ result, email });
+  loadingHandler();
+  submitButton.disabled = true;
   localStorage.setItem('email', email);
 });
 
