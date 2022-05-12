@@ -20,7 +20,7 @@ const saveResult = ({ result, email }) => {
     })
     .catch((err) => {
       spinner.classList.add('idle');
-      alert('Ошибка соединения, результат не сохранен! Возможно проблема с интернет подключением.');
+      alert(err);
     });
   return (isLoading = 0);
 };
