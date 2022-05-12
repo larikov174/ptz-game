@@ -67,6 +67,15 @@ startGameButton.addEventListener('click', () => {
   input.value = localStorage.email || '';
   formValidation.resetValidation();
   window.scrollTo(0, 0);
+
+  playAgainText.classList.add('idle');
+  inputLabel.classList.remove('idle');
+  input.classList.remove('idle');
+  submitButton.classList.remove('idle');
+  mainScore.classList.remove('idle');
+  registrationText.classList.remove('idle');
+
+
 });
 
 restartButton.addEventListener('click', () => {
