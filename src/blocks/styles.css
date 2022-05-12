@@ -30,6 +30,7 @@
 @import './info/info.css';
 @import './info/__title/info__title.css';
 @import './info/__text/info__text.css';
+@import './info/__text/info__text_descr.css';
 @import './info/__text/info__text_color.css';
 @import './info/__button/info__button.css';
 @import './info/__button/info__button_back.css';
