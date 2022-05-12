@@ -41,7 +41,7 @@ if (typeof window.history.replaceState === 'function') {
 window.scrollTo(0, 0);
 
 const formValidation = new FormValidator(validationConfig, form);
-formValidation.enableValidation();
+if (localStorage.email !== '') formValidation.enableValidation();
 
 const loadingHandler = () => {
   resultSection.classList.add('idle');
@@ -65,7 +65,7 @@ startGameButton.addEventListener('click', () => {
   resultSection.classList.remove('idle');
   gameCanvas.classList.remove('idle');
   input.value = localStorage.email || '';
-
+  formValidation.resetValidation();
   window.scrollTo(0, 0);
 });
 
@@ -81,6 +81,8 @@ restartButton.addEventListener('click', () => {
   input.classList.remove('idle');
   submitButton.classList.remove('idle');
   mainScore.classList.remove('idle');
+  input.value = localStorage.email || '';
+  formValidation.resetValidation();
 
   window.scrollTo(0, 0);
 });
@@ -117,6 +119,8 @@ submitButton.addEventListener('click', (e) => {
   submitButton.classList.add('idle');
   mainScore.classList.add('idle');
   playAgainText.classList.remove('idle');
+
+  formValidation.resetValidation();
 
   localStorage.setItem('email', email);
 });
