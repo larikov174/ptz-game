@@ -1,4 +1,5 @@
 import CONST from './constants';
+const spinner = document.querySelector('.main__preloader');
 
 const { DB_URL } = CONST;
 let isLoading = 0;
@@ -17,8 +18,11 @@ const saveResult = ({ result, email }) => {
       if (res.status === 200) isLoading = res.status;
       return res.status;
     })
-    .catch((err) => console.log(err));
-  return isLoading = 0;
+    .catch((err) => {
+      spinner.classList.add('idle');
+      alert('Ошибка соединения, результат не сохранен! Возможно проблема с интернет подключением.');
+    });
+  return (isLoading = 0);
 };
 
 export { saveResult, isLoading };

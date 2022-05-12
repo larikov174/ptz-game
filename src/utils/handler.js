@@ -1,6 +1,6 @@
-import { saveResult, isLoading } from '../utils/api';
+import { saveResult, isLoading } from './api';
 import { scoreToSave } from '../components/MainScene';
-import FormValidator from '../utils/validation';
+import FormValidator from './validation';
 
 const startGameButton = document.querySelector('.info__button');
 const restartButton = document.querySelector('.form__button_restart');
