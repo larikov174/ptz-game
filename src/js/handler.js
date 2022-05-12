@@ -1,5 +1,6 @@
 import { saveResult, isLoading } from '../utils/api';
 import { scoreToSave } from '../components/MainScene';
+import FormValidator from '../utils/validation';
 
 const startGameButton = document.querySelector('.info__button');
 const restartButton = document.querySelector('.form__button_restart');
@@ -20,6 +21,15 @@ const burgerMenu = document.querySelector('.burger-menu');
 const submitButton = document.querySelector('.form__button_submit');
 const scrollUpButton = document.querySelector('.info__button_back');
 const spinner = document.querySelector('.main__preloader');
+const form = document.querySelector('.form');
+
+const validationConfig = {
+  inputList: '.form__input',
+  buttonElement: '.form__button_submit',
+  buttonIdle: 'idle',
+  inputError: 'popup__input_type_error',
+  errorActive: 'main__text_error_active'
+};
 
 window.location.replace('#');
 
@@ -29,6 +39,9 @@ if (typeof window.history.replaceState === 'function') {
 }
 
 window.scrollTo(0, 0);
+
+const formValidation = new FormValidator(validationConfig, form);
+formValidation.enableValidation();
 
 const loadingHandler = () => {
   resultSection.classList.add('idle');

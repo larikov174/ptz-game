@@ -1,0 +1,13 @@
+.main__text_error {
+  display: none;
+  font-size: 16px;
+  margin: 0 10px;
+  text-align: center;
+  color: #f0af1d;
+}
+
+@media screen and (max-width: 630px) {
+  .main__text_error {
+    font-size: 14px;
+  }
+}

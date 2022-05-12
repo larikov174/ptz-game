@@ -14,6 +14,9 @@
 @import './main/__intro/main__intro.css';
 @import './main/__title/main__title.css';
 @import './main/__text/main__text.css';
+@import './main/__text/main__text_error.css';
+@import './main/__text/main__text_error_active.css';
+@import './main/__text/main__text_label.css';
 @import './main/__link/main__link.css';
 @import './main/__info/main__info.css';
 @import './main/__results/main__results.css';
@@ -51,6 +54,7 @@
 @import './footer/__sfx/footer__sfx_hover.css';
 
 @import './form/form.css';
+@import './form/__container/form__container.css';
 @import './form/__input/form__input.css';
 @import './form/__actions/form__actions.css';
 @import './form/__button/form__button_submit.css';

@@ -52,9 +52,12 @@
         отправить
       </p>
       <form method="post" action="submit" class="form" name="form" id="form">
-        <label for="email" class="main__text" id="inputLabel">E-mail:</label>
-        <input type="email" name="email" id="userEmail" class="form__input" placeholder="Введите email..."
-          pattern="^[a-z0-9+_.-]+@[a-z0-9.-]+\.[a-z]+$" required />
+        <div class="form__container">
+          <label for="email" class="main__text main__text_label" id="inputLabel">E-mail:</label>
+          <input type="email" name="email" id="userEmail" class="form__input" placeholder="Введите email..."
+            pattern="^[a-z0-9+_.-]+@[a-z0-9.-]+\.[a-z]+$" required />
+        </div>
+          <span id="userEmail-error" class="main__text_error">Текст какой то ошибки валидации</span>
         <div class="form__actions">
           <button type="submit" class="form__button_submit">отправить</button>
           <button type="button" class="form__button_restart">играть снова</button>
