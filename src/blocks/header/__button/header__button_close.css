@@ -1,14 +1,14 @@
-@keyframes rotator {
+@keyframes rotator2 {
   0% {
-    transform: rotate(0deg);
+    transform: rotateZ(0deg);
   }
   100% {
-    transform: rotate(180deg);
+    transform: rotateZ(180deg);
   }
 }
 .header__button_close {
   background-image: url('../../../assets/icon-close.svg');
-  animation: rotator 0.5s ease-out;
+  animation: rotator2 0.5s linear;
 }
 
 @media screen and (max-width: 500px) {
