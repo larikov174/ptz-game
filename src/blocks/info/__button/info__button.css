@@ -2,8 +2,8 @@
   font: normal 400 32px/32px Calibri, Arial, serif;
   text-decoration: none;
   text-transform: uppercase;
-  color: #fff;
-  background-color: #4b2942;
+  color: var(--col-white);
+  background-color: var(--col-purple);
   border-radius: 10px;
   width: fit-content;
   height: 50px;
@@ -13,7 +13,7 @@
   justify-content: center;
   align-content: center;
   flex-direction: column;
-  box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 12px var(--col-black-transparent);
 }
 
 .info__button:hover {

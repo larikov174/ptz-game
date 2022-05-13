@@ -1,6 +1,6 @@
 .burger-menu__item {
   font: normal 400 32px/32px Calibri, Arial, serif;
-  color: #fff;
+  color: var(--col-white);
   text-decoration: none;
 }
 

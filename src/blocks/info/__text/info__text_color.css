@@ -1,5 +1,5 @@
 .info__text_color {
-  color: #f0af1d;
+  color: var(--col-yellow);
   font-weight: 600;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }

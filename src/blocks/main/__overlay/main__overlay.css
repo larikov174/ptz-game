@@ -2,7 +2,7 @@
   width: 100%;
   height: 100%;
   position: absolute;
-  background-color: #000;
+  background-color: var(--col-black);
   opacity: 0.6;
   z-index: 0;
 }

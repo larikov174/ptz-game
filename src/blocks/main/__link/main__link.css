@@ -4,7 +4,7 @@
   text-transform: uppercase;
   text-align: center;
   margin-top: 20px;
-  color: #fff;
+  color: var(--col-white);
   border: 3px solid #fff;
   border-radius: 10px;
   width: auto;
@@ -17,8 +17,8 @@
   align-content: center;
   flex-direction: column;
   grid-area: link;
-  box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.5);
-  text-shadow: 5px 5px 12px rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 12px var(--col-black-transparent);
+  text-shadow: 5px 5px 12px var(--col-black-transparent);
 }
 
 .main__link:hover {

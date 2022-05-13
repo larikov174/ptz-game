@@ -1,5 +1,15 @@
 @import './blocks/styles.css';
 
+:root {
+--col-white: #fff;
+--col-black: #000;
+--col-black-transparent: #000000c9;
+--col-yellow: #f0af1d;
+--col-yellow-transparent: #db9905;
+--col-purple: #4b2942;
+--col-purple-transparent: #4b2942db;
+}
+
 html {
   height: 100%;
 }
@@ -9,7 +19,7 @@ body {
   width: 100%;
   height: 100vh;
   margin: 0 auto;
-  background-color: #fff;
+  background-color: var(--col-white);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
