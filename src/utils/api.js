@@ -5,7 +5,7 @@ const { DB_URL } = CONST;
 let isLoading = 0;
 
 const saveResult = ({ result, email }) => {
-  const res = fetch(`${DB_URL}/save`, {
+  const res = fetch(`${DB_URL}/save/`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
