@@ -1,11 +1,18 @@
 import CONST from './constants';
 const spinner = document.querySelector('.main__preloader');
+const registrationText = document.querySelector('#textAboutRegistration');
+const inputLabel = document.querySelector('#inputLabel');
+const input = document.querySelector('.form__input');
+const submitButton = document.querySelector('.form__button_submit');
+const mainScore = document.querySelector('.main__score');
+const playAgainText = document.querySelector('#playAgainText');
+
 
 const { DB_URL } = CONST;
-let isLoading = 0;
+let isLoading = false;
 
 const saveResult = ({ result, email }) => {
-  const res = fetch(`${DB_URL}/save/`, {
+  fetch(`${DB_URL}/save/`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -16,15 +23,21 @@ const saveResult = ({ result, email }) => {
       isLoading = true;
       res.json();
 
-      if (res.status === 200) isLoading = res.status;
-      else throw 'Ошибка сохранения, попробуйте еще раз!';
+      if (res.status === 200) isLoading = true;
+      else throw 'Ошибка сохранения, проверьте ваш email и попробуйте еще раз!';
       return res.status;
     })
     .catch((err) => {
       spinner.classList.add('idle');
+      registrationText.classList.remove('idle');
+      inputLabel.classList.remove('idle');
+      input.classList.remove('idle');
+      submitButton.classList.remove('idle');
+      mainScore.classList.remove('idle');
+      playAgainText.classList.add('idle');
       alert(err);
     });
-  return (isLoading = 0);
+  return (isLoading = false);
 };
 
 export { saveResult, isLoading };

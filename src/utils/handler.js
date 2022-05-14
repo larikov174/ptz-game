@@ -48,7 +48,7 @@ const loadingHandler = () => {
   spinner.classList.remove('idle');
 
   let checkInterval = setInterval(() => {
-    if (isLoading === 200) {
+    if (isLoading) {
       resultSection.classList.remove('idle');
       spinner.classList.add('idle');
       clearInterval(checkInterval);
@@ -130,7 +130,6 @@ submitButton.addEventListener('click', (e) => {
   playAgainText.classList.remove('idle');
 
   formValidation.resetValidation();
-
   localStorage.setItem('email', email);
 });
 
