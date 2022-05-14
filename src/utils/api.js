@@ -15,7 +15,9 @@ const saveResult = ({ result, email }) => {
     .then((res) => {
       isLoading = true;
       res.json();
+
       if (res.status === 200) isLoading = res.status;
+      else throw 'Ошибка сохранения, попробуйте еще раз!';
       return res.status;
     })
     .catch((err) => {

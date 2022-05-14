@@ -10,7 +10,7 @@ const CONST = {
   FRAMES: ['CUBE_CHETRA', 'CUBE_DOZER', 'CUBE_FPK', 'CUBE_MKSM', 'CUBE_PK'],
   SCORE: 0,
   GOAL: 5,
-  TIME: 30,
+  TIME: 1,
   LEVEL: 1,
   HIGHSCORE: 0,
   INLINE_LIMIT: 7,
@@ -34,8 +34,8 @@ const CONST = {
     BEST_SCORE: 'Ваш лучший результат(очков):',
     AGAIN: 'Попробуем еще раз?!',
   },
-  DB_URL: 'https://chetra.herokuapp.com',
-  // DB_URL: 'http://localhost:3001',
+  // DB_URL: 'https://chetra.herokuapp.com',
+  DB_URL: 'http://localhost:3001',
 };
 
 export default CONST;
