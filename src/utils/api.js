@@ -1,4 +1,5 @@
 import CONST from './constants';
+
 const spinner = document.querySelector('.main__preloader');
 const registrationText = document.querySelector('#textAboutRegistration');
 const inputLabel = document.querySelector('#inputLabel');
@@ -9,6 +10,7 @@ const playAgainText = document.querySelector('#playAgainText');
 
 
 const { DB_URL } = CONST;
+// eslint-disable-next-line import/no-mutable-exports
 let isLoading = false;
 
 const saveResult = ({ result, email }) => {
@@ -24,6 +26,7 @@ const saveResult = ({ result, email }) => {
       res.json();
 
       if (res.status === 200) isLoading = true;
+      // eslint-disable-next-line no-throw-literal
       else throw 'Ошибка сохранения, проверьте ваш email и попробуйте еще раз!';
       return res.status;
     })
@@ -35,6 +38,7 @@ const saveResult = ({ result, email }) => {
       submitButton.classList.remove('idle');
       mainScore.classList.remove('idle');
       playAgainText.classList.add('idle');
+      // eslint-disable-next-line no-alert
       alert(err);
     });
   return (isLoading = false);

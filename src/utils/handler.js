@@ -47,7 +47,7 @@ const loadingHandler = () => {
   resultSection.classList.add('idle');
   spinner.classList.remove('idle');
 
-  let checkInterval = setInterval(() => {
+  const checkInterval = setInterval(() => {
     if (isLoading) {
       resultSection.classList.remove('idle');
       spinner.classList.add('idle');

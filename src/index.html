@@ -7,7 +7,7 @@
   <meta name="description"
     content="Официальный дилер ООО ФПК, продажа бульдозеров ЧЕТРА и мини погрузчиков ЧЕТРА МКСМ на Дальнем Востоке. Продажа запасных частей бренда ЧЕТРА. Интерактивная игра, кубики по цвету." />
   <meta name="format-detection" content="telephone=no" />
-  <link rel="preload" href="./assets/bg_image.png" as="image">
+  <link rel="preload" href="./assets/bg_image.png" as="image" />
   <link rel="icon" type="image/png" href="./assets/fav.ico" />
   <title>ЧЕТРА - ФПК</title>
 </head>
@@ -37,7 +37,6 @@
       <h2 class="main__title">конкурс</h2>
       <a class="main__link" href="#mainInfo">узнать подробнее</a>
       <a class="main__link" href="#startGame">начать игру</a>
-
     </article>
     <article class="main__results idle">
       <div class="main__score" id="yourScoreText">
@@ -46,7 +45,9 @@
           <p class="main__text" id="resultToShow">0</p>
         </span>
       </div>
-      <p class="main__text idle" id="playAgainText">Сохранение <span class="info__text_color">успешно!</span> Попробуем сыграть еще раз?</p>
+      <p class="main__text idle" id="playAgainText">
+        Сохранение <span class="info__text_color">успешно!</span> Попробуем сыграть еще раз?
+      </p>
       <p class="main__text" id="textAboutRegistration">
         Для участия в акции введите адрес Вашей <span class="info__text_color">электронной почты</span> и нажмите
         отправить
@@ -57,7 +58,7 @@
           <input type="email" name="email" id="userEmail" class="form__input" placeholder="Введите email..."
             pattern="^[a-z0-9+_.-]+@[a-z0-9.-]+\.[a-z]{2,}$" required />
         </div>
-          <span id="userEmail-error" class="main__text_error">Текст какой то ошибки валидации</span>
+        <span id="userEmail-error" class="main__text_error">Текст какой то ошибки валидации</span>
         <div class="form__actions">
           <button type="submit" class="form__button_submit">отправить</button>
           <button type="button" class="form__button_restart">играть снова</button>
