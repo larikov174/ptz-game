@@ -97,9 +97,14 @@ restartButton.addEventListener('click', () => {
 });
 
 burgerButton.addEventListener('click', () => {
-  burgerMenu.classList.toggle('idle');
+  const menu = document.querySelector('.burger-menu');
+  menu.classList.remove('burger-menu_animation');
+  // eslint-disable-next-line no-void
+  void menu.offsetWidth;
+  menu.classList.add('burger-menu_animation');
+  menu.classList.toggle('idle');
   burgerButton.classList.toggle('header__button_close');
-  if (!burgerMenu.classList.contains('idle')) {
+  if (!menu.classList.contains('idle')) {
     introSection.style.visibility = 'hidden';
     resultSection.style.visibility = 'hidden';
   } else {
@@ -109,7 +114,12 @@ burgerButton.addEventListener('click', () => {
 });
 
 burgerMenu.addEventListener('click', () => {
-  burgerMenu.classList.add('idle');
+  const menu = document.querySelector('.burger-menu');
+  menu.classList.remove('burger-menu_animation');
+  // eslint-disable-next-line no-void
+  void menu.offsetWidth;
+  menu.classList.add('burger-menu_animation');
+  menu.classList.add('idle');
   burgerButton.classList.remove('header__button_close');
   introSection.style.visibility = 'visible';
   resultSection.style.visibility = 'visible';

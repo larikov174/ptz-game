@@ -6,6 +6,7 @@
 @import './header/__button/header__button_close.css';
 
 @import './burger-menu/burger-menu.css';
+@import './burger-menu/burger-menu_animation.css';
 @import './burger-menu/__list/burger-menu__list.css';
 @import './burger-menu/__item/burger-menu__item.css';
 @import './burger-menu/__li/burger-menu__li.css';
