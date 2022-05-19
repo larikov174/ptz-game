@@ -1,207 +1,278 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, maximum-scale=1" />
-    <meta
-      name="description"
-      content="Официальный дилер ООО ФПК, продажа бульдозеров ЧЕТРА и мини погрузчиков ЧЕТРА МКСМ на Дальнем Востоке. Продажа запасных частей бренда ЧЕТРА. Интерактивная игра, кубики по цвету."
-    />
-    <meta name="format-detection" content="telephone=no" />
-    <link rel="preload" href="./assets/bg_image.png" as="image" />
-    <link rel="icon" type="image/png" href="./assets/fav.ico" />
-    <title>ЧЕТРА - ФПК</title>
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, user-scalable=0, maximum-scale=1"
+		/>
+		<meta
+			name="description"
+			content="Официальный дилер ООО ФПК, продажа бульдозеров ЧЕТРА и мини погрузчиков ЧЕТРА МКСМ на Дальнем Востоке. Продажа запасных частей бренда ЧЕТРА. Интерактивная игра, кубики по цвету."
+		/>
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="preload" href="./assets/bg_image.png" as="image" />
+		<link rel="icon" type="image/png" href="./assets/fav.ico" />
+		<title>ЧЕТРА - ФПК</title>
 
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript">
-      (function (m, e, t, r, i, k, a) {
-        m[i] =
-          m[i] ||
-          function () {
-            (m[i].a = m[i].a || []).push(arguments);
-          };
-        m[i].l = 1 * new Date();
-        (k = e.createElement(t)),
-          (a = e.getElementsByTagName(t)[0]),
-          (k.async = 1),
-          (k.src = r),
-          a.parentNode.insertBefore(k, a);
-      })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
+		<!-- Yandex.Metrika counter -->
+		<script type="text/javascript">
+			(function (m, e, t, r, i, k, a) {
+				m[i] =
+					m[i] ||
+					function () {
+						(m[i].a = m[i].a || []).push(arguments);
+					};
+				m[i].l = 1 * new Date();
+				(k = e.createElement(t)),
+					(a = e.getElementsByTagName(t)[0]),
+					(k.async = 1),
+					(k.src = r),
+					a.parentNode.insertBefore(k, a);
+			})(
+				window,
+				document,
+				"script",
+				"https://mc.yandex.ru/metrika/tag.js",
+				"ym"
+			);
 
-      ym(51267094, 'init', {
-        clickmap: true,
-        trackLinks: true,
-        accurateTrackBounce: true,
-        webvisor: true,
-      });
-    </script>
-    <noscript>
-      <div><img src="https://mc.yandex.ru/watch/51267094" style="position: absolute; left: -9999px" alt="" /></div>
-    </noscript>
-    <!-- /Yandex.Metrika counter -->
+			ym(51267094, "init", {
+				clickmap: true,
+				trackLinks: true,
+				accurateTrackBounce: true,
+				webvisor: true,
+			});
+		</script>
+		<noscript>
+			<div>
+				<img
+					src="https://mc.yandex.ru/watch/51267094"
+					style="position: absolute; left: -9999px"
+					alt=""
+				/>
+			</div>
+		</noscript>
+		<!-- /Yandex.Metrika counter -->
+	</head>
 
-  </head>
+	<body>
+		<header class="header" id="headerAnchor">
+			<h1 class="header__title">
+				Официальный дилер ООО ФПК, продажа бульдозеров ЧЕТРА и мини погрузчиков
+				ЧЕТРА МКСМ на Дальнем Востоке. Продажа запасных частей бренда ЧЕТРА.
+				Интерактивная игра, кубики по цвету.
+			</h1>
+			<button type="button" class="header__button"></button>
+		</header>
 
-  <body>
-    <header class="header" id="headerAnchor">
-      <h1 class="header__title">
-        Официальный дилер ООО ФПК, продажа бульдозеров ЧЕТРА и мини погрузчиков ЧЕТРА МКСМ на Дальнем Востоке. Продажа
-        запасных частей бренда ЧЕТРА. Интерактивная игра, кубики по цвету.
-      </h1>
-      <button type="button" class="header__button"></button>
-    </header>
+		<section class="burger-menu burger-menu_animation idle">
+			<ul class="burger-menu__list">
+				<li class="burger-menu__li">
+					<a class="burger-menu__item" href="#startGame">Начать игру</a>
+				</li>
+				<li class="burger-menu__li">
+					<a class="burger-menu__item" href="#mainInfo">Об акции</a>
+				</li>
+				<li class="burger-menu__li">
+					<a class="burger-menu__item" href="#terms"
+						>Условия проведения акции</a
+					>
+				</li>
+				<li class="burger-menu__li">
+					<a class="burger-menu__item" href="#gameRules">Правила игры</a>
+				</li>
+				<li class="burger-menu__li">
+					<a class="burger-menu__item" href="#contacts">Контакты</a>
+				</li>
+			</ul>
+		</section>
 
-    <section class="burger-menu burger-menu_animation idle">
-      <ul class="burger-menu__list">
-        <li class="burger-menu__li"><a class="burger-menu__item" href="#startGame">Начать игру</a></li>
-        <li class="burger-menu__li"><a class="burger-menu__item" href="#mainInfo">Об акции</a></li>
-        <li class="burger-menu__li"><a class="burger-menu__item" href="#terms">Условия проведения акции</a></li>
-        <li class="burger-menu__li"><a class="burger-menu__item" href="#gameRules">Правила игры</a></li>
-        <li class="burger-menu__li"><a class="burger-menu__item" href="#contacts">Контакты</a></li>
-      </ul>
-    </section>
+		<section class="main">
+			<div class="main__overlay"></div>
+			<article class="main__intro">
+				<h2 class="main__title">конкурс</h2>
+				<a class="main__link" href="#mainInfo">узнать подробнее</a>
+				<a class="main__link" href="#startGame">начать игру</a>
+			</article>
+			<article class="main__results idle">
+				<div class="main__score" id="yourScoreText">
+					<p class="main__text">Вы набрали(очков):&nbsp;</p>
+					<span class="info__text_color">
+						<p class="main__text" id="resultToShow">0</p>
+					</span>
+				</div>
+				<p class="main__text idle" id="playAgainText">
+					Сохранение <span class="info__text_color">успешно!</span> Попробуем
+					сыграть еще раз?
+				</p>
+				<p class="main__text" id="textAboutRegistration">
+					Для участия в акции введите адрес Вашей
+					<span class="info__text_color">электронной почты</span> и нажмите
+					отправить
+				</p>
+				<form
+					method="post"
+					action="submit"
+					class="form"
+					name="form"
+					id="form"
+					novalidate
+				>
+					<div class="form__container">
+						<label
+							for="email"
+							class="main__text main__text_label"
+							id="inputLabel"
+							>E-mail:</label
+						>
+						<input
+							type="email"
+							name="email"
+							id="userEmail"
+							class="form__input"
+							placeholder="Введите email..."
+							pattern="^[a-z0-9+_.-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+							required
+						/>
+					</div>
+					<span id="userEmail-error" class="main__text_error"
+						>Текст какой то ошибки валидации</span
+					>
+					<div class="form__actions">
+						<button type="submit" class="form__button_submit">сохранить</button>
+						<button type="button" class="form__button_restart">
+							играть снова
+						</button>
+						<a class="main__link" href="#terms">подробности акции</a>
+					</div>
+				</form>
+			</article>
 
-    <section class="main">
-      <div class="main__overlay"></div>
-      <article class="main__intro">
-        <h2 class="main__title">конкурс</h2>
-        <a class="main__link" href="#mainInfo">узнать подробнее</a>
-        <a class="main__link" href="#startGame">начать игру</a>
-      </article>
-      <article class="main__results idle">
-        <div class="main__score" id="yourScoreText">
-          <p class="main__text">Вы набрали(очков):&nbsp;</p>
-          <span class="info__text_color">
-            <p class="main__text" id="resultToShow">0</p>
-          </span>
-        </div>
-        <p class="main__text idle" id="playAgainText">
-          Сохранение <span class="info__text_color">успешно!</span> Попробуем сыграть еще раз?
-        </p>
-        <p class="main__text" id="textAboutRegistration">
-          Для участия в акции введите адрес Вашей <span class="info__text_color">электронной почты</span> и нажмите
-          отправить
-        </p>
-        <form method="post" action="submit" class="form" name="form" id="form" novalidate>
-          <div class="form__container">
-            <label for="email" class="main__text main__text_label" id="inputLabel">E-mail:</label>
-            <input
-              type="email"
-              name="email"
-              id="userEmail"
-              class="form__input"
-              placeholder="Введите email..."
-              pattern="^[a-z0-9+_.-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-              required
-            />
-          </div>
-          <span id="userEmail-error" class="main__text_error">Текст какой то ошибки валидации</span>
-          <div class="form__actions">
-            <button type="submit" class="form__button_submit">сохранить</button>
-            <button type="button" class="form__button_restart">играть снова</button>
-            <a class="main__link" href="#terms">подробности акции</a>
-          </div>
-        </form>
-      </article>
+			<article class="main__preloader idle">
+				<h2 class="main__preloader_title">Сохранение</h2>
+				<div class="main__preloader_container">
+					<span class="main__preloader_round"></span>
+				</div>
+			</article>
+		</section>
 
-      <article class="main__preloader idle">
-        <h2 class="main__preloader_title">Сохранение</h2>
-        <div class="main__preloader_container">
-          <span class="main__preloader_round"></span>
-        </div>
-      </article>
-    </section>
+		<section class="info" id="mainInfo">
+			<h3 class="info__title info__slide_left" id="aboutPrize">
+				Получите возможность выиграть главный приз -
+				<span class="info__text_color">Гриль (угольный) для барбекю!</span>
+			</h3>
+			<p class="info__text info__text_descr info__slide_right">
+				Для этого Вам необходимо набрать максимальное количество очков в нашей
+				игре и приз Ваш!
+			</p>
+			<h3 class="info__title info__slide_left" id="terms">
+				Условия проведения акции:
+			</h3>
+			<ul class="info__text info__slide_right">
+				<li>
+					Сроки проведения:
+					<span class="info__text_color">с 16.05.2022г по 15.06.2022г</span>
+				</li>
+				<li>
+					Итоги будут подведены в течение 5 рабочих дней с момента окончания
+					сроков проведения акции.
+				</li>
+				<li>
+					Отправка приза победителю (в пределах Российской Федерации) будет
+					осуществлена за счет ООО "ФПК"!
+				</li>
+			</ul>
+			<h3 class="info__title info__slide_left" id="gameRules">Правила игры:</h3>
+			<ul class="info__text info__slide_right">
+				<li>
+					<span class="info__text_color">Цель игры - </span>набрать наибольшее
+					количество очков
+					<span class="info__text_color">за 30 секунд</span>
+				</li>
+				<li>
+					Необходимо искать цепочки
+					<span class="info__text_color">одинаковых</span> кубиков (от 2-х и
+					более)
+				</li>
+				<li>
+					При сгорании кубиков игроку начисляются очки по схеме:
+					<ul>
+						<li>2 кубика = 2 очка,</li>
+						<li>3 кубика = 5 очков,</li>
+						<li>4 кубика = 8 очков,</li>
+						<li>5 кубиков и более = количество кубиков х3 очков.</li>
+					</ul>
+				</li>
+			</ul>
+			<h3 class="info__title info__slide_left">
+				Играйте и выигрывайте вместе с нами.&nbsp;<span class="info__text_color"
+					>ООО "ФПК"</span
+				>
+				надежный партнер!
+			</h3>
+			<div class="info__button_wrapper" id="startGame">
+				<button class="info__button">Начать игру!</button>
+			</div>
+			<a class="info__button_back idle" href="#headerAnchor"></a>
+		</section>
+	</body>
 
-    <section class="info" id="mainInfo">
-      <h3 class="info__title info__slide_left" id="aboutPrize">
-        Получите возможность выиграть главный приз -
-        <span class="info__text_color">Гриль (угольный) для барбекю!</span>
-      </h3>
-      <p class="info__text info__text_descr info__slide_right">
-        Для этого Вам необходимо набрать максимальное количество очков в нашей игре и приз Ваш!
-      </p>
-      <h3 class="info__title info__slide_left" id="terms">Условия проведения акции:</h3>
-      <ul class="info__text info__slide_right">
-        <li>Сроки проведения: <span class="info__text_color">с 16.05.2022г по 15.06.2022г</span></li>
-        <li>Итоги будут подведены в течение 5 рабочих дней с момента окончания сроков проведения акции.</li>
-        <li>Отправка приза победителю (в пределах Российской Федерации) будет осуществлена за счет ООО "ФПК"!</li>
-      </ul>
-      <h3 class="info__title info__slide_left" id="gameRules">Правила игры:</h3>
-      <ul class="info__text info__slide_right">
-        <li>
-          <span class="info__text_color">Цель игры - </span>набрать наибольшее количество очков
-          <span class="info__text_color">за 30 секунд</span>
-        </li>
-        <li>Необходимо искать цепочки <span class="info__text_color">одинаковых</span> кубиков (от 2-х и более)</li>
-        <li>
-          При сгорании кубиков игроку начисляются очки по схеме:
-          <ul>
-            <li>2 кубика = 2 очка,</li>
-            <li>3 кубика = 5 очков,</li>
-            <li>4 кубика = 8 очков,</li>
-            <li>5 кубиков и более = количество кубиков х3 очков.</li>
-          </ul>
-        </li>
-      </ul>
-      <h3 class="info__title info__slide_left">
-        Играйте и выигрывайте вместе с нами.&nbsp;<span class="info__text_color">ООО "ФПК"</span> надежный партнер!
-      </h3>
-      <div class="info__button_wrapper" id="startGame">
-        <button class="info__button">Начать игру!</button>
-      </div>
-      <a class="info__button_back idle" href="#headerAnchor"></a>
-    </section>
-  </body>
+	<footer class="footer" id="contacts">
+		<div class="footer__logo footer__cell">
+			<a href="https://www.chetra.ru/" target="_blank">
+				<img
+					src="./assets/chetra-logo.png"
+					class="footer__logo_chetra footer__sfx_hover"
+					alt="логотип ЧЕТРА"
+					title="Производитель техники. Бульдозеры, погрузчики. Сделано в России!"
+				/>
+			</a>
+			<div class="footer__devider"></div>
+			<a href="https://www.fpktech.ru/" target="_blank">
+				<img
+					src="./assets/fpk-logo.png"
+					class="footer__logo_fpk footer__sfx_hover"
+					alt="логотип ФПК"
+					title="Продажа спецтехники, бульдозеры, фронтальные погрузчики, минипогрузчики."
+				/>
+			</a>
+		</div>
+		<div class="footer__phone footer__cell">
+			<div
+				class="footer__icon_phone"
+				role="img"
+				title="Номер телефона ООО ФПК"
+			></div>
+			<p class="footer__text">8(351)264-22-44</p>
+		</div>
+		<div class="footer__email footer__cell">
+			<p class="footer__text footer__text_color">E-mail:</p>
+			<a
+				class="footer__text footer__link footer__sfx_hover"
+				type="email"
+				href="mailto:fpk@fpktech.ru?subject=Вопрос по технике ЧЕТРА"
+				>&nbsp;fpk@fpktech.ru</a
+			>
+		</div>
+		<div class="footer__credits footer__cell">
+			<p class="footer__text footer__text_small footer__text_color">
+				&copy; 2022. Андрей Лариков.&nbsp;
+			</p>
+			<a
+				class="footer__text footer__text_small footer__link footer__sfx_hover"
+				href="https://github.com/larikov174"
+				target="_blank"
+				>Профиль разработчика на Github.com</a
+			>
+		</div>
+	</footer>
 
-  <footer class="footer" id="contacts">
-    <div class="footer__logo footer__cell">
-      <a href="https://www.chetra.ru/" target="_blank">
-        <img
-          src="./assets/chetra-logo.png"
-          class="footer__logo_chetra footer__sfx_hover"
-          alt="логотип ЧЕТРА"
-          title="Производитель техники. Бульдозеры, погрузчики. Сделано в России!"
-        />
-      </a>
-      <div class="footer__devider"></div>
-      <a href="https://www.fpktech.ru/" target="_blank">
-        <img
-          src="./assets/fpk-logo.png"
-          class="footer__logo_fpk footer__sfx_hover"
-          alt="логотип ФПК"
-          title="Продажа спецтехники, бульдозеры, фронтальные погрузчики, минипогрузчики."
-        />
-      </a>
-    </div>
-    <div class="footer__phone footer__cell">
-      <div class="footer__icon_phone" role="img" title="Номер телефона ООО ФПК"></div>
-      <p class="footer__text">8(351)264-22-44</p>
-    </div>
-    <div class="footer__email footer__cell">
-      <p class="footer__text footer__text_color">E-mail:</p>
-      <a
-        class="footer__text footer__link footer__sfx_hover"
-        type="email"
-        href="mailto:fpk@fpktech.ru?subject=Вопрос по технике ЧЕТРА"
-        >&nbsp;fpk@fpktech.ru</a
-      >
-    </div>
-    <div class="footer__credits footer__cell">
-      <p class="footer__text footer__text_small footer__text_color">&copy; 2022. Андрей Лариков.&nbsp;</p>
-      <a
-        class="footer__text footer__text_small footer__link footer__sfx_hover"
-        href="https://github.com/larikov174"
-        target="_blank"
-        >Профиль разработчика на Github.com</a
-      >
-    </div>
-  </footer>
+	<noscript>You need to enable JavaScript to run this app.</noscript>
 
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-
-  <template
-    class="game idle"
-    id="phaser-game"
-    title="Интерактивная игра, поиск одинаковых кубиков. Техника ЧЕТРА. Официальный дилер ООО ФПК."
-  ></template>
+	<template
+		class="game idle"
+		id="phaser-game"
+		title="Интерактивная игра, поиск одинаковых кубиков. Техника ЧЕТРА. Официальный дилер ООО ФПК."
+	></template>
 </html>
