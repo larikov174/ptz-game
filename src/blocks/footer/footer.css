@@ -3,7 +3,7 @@
   max-height: 240px;
   width: 100%;
   box-sizing: border-box;
-  background-color: var(--col-purple);
+  background-color: var(--col-grey);
   display: grid;
   grid-template-rows: 4fr 1fr;
   grid-template-columns: repeat(3, 1fr);

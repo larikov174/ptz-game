@@ -46,7 +46,7 @@
   top: 0;
   left: 0;
   /* background: #4b2942; */
-  background: #f0af1d;
+  background: var(--col-grey);
   border-radius: 50px;
 }
 
@@ -62,14 +62,14 @@
 }
 
 .main__preloader_round::after {
-  background: #ffff;
+  background: var(--col-white);
   animation: preloader-inside-white 1s ease-in-out infinite;
 }
 
 .main__preloader_round::before {
   z-index: 10;
   /* background: #f0af1d; */
-  background: #4b2942;
+  background: var(--col-red);
   animation: preloader-inside-purple 1s ease-in-out infinite;
 }
 

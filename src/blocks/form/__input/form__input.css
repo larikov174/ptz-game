@@ -1,14 +1,14 @@
 .form__input {
-  border: 3px solid var(--col-yellow);
+  border: 3px solid var(--col-red);
   border-radius: 10px;
-  color: var(--col-yellow);
+  color: var(--col-red);
   width: 80%;
   height: 35px;
   margin-left: 10px;
 }
 
 .form__input::placeholder {
-  color: var(--col-yellow-transparent);
+  color: var(--col-red-transparent);
 }
 
 @media screen and (max-width: 630px) {
