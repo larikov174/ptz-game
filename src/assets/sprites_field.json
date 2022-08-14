@@ -2,7 +2,7 @@
 
 "FIELD":
 {
-	"frame": {"x":4,"y":4,"w":1980,"h":1920},
+	"frame": {"x":0,"y":0,"w":1980,"h":1920},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":1980,"h":1920},
@@ -13,8 +13,8 @@
 	"version": "1.0",
 	"image": "sprites_field.png",
 	"format": "RGBA8888",
-	"size": {"w":1988,"h":1928},
+	"size": {"w":1980,"h":1920},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:1e8d6f71b95d48b5cb3d2c06311959c8:e4da864ee0631fd2bcf89ec26ec99419:9b33712da6e94e4996f5497bf2e2883b$"
+	"smartupdate": "$TexturePacker:SmartUpdate:128521b5e1ba60d62da8a88a024453cf:a0390a2d11ff5cb01fd3793f3c45d6de:9b33712da6e94e4996f5497bf2e2883b$"
 }
 }

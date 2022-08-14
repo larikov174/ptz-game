@@ -13,13 +13,13 @@ const config = {
   height: GAME_HEIGHT,
   backgroundColor: GAME_BACKGROUND,
   scene: [Preloader, MainScene, GameOver],
-  title: 'КОНКУРС - ФПК - ЧЕТРА',
+  title: 'КОНКУРС - ФПК - ПТЗ',
   url: 'https://fpktech.ru',
   version: '3.0',
   banner: {
     hidePhaser: true,
     text: '#fff',
-    background: ['#4b2942', '#f0af1d', '#fff', '#04336a']
+    background: ['#CE2A2E', '#2D333C', '#fff', '#04336a']
   },
 };
 

@@ -6,8 +6,9 @@
   --col-black-transparent: #000000c9;
   --col-yellow: #f0af1d;
   --col-yellow-transparent: #db9905;
-  --col-purple: #4b2942;
-  --col-purple-transparent: #4b2942db;
+  --col-purple: #CE2A2E;
+  --col-purple-transparent: #CE2A2Edb;
+	--col-grey: #2D333C;
 }
 
 html {
