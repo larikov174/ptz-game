@@ -1,5 +1,5 @@
 {
-  "name": "chetra-game",
+  "name": "ptz-game",
   "version": "1.0.0",
   "description": "arcade game",
   "main": "index.js",
@@ -22,9 +22,9 @@
   "author": "Andrey Larikov",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/larikov174/chetra-game/issues"
+    "url": "https://github.com/larikov174/ptz-game/issues"
   },
-  "homepage": "https://larikov.online/chetra",
+  "homepage": "https://kirovets-fpk.ru/game/index.html",
   "dependencies": {
     "phaser": "^3.55.2"
   },

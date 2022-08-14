@@ -1,5 +1,5 @@
 .footer__devider {
-  border-right: 2px solid #f0af1d;
+  border-right: 2px solid var(--col-red);
   height: 100px;
   margin: 10px;
 }
