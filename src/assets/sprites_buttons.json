@@ -8,7 +8,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":344,"h":120},
 	"sourceSize": {"w":344,"h":120}
 },
-"CUBE_CHETRA":
+"CUBE_PTZ1":
 {
 	"frame": {"x":344,"y":0,"w":274,"h":264},
 	"rotated": false,
@@ -26,23 +26,23 @@
 },
 "CUBE_FPK":
 {
-	"frame": {"x":892,"y":0,"w":274,"h":264},
+	"frame": {"x":0,"y":264,"w":274,"h":264},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":274,"h":264},
 	"sourceSize": {"w":274,"h":264}
 },
-"CUBE_MKSM":
+"CUBE_PTZ2":
 {
-	"frame": {"x":1166,"y":0,"w":274,"h":264},
+	"frame": {"x":274,"y":264,"w":274,"h":264},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":274,"h":264},
 	"sourceSize": {"w":274,"h":264}
 },
-"CUBE_PK":
+"CUBE_PTZ3":
 {
-	"frame": {"x":1440,"y":0,"w":274,"h":264},
+	"frame": {"x":548,"y":264,"w":274,"h":264},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":274,"h":264},
@@ -53,8 +53,8 @@
 	"version": "1.0",
 	"image": "sprites_buttons.png",
 	"format": "RGBA8888",
-	"size": {"w":1714,"h":264},
+	"size": {"w":892,"h":528},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:ef31b7388a5ebfb5554b62d4cf216334:3523fc3c122d842e22e8dbae0766744f:e4f1bdee8ca3d6839ee0788b9ce2c53b$"
+	"smartupdate": "$TexturePacker:SmartUpdate:7cf6748d30659b19e9b9beaefecac815:1f1e1cddaa092e1cb2b4b8e3febd383b:e4f1bdee8ca3d6839ee0788b9ce2c53b$"
 }
 }
